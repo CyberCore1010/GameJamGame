@@ -1,6 +1,8 @@
 package Objects.Player;
 
+import Init.Game;
 import Objects.GameObject;
+import Objects.Interfaces.Drawable;
 import Objects.Interfaces.Movable;
 import Objects.Interfaces.Name;
 import Objects.Interfaces.Positionable;
@@ -15,14 +17,16 @@ public class Player extends GameObject implements Name, Movable, Positionable{
     private float velX = 0, velY = 0;
     private boolean movable = true;
     private BufferedImage bufferedImage;
+    private Game game;
 
-    public Player(String name, float x, float y, float z, float width, float height) {
+    public Player(String name, float x, float y, float z, float width, float height,Game game) {
         this.name = name;
         this.x = x;
         this.y = y;
         this.z = z;
         this.width = width;
         this.height = height;
+        this.game = game;
     }
 
     @Override
@@ -59,10 +63,14 @@ public class Player extends GameObject implements Name, Movable, Positionable{
 
     @Override
     public void render(Graphics g) {
+        Drawable player = (graphics)->{
+            graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+            graphics.setColor(Color.RED);
+            graphics.fillRect((int)x, (int)y, (int)width, (int)height);
+        };
+
         Graphics2D g2d = (Graphics2D) g;
-        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        g2d.setColor(Color.RED);
-        g2d.fillRect((int)x, (int)y, (int)width, (int)height);
+        renderToCamera(player, g2d, game.camera);
     }
 
     @Override

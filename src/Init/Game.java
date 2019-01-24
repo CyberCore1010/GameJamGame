@@ -6,6 +6,7 @@ import Objects.Utility.StateHandler;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.geom.AffineTransform;
 
 public class Game extends JComponent {
     public EventHandler eventHandler;
@@ -15,7 +16,7 @@ public class Game extends JComponent {
     private StateHandler stateHandler;
 
     //This is the camera which is an object of type Camera from my Camera class. It's used for updating the camera each tick of the game
-    static Camera camera;
+    public Camera camera;
 
     //These variables are simply used to tell the program that it is running. It also creates a new Thread object which
     //Is used for separating the game time from the game logic
@@ -24,10 +25,10 @@ public class Game extends JComponent {
 
     Game(ObjectHandler objectHandler) {
         Game.objectHandler = objectHandler;
-        camera = new Camera(0, 0);
+        camera = new Camera(100, 100, 1);
 
         stateHandler = new StateHandler(objectHandler);
-        stateHandler.StateSetTester(camera);
+        stateHandler.StateSetTester(this);
 
         thread = new Thread(this::start);
         thread.start();
@@ -93,9 +94,7 @@ public class Game extends JComponent {
 
         ////////DRAWING AREA////////
 
-        g2d.translate(-camera.getX(), -camera.getY());
         objectHandler.render(g); //displays objects passed from handler
-        g2d.translate(0, 0);
 
         ////////MENU DRAWING////////
         g2d.dispose();

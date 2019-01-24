@@ -1,5 +1,8 @@
 package Objects;
 
+import Init.Camera;
+import Objects.Interfaces.Drawable;
+
 import java.awt.*;
 
 public abstract class GameObject {
@@ -15,4 +18,8 @@ public abstract class GameObject {
     public abstract void update();
     public abstract void render (Graphics g);
 
+    protected void renderToCamera(Drawable item, Graphics2D g2d, Camera camera){
+        g2d.setTransform(camera.getTransform());
+        item.draw(g2d);
+    }
 }

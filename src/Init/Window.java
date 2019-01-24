@@ -32,8 +32,6 @@ public class Window {
             @Override
             public void mouseMoved(MouseEvent e) {
                 Point temp = e.getPoint();
-                mousePoint.x = temp.x+(int)Game.camera.getX();
-                mousePoint.y = temp.y+(int)Game.camera.getY();
             }
         });
     }
