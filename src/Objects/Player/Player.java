@@ -9,6 +9,9 @@ import Objects.Interfaces.Positionable;
 import Objects.Utility.KeyHandler;
 
 import java.awt.*;
+import java.awt.geom.AffineTransform;
+import java.awt.geom.Area;
+import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 
 public class Player extends GameObject implements Name, Movable, Positionable{
@@ -63,14 +66,28 @@ public class Player extends GameObject implements Name, Movable, Positionable{
 
     @Override
     public void render(Graphics g) {
+
         Drawable player = (graphics)->{
+            Rectangle2D.Double rect = new Rectangle2D.Double(x,y,width,height);
+            Area area = new Area(rect);
+            AffineTransform t = new AffineTransform();
+            t.rotate(0.5,x,y);
+            t.translate(-width/2,-height/2);
+            area.transform(t);
+
             graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
             graphics.setColor(Color.RED);
-            graphics.fillRect((int)x, (int)y, (int)width, (int)height);
+            graphics.fill(area);
+        };
+
+        Drawable test = (graphics)->{
+            graphics.setColor(Color.GREEN);
+            graphics.fillRect((int)(x-width/2), (int)(y-height/2), (int)width, (int)height);
         };
 
         Graphics2D g2d = (Graphics2D) g;
         renderToCamera(player, g2d, game.camera);
+        renderToCamera(test,g2d,game.camera);
     }
 
     @Override
