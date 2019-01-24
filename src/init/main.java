@@ -1,6 +1,6 @@
-package Init;
+package init;
 
-import Objects.Utility.ObjectHandler;
+import objects.handlers.ObjectHandler;
 
 public class main {
     /**This is simply the main method. It creates the handler and sends it to the game. It also adds the game to a new
@@ -11,8 +11,7 @@ public class main {
     public static void main(String[] args) {
         System.setProperty("sun.java2d.opengl", "true");
 
-        ObjectHandler objectHandler = new ObjectHandler();
-        Game game = new Game(objectHandler);
+        Game game = new Game();
         new Window(game, "TTMEngine");
     }
 }

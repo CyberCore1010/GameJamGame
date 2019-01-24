@@ -1,14 +1,16 @@
-package Objects.Utility;
+package objects.handlers;
 
-import Objects.GameObject;
+import objects.gameObjects.GameObject;
+import objects.misc.ObjectList;
 
 import java.awt.*;
+import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 public class ObjectHandler {
     //This is the collection that stores each game object, made public, allowing the game to access them easily
     //throughout the code
-    public CopyOnWriteArrayList<GameObject> objects = new CopyOnWriteArrayList<>();
+    public List<GameObject> objects = new ObjectList<>();
 
     /**
      * The ObjectHandler constructor simply loads the images in to their respective objects

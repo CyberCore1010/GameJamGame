@@ -1,4 +1,4 @@
-package Objects.Utility;
+package objects.handlers;
 
 public class EventHandler {
     private StateHandler stateHandler;

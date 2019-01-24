@@ -1,17 +1,11 @@
-package Init;
-
-import Objects.GameObject;
+package objects.misc;
 
 import java.awt.geom.AffineTransform;
 
 public class Camera {
     private AffineTransform transform;
 
-    /**
-     * @param x - Default x location of the player
-     * @param y - Default y location of the player
-     */
-    Camera(float x, float y,float zoom) {
+    public Camera(double x, double y, double zoom) {
         transform = new AffineTransform();
         transform.translate(-x,-y);
         transform.scale(zoom,zoom);

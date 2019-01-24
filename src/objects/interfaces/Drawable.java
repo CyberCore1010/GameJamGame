@@ -1,4 +1,4 @@
-package Objects.Interfaces;
+package objects.interfaces;
 
 import java.awt.*;
 

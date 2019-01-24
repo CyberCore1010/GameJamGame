@@ -1,6 +1,7 @@
-package Init;
+package init;
 
-import Objects.Utility.KeyHandler;
+import objects.handlers.KeyHandler;
+import objects.handlers.MouseHandler;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,8 +13,6 @@ public class Window {
 
     public static int gameWidth = (int)screenSize.getWidth();
     public static int gameHeight = (int)screenSize.getHeight()-50;
-
-    public Point mousePoint = new Point(0, 0);
 
     public Window(Component comp, String title) {
         JFrame frame = new JFrame(title);
@@ -27,12 +26,7 @@ public class Window {
         frame.setUndecorated(true);*/
         frame.setVisible(true);
         frame.setCursor(new Cursor(Cursor.CROSSHAIR_CURSOR));
-        frame.addKeyListener(new KeyHandler(Game.objectHandler));
-        frame.addMouseMotionListener(new MouseAdapter() {
-            @Override
-            public void mouseMoved(MouseEvent e) {
-                Point temp = e.getPoint();
-            }
-        });
+        frame.addKeyListener(new KeyHandler());
+        frame.addMouseMotionListener(new MouseHandler());
     }
 }

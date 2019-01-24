@@ -1,9 +1,8 @@
-package Objects.Utility;
+package objects.handlers;
 
-import Init.Camera;
-import Init.Game;
-import Init.Window;
-import Objects.Player.Player;
+import init.Game;
+import init.Window;
+import objects.gameObjects.Player;
 
 public class StateHandler {
     private ObjectHandler objectHandler;

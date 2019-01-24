@@ -1,12 +1,11 @@
-package Objects.Player;
+package objects.gameObjects;
 
-import Init.Game;
-import Objects.GameObject;
-import Objects.Interfaces.Drawable;
-import Objects.Interfaces.Movable;
-import Objects.Interfaces.Name;
-import Objects.Interfaces.Positionable;
-import Objects.Utility.KeyHandler;
+import init.Game;
+import objects.interfaces.Drawable;
+import objects.interfaces.Movable;
+import objects.interfaces.Name;
+import objects.interfaces.Positionable;
+import objects.handlers.KeyHandler;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -70,7 +69,7 @@ public class Player extends GameObject implements Name, Movable, Positionable{
         };
 
         Graphics2D g2d = (Graphics2D) g;
-        renderToCamera(player, g2d, game.camera);
+        renderToCamera(player, g2d, game.cameraList.get(0));
     }
 
     @Override

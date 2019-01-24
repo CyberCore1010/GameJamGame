@@ -1,4 +1,4 @@
-package Objects.Interfaces;
+package objects.interfaces;
 
 public interface Positionable {
 }

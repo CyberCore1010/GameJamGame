@@ -1,4 +1,4 @@
-package Objects.Utility;
+package objects.handlers;
 
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -6,20 +6,15 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class KeyHandler extends KeyAdapter {
-    private ObjectHandler objectHandler;
 
     private static Map<String, Boolean> keyMap;
 
-    /**
-     * @param objectHandler - takes the object handler as a parameter so it can set variables in it.
-     */
-    public KeyHandler(ObjectHandler objectHandler) {
+    public KeyHandler() {
         keyMap = new HashMap<>();
         keyMap.put("W", false);
         keyMap.put("A", false);
         keyMap.put("S", false);
         keyMap.put("D", false);
-        this.objectHandler = objectHandler;
     }
 
     public static boolean isKeyPressed(String key) {

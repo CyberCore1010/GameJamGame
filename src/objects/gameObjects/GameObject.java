@@ -1,7 +1,7 @@
-package Objects;
+package objects.gameObjects;
 
-import Init.Camera;
-import Objects.Interfaces.Drawable;
+import objects.misc.Camera;
+import objects.interfaces.Drawable;
 
 import java.awt.*;
 

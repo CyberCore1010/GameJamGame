@@ -1,31 +1,35 @@
-package Init;
+package init;
 
-import Objects.Utility.ObjectHandler;
-import Objects.Utility.EventHandler;
-import Objects.Utility.StateHandler;
+import objects.handlers.ObjectHandler;
+import objects.handlers.EventHandler;
+import objects.handlers.StateHandler;
+import objects.misc.Camera;
+import objects.misc.ObjectList;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.geom.AffineTransform;
 
 public class Game extends JComponent {
     public EventHandler eventHandler;
 
     //This is the Object handler which is set in the constructor. It's passed throughout the entire program, and is used to manipulate the objects in the game
-    static ObjectHandler objectHandler;
+    public ObjectHandler objectHandler;
     private StateHandler stateHandler;
 
     //This is the camera which is an object of type Camera from my Camera class. It's used for updating the camera each tick of the game
-    public Camera camera;
+    public ObjectList<Camera> cameraList;
 
     //These variables are simply used to tell the program that it is running. It also creates a new Thread object which
     //Is used for separating the game time from the game logic
     private static boolean isRunning = true;
     private Thread thread;
 
-    Game(ObjectHandler objectHandler) {
-        Game.objectHandler = objectHandler;
-        camera = new Camera(100, 100, 1);
+    Game() {
+        cameraList = new ObjectList<>();
+        Camera main = new Camera(100, 100, 1);
+        cameraList.add(main);
+
+        objectHandler = new ObjectHandler();
 
         stateHandler = new StateHandler(objectHandler);
         stateHandler.StateSetTester(this);
@@ -33,7 +37,7 @@ public class Game extends JComponent {
         thread = new Thread(this::start);
         thread.start();
 
-        eventHandler = new EventHandler(stateHandler, Game.objectHandler);
+        eventHandler = new EventHandler(stateHandler, objectHandler);
     }
 
     /**This method is the method that controls the time used in the game. It basically works on the basis that each
@@ -74,18 +78,6 @@ public class Game extends JComponent {
         objectHandler.update();
     }
 
-    /**This method is called from the start method when the game is no longer running and simply joins the two threads
-     * together to prevent system problems.
-     */
-    private void stop() {
-        isRunning = false;
-        try {
-            thread.join();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
-
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -100,4 +92,18 @@ public class Game extends JComponent {
         g2d.dispose();
         g.dispose();
     }
+
+    /**This method is called from the start method when the game is no longer running and simply joins the two threads
+     * together to prevent system problems.
+     */
+    private void stop() {
+        isRunning = false;
+        try {
+            thread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+
 }
