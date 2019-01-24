@@ -52,11 +52,8 @@ public class Game extends JComponent {
         window = new Window(this,"Scythe Engine");
 
         stateHandler = new StateHandler(this);
-        stateHandler.StateSetTester(this);
         eventHandler = new EventHandler(this);
         lightHandler = new LightHandler();
-
-        window = new Window(this,"Sythe Engine");
 
         //creating and starting the thread
         thread = new Thread(this::start);
