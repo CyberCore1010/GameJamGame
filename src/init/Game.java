@@ -1,5 +1,6 @@
 package init;
 
+import objects.handlers.LightHandler;
 import objects.handlers.ObjectHandler;
 import objects.handlers.EventHandler;
 import objects.handlers.StateHandler;
@@ -26,6 +27,9 @@ public class Game extends JComponent {
     private static boolean isRunning = true;
     private Thread thread;
 
+
+    LightHandler lightHandler;
+
     Game() {
         cameraList = new ObjectList<>();
         Camera main = new Camera(100, 100, 1);
@@ -36,12 +40,12 @@ public class Game extends JComponent {
         stateHandler = new StateHandler(objectHandler);
         stateHandler.StateSetTester(this);
         eventHandler = new EventHandler(stateHandler, objectHandler);
+        lightHandler = new LightHandler();
 
         window = new Window(this,"Sythe Engine");
 
         thread = new Thread(this::start);
         thread.start();
-
     }
 
     /**This method is the method that controls the time used in the game. It basically works on the basis that each
@@ -88,9 +92,13 @@ public class Game extends JComponent {
 
         Graphics2D g2d = (Graphics2D) g;
 
+        g.setColor(Color.WHITE);
+        g.fillRect(0, 0, Window.gameWidth, Window.gameHeight);
+
         ////////DRAWING AREA////////
 
         objectHandler.render(g); //displays objects passed from handler
+        lightHandler.Paint(g);
 
         ////////MENU DRAWING////////
         g2d.dispose();
@@ -108,6 +116,4 @@ public class Game extends JComponent {
             e.printStackTrace();
         }
     }
-
-
 }
