@@ -10,6 +10,8 @@ import javax.swing.*;
 import java.awt.*;
 
 public class Game extends JComponent {
+    public Window window;
+
     public EventHandler eventHandler;
 
     //This is the Object handler which is set in the constructor. It's passed throughout the entire program, and is used to manipulate the objects in the game
@@ -33,11 +35,13 @@ public class Game extends JComponent {
 
         stateHandler = new StateHandler(objectHandler);
         stateHandler.StateSetTester(this);
+        eventHandler = new EventHandler(stateHandler, objectHandler);
+
+        window = new Window(this,"Sythe Engine");
 
         thread = new Thread(this::start);
         thread.start();
 
-        eventHandler = new EventHandler(stateHandler, objectHandler);
     }
 
     /**This method is the method that controls the time used in the game. It basically works on the basis that each
