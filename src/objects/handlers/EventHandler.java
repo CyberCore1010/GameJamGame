@@ -1,11 +1,11 @@
 package objects.handlers;
 
-public class EventHandler {
-    private StateHandler stateHandler;
-    private ObjectHandler objectHandler;
+import init.Game;
 
-    public EventHandler(StateHandler stateHandler, ObjectHandler objectHandler) {
-        this.stateHandler = stateHandler;
-        this.objectHandler = objectHandler;
+public class EventHandler {
+    Game game;
+
+    public EventHandler(Game game) {
+        this.game = game;
     }
 }

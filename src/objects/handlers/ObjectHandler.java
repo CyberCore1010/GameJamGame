@@ -7,14 +7,14 @@ import java.awt.*;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
+/**
+ * a class to handle all the objects in the game
+ */
 public class ObjectHandler {
     //This is the collection that stores each game object, made public, allowing the game to access them easily
     //throughout the code
     public List<GameObject> objects = new ObjectList<>();
 
-    /**
-     * The ObjectHandler constructor simply loads the images in to their respective objects
-     */
     public ObjectHandler() {
 
     }
@@ -42,8 +42,16 @@ public class ObjectHandler {
     /**
      * @param object - The objects to add to the list
      */
-    public void addObject(GameObject object) {
+    public void add(GameObject object) {
         //Adds objects to list
         objects.add(object);
+    }
+
+    public void remove(GameObject object){
+        objects.remove(object);
+    }
+
+    public void clear(){
+        objects.clear();
     }
 }

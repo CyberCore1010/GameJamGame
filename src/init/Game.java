@@ -14,8 +14,9 @@ public class Game extends JComponent {
     public Window window;
 
     public EventHandler eventHandler;
+    public GameState state;
+    public LightHandler lightHandler;
 
-    //This is the Object handler which is set in the constructor. It's passed throughout the entire program, and is used to manipulate the objects in the game
     public ObjectHandler objectHandler;
     private StateHandler stateHandler;
 
@@ -27,23 +28,29 @@ public class Game extends JComponent {
     private static boolean isRunning = true;
     private Thread thread;
 
-
-    LightHandler lightHandler;
-
     Game() {
+        //setting default game state
+        state = GameState.Main;
+
+        //creating and adding the initial camera to the camera list
         cameraList = new ObjectList<>();
         Camera main = new Camera(100, 100, 1);
         cameraList.add(main);
 
+        //initialising the handlers for the game
         objectHandler = new ObjectHandler();
+        stateHandler = new StateHandler(this);
+        eventHandler = new EventHandler(this);
 
-        stateHandler = new StateHandler(objectHandler);
-        stateHandler.StateSetTester(this);
-        eventHandler = new EventHandler(stateHandler, objectHandler);
-        lightHandler = new LightHandler();
 
-        window = new Window(this,"Sythe Engine");
+        //creating the window
+        window = new Window(this,"Scythe Engine");
 
+        stateHandler = new StateHandler(this);
+        eventHandler = new EventHandler(this);
+        lightHandler = new LightHandler(5000, 5000);
+
+        //creating and starting the thread
         thread = new Thread(this::start);
         thread.start();
     }
@@ -83,6 +90,7 @@ public class Game extends JComponent {
      * players current position. Afterwords it runs the update method in the object handler
      */
     private void update() {
+        stateHandler.update();
         objectHandler.update();
     }
 
