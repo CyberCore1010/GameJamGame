@@ -8,7 +8,7 @@ public class Camera {
     private double zoom;
     private double width,height;
 
-    public Camera(double x, double y, double zoom,double width,double height) {
+    public Camera(double x, double y, double zoom, double width, double height) {
         transform = new AffineTransform();
         transform.setToTranslation(width/2,height/2);
         transform.translate(-x,-y);
