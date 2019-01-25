@@ -39,17 +39,13 @@ public class Game extends JComponent {
 
         //initialising the handlers for the game
         objectHandler = new ObjectHandler();
-        lightHandler = new LightHandler(5000, 5000);
+        //lightHandler = new LightHandler(5000, 5000);
         stateHandler = new StateHandler(this);
         eventHandler = new EventHandler(this);
 
 
         //creating the window
         window = new Window(this,"Scythe Engine");
-
-        //stateHandler = new StateHandler(this);
-        //eventHandler = new EventHandler(this);
-
 
         //creating and starting the thread
         thread = new Thread(this::start);
