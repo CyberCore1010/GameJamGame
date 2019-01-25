@@ -2,26 +2,40 @@ package objects.handlers;
 
 import net.beadsproject.beads.core.AudioContext;
 import net.beadsproject.beads.data.SampleManager;
+import net.beadsproject.beads.ugens.CrossFade;
 import net.beadsproject.beads.ugens.Gain;
 import net.beadsproject.beads.ugens.Noise;
 import net.beadsproject.beads.ugens.SamplePlayer;
 
+import java.util.Scanner;
+
 public class MusicPlayer {
     private AudioContext ac;
-    private Gain g;
+//    private Gain g;
 
     public MusicPlayer(){
         this.ac = new AudioContext();
-        this.g = new Gain(ac, 5, 1f);
+//        this.g = new Gain(ac, 5, 1f);
     }
 
 
-    public void playSong(String track){
+    public void playTrack(String track){
         String file = "res/audio/" + track + ".mp3";
         SamplePlayer player = new SamplePlayer(this.ac, SampleManager.sample(file));
 
+        Gain g = new Gain(ac,5,1f);
         g.addInput(player);
         ac.out.addInput(g);
+    }
+
+    public void changeTrack(String track){
+        String file = "res/audio/" + track + ".mp3";
+        SamplePlayer player = new SamplePlayer(this.ac, SampleManager.sample(file));
+        CrossFade fade = new CrossFade(ac,2);
+
+        Gain g = new Gain(ac,5,1f);
+        g.addInput(player);
+        fade.fadeTo(g,1000);
     }
 
 
@@ -36,9 +50,13 @@ public class MusicPlayer {
     public static void main(String[] args) {
 
         MusicPlayer music = new MusicPlayer();
-        music.playSong("doom1");
+        music.playTrack("doom1");
         music.start();
-
+        Scanner sc = new Scanner(System.in);
+        while(true){
+            String i = sc.next();
+            music.changeTrack(i);
+        }
 
 
 //        AudioContext ac;
