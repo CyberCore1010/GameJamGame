@@ -10,8 +10,9 @@ public class Camera {
 
     public Camera(double x, double y, double zoom,double width,double height) {
         transform = new AffineTransform();
-        transform.setToScale(zoom,zoom);
-        transform.setToTranslation(-x+(width/2),-y+(height/2));
+        transform.setToTranslation(width/2,height/2);
+        transform.translate(-x,-y);
+        transform.scale(zoom,zoom);
         this.x = x;
         this.y = y;
         this.zoom = zoom;
@@ -48,7 +49,7 @@ public class Camera {
     }
 
     public void setZoom(double zoom){
-        transform.scale(zoom,zoom);
+        this.zoom = zoom;
     }
 
     public double getZoom(){
@@ -56,8 +57,10 @@ public class Camera {
     }
 
     public AffineTransform getTransform(){
-        transform.setToScale(zoom,zoom);
-        transform.setToTranslation(-x+(width/2),-y+(height/2));
+        transform.setToScale(0,0);
+        transform.setToTranslation(width/2,height/2);
+        transform.scale(zoom,zoom);
+        transform.translate(-x,-y);
         return transform;
     }
 }
