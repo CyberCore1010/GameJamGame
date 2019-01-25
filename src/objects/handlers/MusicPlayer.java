@@ -1,41 +1,40 @@
 package objects.handlers;
 
 import net.beadsproject.beads.core.AudioContext;
+import net.beadsproject.beads.data.Sample;
 import net.beadsproject.beads.data.SampleManager;
 import net.beadsproject.beads.ugens.CrossFade;
 import net.beadsproject.beads.ugens.Gain;
 import net.beadsproject.beads.ugens.Noise;
 import net.beadsproject.beads.ugens.SamplePlayer;
 
+import java.util.HashMap;
 import java.util.Scanner;
 
 public class MusicPlayer {
     private AudioContext ac;
-//    private Gain g;
+    private Gain playingTrack;
+    private HashMap<String,Sample> trackList;
 
     public MusicPlayer(){
         this.ac = new AudioContext();
-//        this.g = new Gain(ac, 5, 1f);
+        trackList = new HashMap<>();
+        trackList.put("doom1",SampleManager.sample("res/audio/doom1.mp3"));
+        trackList.put("doom2",SampleManager.sample("res/audio/doom2.mp3"));
     }
 
 
     public void playTrack(String track){
-        String file = "res/audio/" + track + ".mp3";
-        SamplePlayer player = new SamplePlayer(this.ac, SampleManager.sample(file));
-
-        Gain g = new Gain(ac,5,1f);
-        g.addInput(player);
-        ac.out.addInput(g);
+//		SampleManager.setBufferingRegime(Sample.Regime.newStreamingRegime(1000));
+        SamplePlayer player = new SamplePlayer(ac, trackList.get(track));
+        playingTrack = new Gain(ac,5,1f);
+        playingTrack.addInput(player);
+        ac.out.addInput(playingTrack);
     }
 
     public void changeTrack(String track){
-        String file = "res/audio/" + track + ".mp3";
-        SamplePlayer player = new SamplePlayer(this.ac, SampleManager.sample(file));
-        CrossFade fade = new CrossFade(ac,2);
-
-        Gain g = new Gain(ac,5,1f);
-        g.addInput(player);
-        fade.fadeTo(g,1000);
+        playingTrack.kill();
+        playTrack(track);
     }
 
 
