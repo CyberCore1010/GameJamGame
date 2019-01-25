@@ -28,13 +28,16 @@ public class Game extends JComponent {
     private Thread thread;
 
     Game() {
+        //creating the window
+        window = new Window(this,"Scythe Engine");
+
         //setting default game state
         state = GameState.Main;
 
         //creating and adding the initial camera to the camera list
         cameraMap = new ObjectMap<>();
-        Camera main = new Camera(0, 0, 2);
-        Camera screen = new Camera(0,0,1);
+        Camera main = new Camera(0, 0, 2,window.gameWidth,window.gameHeight);
+        Camera screen = new Camera(0,0,1,window.gameWidth,window.gameHeight);
         cameraMap.put(CameraID.Main,main);
         cameraMap.put(CameraID.Screen,screen);
 
@@ -44,8 +47,7 @@ public class Game extends JComponent {
         stateHandler = new StateHandler(this);
         eventHandler = new EventHandler(this);
 
-        //creating the window
-        window = new Window(this,"Scythe Engine");
+
 
         //creating and starting the thread
         thread = new Thread(this::start);
@@ -64,6 +66,7 @@ public class Game extends JComponent {
         double amountOfTicks = 60.0;
         double ns = 1000000000 / amountOfTicks;
         double delta = 0;
+        int fps = 0;
         long timer = System.currentTimeMillis();
         while(isRunning) {
             long now = System.nanoTime();
@@ -74,9 +77,11 @@ public class Game extends JComponent {
                 delta--;
             }
             repaint();
-
+            fps++;
             if(System.currentTimeMillis() - timer > 1000) {
                 timer += 1000;
+                System.out.println(fps);
+                fps = 0;
             }
         }
         stop();
@@ -98,7 +103,7 @@ public class Game extends JComponent {
         Graphics2D g2d = (Graphics2D) g;
 
         g.setColor(Color.WHITE);
-        g.fillRect(0, 0, Window.gameWidth, Window.gameHeight);
+        g.fillRect(0, 0, window.gameWidth, window.gameHeight);
 
         ////////DRAWING AREA////////
 

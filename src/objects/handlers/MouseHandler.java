@@ -4,11 +4,15 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseWheelEvent;
+import java.awt.geom.Point2D;
 
 public class MouseHandler extends MouseAdapter {
+    private boolean mouseDown = false;
+    private Point2D.Double mousePos;
 
     public MouseHandler() {
         super();
+        mousePos = new Point2D.Double();
     }
 
     @Override
@@ -19,11 +23,13 @@ public class MouseHandler extends MouseAdapter {
     @Override
     public void mousePressed(MouseEvent e) {
         super.mousePressed(e);
+        mouseDown = true;
     }
 
     @Override
     public void mouseReleased(MouseEvent e) {
         super.mouseReleased(e);
+        mouseDown = false;
     }
 
     @Override
@@ -49,5 +55,16 @@ public class MouseHandler extends MouseAdapter {
     @Override
     public void mouseMoved(MouseEvent e) {
         super.mouseMoved(e);
+        mousePos.setLocation(e.getX(),e.getY());
     }
+
+    public boolean isMouseDown(){
+        return mouseDown;
+    }
+
+    public Point2D.Double getMousePos(){
+        return mousePos;
+    }
+
+
 }

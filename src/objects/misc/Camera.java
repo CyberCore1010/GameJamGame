@@ -5,11 +5,18 @@ import java.awt.geom.AffineTransform;
 public class Camera {
     private AffineTransform transform;
     private double x,y;
+    private double zoom;
+    private double width,height;
 
-    public Camera(double x, double y, double zoom) {
+    public Camera(double x, double y, double zoom,double width,double height) {
         transform = new AffineTransform();
-        transform.translate(-x,-y);
-        transform.scale(zoom,zoom);
+        transform.setToScale(zoom,zoom);
+        transform.setToTranslation(-x+(width/2),-y+(height/2));
+        this.x = x;
+        this.y = y;
+        this.zoom = zoom;
+        this.width = width;
+        this.height = height;
     }
 
     /**
@@ -37,14 +44,20 @@ public class Camera {
      * @param y - takes the y position passed in and sets the camera's y to it
      */
     public void setY(double y) {
-
+        this.y = y;
     }
 
     public void setZoom(double zoom){
         transform.scale(zoom,zoom);
     }
 
+    public double getZoom(){
+        return zoom;
+    }
+
     public AffineTransform getTransform(){
+        transform.setToScale(zoom,zoom);
+        transform.setToTranslation(-x+(width/2),-y+(height/2));
         return transform;
     }
 }

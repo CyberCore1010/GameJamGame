@@ -27,6 +27,7 @@ public class Player extends GameObject{
 
     public Player(double x, double y, int z, double width, double height, Game game) {
         super(x,y,z,0, GameObjectID.Player,game);
+        camera = game.cameraMap.get(CameraID.Main);
         this.width = width;
         this.height = height;
         velX = 4;
@@ -40,7 +41,6 @@ public class Player extends GameObject{
 
     @Override
     public void update() {
-        camera = game.cameraMap.get(CameraID.Main);
         camera.setX(x);
         camera.setY(y);
         if(movable) {
@@ -71,25 +71,25 @@ public class Player extends GameObject{
     public void render(Graphics g) {
         Drawable player = (graphics)->{
             graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-
+            
             switch(direction) {
                 case 1:
-                    graphics.drawImage(upSprite, (int)x, (int)y, (int)width, (int)height, null);
+                    graphics.drawImage(upSprite, (int)(x-width/2), (int)(y-height/2), (int)width, (int)height, null);
                     break;
                 case 2:
-                    graphics.drawImage(downSprite, (int)x, (int)y, (int)width, (int)height, null);
+                    graphics.drawImage(downSprite, (int)(x-width/2), (int)(y-height/2), (int)width, (int)height, null);
                     break;
                 case 3:
-                    graphics.drawImage(leftSprite, (int)x, (int)y, (int)width, (int)height, null);
+                    graphics.drawImage(leftSprite, (int)(x-width/2), (int)(y-height/2), (int)width, (int)height, null);
                     break;
                 case 4:
-                    graphics.drawImage(rightSprite, (int)x, (int)y, (int)width, (int)height, null);
+                    graphics.drawImage(rightSprite, (int)(x-width/2), (int)(y-height/2), (int)width, (int)height, null);
                     break;
             }
         };
 
         Graphics2D g2d = (Graphics2D) g;
-        renderToCamera(player, g2d, game.cameraMap.get(CameraID.Main));
+        renderToCamera(player, g2d,camera);
     }
 
     @Override
