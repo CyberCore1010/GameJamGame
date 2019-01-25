@@ -1,6 +1,5 @@
 package objects.handlers;
 
-
 import game.Game;
 
 import objects.gameObjects.Player;

@@ -1,6 +1,6 @@
 package objects.FileIO;
 
-import init.Game;
+import game.Game;
 import objects.gameObjects.GameObject;
 
 import java.io.BufferedReader;
@@ -34,11 +34,12 @@ public class ObjectFileReader {
         try {
             String line = bufferedReader.readLine();
             ArrayList<String> list = new ArrayList<>(Arrays.asList(line.split(",")));
-            if(list)
+            if(list.get(0).equals("Player")) {
+                //return new Player();
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
+        return null;
     }
 }

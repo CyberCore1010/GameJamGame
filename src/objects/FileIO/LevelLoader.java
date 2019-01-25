@@ -1,6 +1,6 @@
 package objects.FileIO;
 
-import init.Game;
+import game.Game;
 
 public class LevelLoader {
     ObjectFileReader mapContent;
