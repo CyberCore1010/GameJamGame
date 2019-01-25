@@ -12,8 +12,7 @@ import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 
 public class Player extends GameObject{
-    private double x, y,width, height;
-    private int z;
+    private double width, height;
     private double velX,velY;
     private boolean movable = true;
     private Camera camera;
@@ -26,7 +25,7 @@ public class Player extends GameObject{
     private int direction = 1;
 
     public Player(double x, double y, int z, double width, double height, Game game) {
-        super(x,y,z,0, GameObjectID.Player,game);
+        super(x+(width/2),y+(height/2),z,0, GameObjectID.Player,game);
         camera = game.cameraMap.get(CameraID.Main);
         this.width = width;
         this.height = height;
@@ -74,16 +73,16 @@ public class Player extends GameObject{
             
             switch(direction) {
                 case 1:
-                    graphics.drawImage(upSprite, (int)(x-width/2), (int)(y-height/2), (int)width, (int)height, null);
+                    graphics.drawImage(upSprite, (int)(x-(width/2)), (int)(y-(width/2)), (int)width, (int)height, null);
                     break;
                 case 2:
-                    graphics.drawImage(downSprite, (int)(x-width/2), (int)(y-height/2), (int)width, (int)height, null);
+                    graphics.drawImage(downSprite, (int)(x-(width/2)), (int)(y-(width/2)), (int)width, (int)height, null);
                     break;
                 case 3:
-                    graphics.drawImage(leftSprite, (int)(x-width/2), (int)(y-height/2), (int)width, (int)height, null);
+                    graphics.drawImage(leftSprite, (int)(x-(width/2)), (int)(y-(width/2)), (int)width, (int)height, null);
                     break;
                 case 4:
-                    graphics.drawImage(rightSprite, (int)(x-width/2), (int)(y-height/2), (int)width, (int)height, null);
+                    graphics.drawImage(rightSprite, (int)(x-(width/2)), (int)(y-(width/2)), (int)width, (int)height, null);
                     break;
             }
         };

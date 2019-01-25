@@ -28,6 +28,8 @@ public class Game extends JComponent {
     private Thread thread;
 
     Game() {
+        objectHandler = new ObjectHandler();
+
         //creating the window
         window = new Window(this,"Scythe Engine");
 
@@ -42,12 +44,8 @@ public class Game extends JComponent {
         cameraMap.put(CameraID.Screen,screen);
 
         //initialising the handlers for the game
-        objectHandler = new ObjectHandler();
-        //lightHandler = new LightHandler(5000, 5000);
         stateHandler = new StateHandler(this);
         eventHandler = new EventHandler(this);
-
-
 
         //creating and starting the thread
         thread = new Thread(this::start);
@@ -102,13 +100,9 @@ public class Game extends JComponent {
 
         Graphics2D g2d = (Graphics2D) g;
 
-        g.setColor(Color.WHITE);
-        g.fillRect(0, 0, window.gameWidth, window.gameHeight);
-
         ////////DRAWING AREA////////
 
         objectHandler.render(g); //displays objects passed from handler
-        //lightHandler.draw(g);
 
         ////////MENU DRAWING////////
         g2d.dispose();
