@@ -11,6 +11,7 @@ public class Light {
         this.y = y;
         lightImage = new BufferedImage(radius*2, radius*2, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g2d = (Graphics2D) lightImage.getGraphics();
+
         int step = 4;
         int numSteps = radius/step;
         g2d.setColor(new Color(0, 0, 0, luminosity));
