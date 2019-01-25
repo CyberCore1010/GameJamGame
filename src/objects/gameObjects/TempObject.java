@@ -46,7 +46,6 @@ public class TempObject extends GameObject{
             g.setColor(Color.BLUE);
             g.fillRect((int)x, (int)y, 100, 100);
         }
-        g.setColor(Color.RED);
         g.drawLine((int)line.getX1(), (int)line.getY1(), (int)line.getX2(), (int)line.getY2());
     }
 

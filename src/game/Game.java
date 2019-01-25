@@ -3,6 +3,7 @@ package game;
 import objects.handlers.ObjectHandler;
 import objects.handlers.EventHandler;
 import objects.handlers.StateHandler;
+import objects.interfaces.Drawable;
 import objects.misc.Camera;
 import objects.misc.ObjectMap;
 
@@ -30,14 +31,14 @@ public class Game extends JComponent {
     Game() {
         objectHandler = new ObjectHandler();
         //creating the window
-        window = new Window(this,"Scythe Engine");
+        window = new Window(this,"Home Sweet Home - Running on Scythe engine");
 
         //setting default game state
         state = GameState.Main;
 
         //creating and adding the initial camera to the camera list
         cameraMap = new ObjectMap<>();
-        Camera main = new Camera(0, 0, 3,window.gameWidth,window.gameHeight);
+        Camera main = new Camera(0, 0, 2,window.gameWidth,window.gameHeight);
         Camera screen = new Camera(0,0,1,window.gameWidth,window.gameHeight);
         cameraMap.put(CameraID.Main,main);
         cameraMap.put(CameraID.Screen,screen);

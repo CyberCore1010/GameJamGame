@@ -19,7 +19,8 @@ public class Player extends GameObject{
     private Camera camera;
 
     private boolean moving;
-    private int moveTime = 1;
+    private int moveTime = 0;
+    private int moveState = 1;
     private BufferedImage one;
     private BufferedImage two;
     private BufferedImage three;
@@ -32,12 +33,12 @@ public class Player extends GameObject{
     private BufferedImage ten;
 
     public Player(double x, double y, int z, double width, double height, Game game) {
-        super(x+(width/2),y+(height/2),z,0, GameObjectID.Player,game);
+        super(x, y, z,0, GameObjectID.Player,game);
         camera = game.cameraMap.get(CameraID.Main);
         this.width = width;
         this.height = height;
-        velX = 4;
-        velY = 4;
+        velX = 2;
+        velY = 2;
         BufferedImageLoader loader = new BufferedImageLoader();
         one = loader.loadImage("/player/1.png");
         two = loader.loadImage("/player/2.png");
@@ -56,7 +57,39 @@ public class Player extends GameObject{
         camera.setX(x);
         camera.setY(y);
         if(movable) {
+            collision();
             move();
+        }
+    }
+
+    void collision() {
+        for(GameObject object : game.objectHandler.objects) {
+            if(object.id == GameObjectID.Wall) {
+                if(getBounds().intersects(object.getBounds())) {
+                    boolean xBlock = false;
+                    boolean yBlock = false;
+                    if(x <= object.getBounds().x || x >= object.getBounds().x+object.getBounds().width) {
+                        xBlock = true;
+                    }
+                    if(y <= object.getBounds().y || y >= object.getBounds().y+object.getBounds().height) {
+                        yBlock = true;
+                    }
+                    if(xBlock && !yBlock) {
+                        if(x <= object.getBounds().x) {
+                            x += velX * -1;
+                        } if(x >= object.getBounds().x+object.getBounds().width) {
+                            x -= velX * -1;
+                        }
+                    }
+                    if(!xBlock && yBlock) {
+                        if(y <= object.getBounds().y) {
+                            y += velY * -1;
+                        } if(y >= object.getBounds().y+object.getBounds().height) {
+                            y -= velY * -1;
+                        }
+                    }
+                }
+            }
         }
     }
 
@@ -64,7 +97,28 @@ public class Player extends GameObject{
         if(KeyHandler.isKeyPressed("W") || KeyHandler.isKeyPressed("S") || KeyHandler.isKeyPressed("A") || KeyHandler.isKeyPressed("D")) {
             moving = true;
             moveTime++;
-            if(moveTime > 10) {
+            if(moveTime <= 50) {
+                if(moveTime == 5) {
+                    moveState = 2;
+                } else if(moveTime == 10) {
+                    moveState = 3;
+                } else if(moveTime == 15) {
+                    moveState = 4;
+                } else if(moveTime == 20) {
+                    moveState = 5;
+                } else if(moveTime == 25) {
+                    moveState = 6;
+                } else if(moveTime == 30) {
+                    moveState = 7;
+                } else if(moveTime == 35) {
+                    moveState = 8;
+                } else if(moveTime == 40) {
+                    moveState = 9;
+                } else if(moveTime == 45) {
+                    moveState = 10;
+                }
+            } else {
+                moveState = 1;
                 moveTime = 0;
             }
         } else {
@@ -72,15 +126,19 @@ public class Player extends GameObject{
         }
         if(KeyHandler.isKeyPressed("W")){
             y-=velY;
+            setRotation(-1.5);
         }
         if(KeyHandler.isKeyPressed("S")){
             y+=velY;
+            setRotation(1.5);
         }
         if(KeyHandler.isKeyPressed("A")){
             x-=velX;
+            setRotation(-3);
         }
         if(KeyHandler.isKeyPressed("D")){
             x+=velX;
+            setRotation(0);
         }
     }
 
@@ -88,8 +146,9 @@ public class Player extends GameObject{
     public void render(Graphics g) {
         Drawable player = (graphics)->{
             graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+            graphics.rotate(getRotation(), x, y);
             if(moving) {
-                switch(moveTime) {
+                switch(moveState) {
                     case 1:
                         graphics.drawImage(one, (int)(x-(width/2)), (int)(y-(width/2)), (int)width, (int)height, null);
                         break;
@@ -124,14 +183,14 @@ public class Player extends GameObject{
             } else {
                 graphics.drawImage(one, (int)(x-(width/2)), (int)(y-(width/2)), (int)width, (int)height, null);
             }
+            graphics.rotate(-getRotation(), x, y);
         };
-
         Graphics2D g2d = (Graphics2D) g;
-        renderToCamera(player, g2d,camera);
+        renderToCamera(player, g2d, camera);
     }
 
     @Override
     public Rectangle2D.Double getBounds() {
-        return null;
+        return new Rectangle2D.Double(x-(width/4), y-(height/4), width/2, height/2);
     }
 }
