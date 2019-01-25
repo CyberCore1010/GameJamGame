@@ -63,7 +63,7 @@ public class MusicHandler {
     public static void main(String[] args) {
         MusicHandler music = new MusicHandler();
         music.start();
-        MusicPlayer track2 = new MusicPlayer(music.getAC(),music.trackList.get("night"),2,2000);
+        MusicPlayer track2 = new MusicPlayer(music.getAC(),music.trackList.get("night"),5,2000);
         MusicPlayer track1 = new MusicPlayer(music.getAC(),music.trackList.get("whisper1"),1,2000);
         Scanner sc = new Scanner(System.in);
         while(true){
