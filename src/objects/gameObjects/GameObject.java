@@ -1,6 +1,6 @@
 package objects.gameObjects;
 
-import init.Game;
+import game.Game;
 import objects.misc.Camera;
 import objects.interfaces.Drawable;
 
@@ -12,7 +12,8 @@ import java.awt.geom.Rectangle2D;
  * GameObject, such as the x and y position.
  */
 public abstract class GameObject {
-    protected double x,y,rotation;
+    protected double x,y;
+    private double rotation;
     protected int z;
     protected GameObjectID id;
     protected Game game;
@@ -37,5 +38,46 @@ public abstract class GameObject {
     protected void renderToCamera(Drawable item, Graphics2D g2d, Camera camera){
         g2d.setTransform(camera.getTransform());
         item.draw(g2d);
+    }
+
+    public double getRotation() {
+        return rotation;
+    }
+
+    public void setRotation(double rotation) {
+        this.rotation = rotation;
+    }
+
+
+    public double getX() {
+        return x;
+    }
+
+    public void setX(double x) {
+        this.x = x;
+    }
+
+    public double getY() {
+        return y;
+    }
+
+    public void setY(double y) {
+        this.y = y;
+    }
+
+    public int getZ() {
+        return z;
+    }
+
+    public void setZ(int z) {
+        this.z = z;
+    }
+
+    public GameObjectID getId() {
+        return id;
+    }
+
+    public void setId(GameObjectID id) {
+        this.id = id;
     }
 }

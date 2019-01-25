@@ -1,27 +1,26 @@
-package init;
+package game;
 
-import objects.handlers.LightHandler;
 import objects.handlers.ObjectHandler;
 import objects.handlers.EventHandler;
 import objects.handlers.StateHandler;
 import objects.misc.Camera;
-import objects.misc.ObjectList;
+import objects.misc.ObjectMap;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Map;
 
 public class Game extends JComponent {
     public Window window;
 
     public EventHandler eventHandler;
     public GameState state;
-    public LightHandler lightHandler;
 
     public ObjectHandler objectHandler;
     private StateHandler stateHandler;
 
     //This is the camera which is an object of type Camera from my Camera class. It's used for updating the camera each tick of the game
-    public ObjectList<Camera> cameraList;
+    public Map<CameraID,Camera> cameraMap;
 
     //These variables are simply used to tell the program that it is running. It also creates a new Thread object which
     //Is used for separating the game time from the game logic
@@ -33,9 +32,11 @@ public class Game extends JComponent {
         state = GameState.Main;
 
         //creating and adding the initial camera to the camera list
-        cameraList = new ObjectList<>();
+        cameraMap = new ObjectMap<>();
         Camera main = new Camera(0, 0, 2);
-        cameraList.add(main);
+        Camera screen = new Camera(0,0,1);
+        cameraMap.put(CameraID.Main,main);
+        cameraMap.put(CameraID.Screen,screen);
 
         //initialising the handlers for the game
         objectHandler = new ObjectHandler();

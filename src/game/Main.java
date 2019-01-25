@@ -1,4 +1,4 @@
-package init;
+package game;
 
 public class Main {
     /**This is simply the main method. It creates the handler and sends it to the game. It also adds the game to a new

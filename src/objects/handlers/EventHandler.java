@@ -1,6 +1,6 @@
 package objects.handlers;
 
-import init.Game;
+import game.Game;
 
 public class EventHandler {
     Game game;

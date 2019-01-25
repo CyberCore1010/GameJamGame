@@ -1,12 +1,10 @@
-package init;
+package game;
 
 import objects.handlers.KeyHandler;
 import objects.handlers.MouseHandler;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
 public class Window {
     private static Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();

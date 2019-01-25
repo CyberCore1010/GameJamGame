@@ -1,8 +1,6 @@
 package objects.handlers;
 
-import init.Game;
-import init.Window;
-import objects.gameObjects.Light;
+import game.Game;
 import objects.gameObjects.Player;
 
 public class StateHandler {
