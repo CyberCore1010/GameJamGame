@@ -44,7 +44,6 @@ public class Game extends JComponent {
         stateHandler = new StateHandler(this);
         eventHandler = new EventHandler(this);
 
-
         //creating the window
         window = new Window(this,"Scythe Engine");
 
