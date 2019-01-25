@@ -9,8 +9,8 @@ import java.awt.*;
 public class Window {
     private static Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 
-    public static int gameWidth = (int)screenSize.getWidth();
-    public static int gameHeight = (int)screenSize.getHeight()-50;
+    public int gameWidth = (int)screenSize.getWidth();
+    public int gameHeight = (int)screenSize.getHeight()-50;
 
     public Window(Component comp, String title) {
         JFrame frame = new JFrame(title);
