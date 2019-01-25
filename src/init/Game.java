@@ -1,6 +1,5 @@
 package init;
 
-import objects.handlers.LightHandler;
 import objects.handlers.ObjectHandler;
 import objects.handlers.EventHandler;
 import objects.handlers.StateHandler;
@@ -15,7 +14,6 @@ public class Game extends JComponent {
 
     public EventHandler eventHandler;
     public GameState state;
-    public LightHandler lightHandler;
 
     public ObjectHandler objectHandler;
     private StateHandler stateHandler;
@@ -42,7 +40,6 @@ public class Game extends JComponent {
         //lightHandler = new LightHandler(5000, 5000);
         stateHandler = new StateHandler(this);
         eventHandler = new EventHandler(this);
-
 
         //creating the window
         window = new Window(this,"Scythe Engine");
