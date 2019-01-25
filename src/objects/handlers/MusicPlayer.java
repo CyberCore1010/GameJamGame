@@ -14,12 +14,11 @@ public class MusicPlayer {
     private Gain playingTrack;
     private HashMap<String,Sample> trackList;
 
-    public MusicPlayer(){
+    public MusicPlayer(int transitionSpeed){
         this.ac = new AudioContext();
         trackList = new HashMap<>();
-        fade = new Glide(ac,1);
-        trackList.put("doom1",SampleManager.sample("res/audio/doom1.mp3"));
-        trackList.put("doom2",SampleManager.sample("res/audio/doom2.mp3"));
+        fade = new Glide(ac,1,transitionSpeed);
+        trackList.put("night",SampleManager.sample("res/audio/night.mp3"));
     }
 
 
@@ -40,6 +39,10 @@ public class MusicPlayer {
         playTrack(track);
     }
 
+    public void changeVolume(float speed){
+        fade.setValue(speed);
+    }
+
 
     public void start(){
         ac.start();
@@ -51,8 +54,8 @@ public class MusicPlayer {
     //TEST function to check if audio playing and libs work
     public static void main(String[] args) {
 
-        MusicPlayer music = new MusicPlayer();
-        music.playTrack("doom1");
+        MusicPlayer music = new MusicPlayer(2000);
+        music.playTrack("night");
         music.start();
         Scanner sc = new Scanner(System.in);
         while(true){
