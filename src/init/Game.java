@@ -34,11 +34,12 @@ public class Game extends JComponent {
 
         //creating and adding the initial camera to the camera list
         cameraList = new ObjectList<>();
-        Camera main = new Camera(100, 100, 1);
+        Camera main = new Camera(0, 0, 2);
         cameraList.add(main);
 
         //initialising the handlers for the game
         objectHandler = new ObjectHandler();
+        lightHandler = new LightHandler(5000, 5000);
         stateHandler = new StateHandler(this);
         eventHandler = new EventHandler(this);
 
@@ -46,9 +47,9 @@ public class Game extends JComponent {
         //creating the window
         window = new Window(this,"Scythe Engine");
 
-        stateHandler = new StateHandler(this);
-        eventHandler = new EventHandler(this);
-        lightHandler = new LightHandler(5000, 5000);
+        //stateHandler = new StateHandler(this);
+        //eventHandler = new EventHandler(this);
+
 
         //creating and starting the thread
         thread = new Thread(this::start);
@@ -106,7 +107,7 @@ public class Game extends JComponent {
         ////////DRAWING AREA////////
 
         objectHandler.render(g); //displays objects passed from handler
-        lightHandler.Paint(g);
+        //lightHandler.draw(g);
 
         ////////MENU DRAWING////////
         g2d.dispose();
