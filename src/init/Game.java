@@ -15,7 +15,7 @@ public class Game extends JComponent {
 
     public EventHandler eventHandler;
     public GameState state;
-
+    public LightHandler lightHandler;
 
     public ObjectHandler objectHandler;
     private StateHandler stateHandler;
@@ -27,11 +27,6 @@ public class Game extends JComponent {
     //Is used for separating the game time from the game logic
     private static boolean isRunning = true;
     private Thread thread;
-
-
-
-    LightHandler lightHandler;
-
 
     Game() {
         //setting default game state
@@ -53,7 +48,7 @@ public class Game extends JComponent {
 
         stateHandler = new StateHandler(this);
         eventHandler = new EventHandler(this);
-        lightHandler = new LightHandler();
+        lightHandler = new LightHandler(5000, 5000);
 
         //creating and starting the thread
         thread = new Thread(this::start);

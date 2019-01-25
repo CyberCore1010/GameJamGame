@@ -17,8 +17,7 @@ public abstract class GameObject {
     protected GameObjectID id;
     protected Game game;
 
-
-    public GameObject(double x, double y , int z , double rotation, GameObjectID id,Game game) {
+    public GameObject(double x, double y , int z , double rotation, GameObjectID id, Game game) {
         this.x = x;
         this.y = y;
         this.z = z;

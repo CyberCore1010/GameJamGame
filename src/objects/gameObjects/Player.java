@@ -17,7 +17,7 @@ public class Player extends GameObject{
 
 
     public Player(double x, double y, int z, double width, double height,Game game) {
-        super(x,y,z,0,GameObjectID.Player,game);
+        super(x,y,z,0, GameObjectID.Player,game);
         this.width = width;
         this.height = height;
         velX = 4;
