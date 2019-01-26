@@ -22,6 +22,7 @@ public class StateHandler {
         }
 
         //Floor
+        game.objectHandler.add(new Floor(300, 299, 400, 301, game));//Utility Room
         game.objectHandler.add(new Floor(501, 299, 400, 301, game));//Kitchen
         game.objectHandler.add(new Floor(900, 400, 100, 201, game));//Stairs
         game.objectHandler.add(new Floor(1000, 400, 200, 201, game));//Study1
@@ -46,6 +47,9 @@ public class StateHandler {
 
         //Utility Room
         game.objectHandler.add(new Wall(297, 395, 200, 10, game));
+        game.objectHandler.add(new Wall(295, 395, 10, 160, game));
+        game.objectHandler.add(new Wall(295, 545, 80, 10, game));
+        game.objectHandler.add(new Wall(425, 545, 80, 10, game));
 
         //Kitchen
         game.objectHandler.add(new Wall(497, 595, 308, 10, game));
