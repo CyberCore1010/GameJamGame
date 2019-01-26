@@ -19,13 +19,16 @@ public class MusicHandler {
         trackList = new HashMap<>();
 //        fade = new Glide(ac,1,transitionSpeed);
         trackList.put("alarm",SampleManager.sample("res/audio/alarm.mp3"));
-//        trackList.put("doom1",SampleManager.sample("res/audio/doom1.mp3"));
-//        trackList.put("doom2",SampleManager.sample("res/audio/doom2.mp3"));
+        trackList.put("nailing",SampleManager.sample("res/audio/nailing.mp3"));
         trackList.put("night",SampleManager.sample("res/audio/night.mp3"));
+        trackList.put("playerSteps",SampleManager.sample("res/audio/playerSteps.mp3"));
+        trackList.put("stairs",SampleManager.sample("res/audio/stairs.mp3"));
+        trackList.put("tripwire",SampleManager.sample("res/audio/tripwire.mp3"));
         trackList.put("whisper1",SampleManager.sample("res/audio/whisper1.mp3"));
         trackList.put("whisper1Right",SampleManager.sample("res/audio/whisper1Right.mp3"));
         trackList.put("whisper1Left",SampleManager.sample("res/audio/whisper1Left.mp3"));
         trackList.put("whisper2",SampleManager.sample("res/audio/whisper2.mp3"));
+        trackList.put("windup",SampleManager.sample("res/audio/windup.mp3"));
         trackList.put("woosh",SampleManager.sample("res/audio/woosh.mp3"));
     }
 
