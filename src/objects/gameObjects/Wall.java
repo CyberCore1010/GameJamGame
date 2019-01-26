@@ -21,7 +21,7 @@ public class Wall extends GameObject{
     @Override
     public void render(Graphics g) {
         Drawable drawable = (graphics)->{
-            g.setColor(Color.GRAY);
+            g.setColor(Color.DARK_GRAY);
             g.fillRect((int)x, (int)y, width, height);
         };
 

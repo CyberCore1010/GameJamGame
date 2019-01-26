@@ -24,7 +24,7 @@ public class Player extends GameObject{
     private MusicPlayer playerWalking;
     private MusicPlayer enemyLeft;
     private MusicPlayer enemyRight;
-    private final int MAXDETECT=400;
+    private final int MAXDETECT=200;
     private final int TRANSITIONTIME=1;
 
     private int moveTime = 0;
@@ -58,6 +58,7 @@ public class Player extends GameObject{
         enemyRight = new MusicPlayer(game.musicHandler.getAC(),game.musicHandler.getTrack("whisper1Right"),0,10,true);
     }
 
+    @SuppressWarnings("Duplicates")
     @Override
     public void update() {
         camera.setX(x);
@@ -81,13 +82,14 @@ public class Player extends GameObject{
         int closestRight=Integer.MAX_VALUE;
         for(GameObject object : game.objectHandler.objects) {
             if(object.id == GameObjectID.Enemy){
-                if(object.x > x && (object.x - x)<MAXDETECT){
-                    //further right
-                    closestRight=(int)(object.x - x);
-
-                }else if(object.x < x && (x - object.x)<MAXDETECT){
-                    //further left
-                    closestLeft=(int)(x - object.x);
+                if(object.y >= y-MAXDETECT && object.y <= y+MAXDETECT) {
+                    if(object.x > x && (object.x - x)<MAXDETECT){
+                        //further right
+                        closestRight=(int)(object.x - x);
+                    }else if(object.x < x && (x - object.x)<MAXDETECT){
+                        //further left
+                        closestLeft=(int)(x - object.x);
+                    }
                 }
             }
         }
@@ -99,7 +101,6 @@ public class Player extends GameObject{
             if(!enemyLeft.isPlaying()){ enemyLeft.resume();}
             float perc = 100-(closestLeft*100)/MAXDETECT;
             enemyLeft.fade((4.0f/100f)*perc,TRANSITIONTIME);
-            System.out.println(perc + "Left");
         }
 
         if(closestRight==Integer.MAX_VALUE){
@@ -109,7 +110,6 @@ public class Player extends GameObject{
             if(!enemyRight.isPlaying()){ enemyRight.resume();}
             float perc = 100-(closestRight*100)/MAXDETECT;
             enemyRight.fade((4.0f/100f)*perc,TRANSITIONTIME);
-            System.out.println(perc + "Right");
         }
 
     }
@@ -194,6 +194,7 @@ public class Player extends GameObject{
 
     @Override
     public void render(Graphics g) {
+        System.out.println(x+", "+y);
         Drawable player = (graphics)->{
             graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
             graphics.rotate(getRotation(), x, y);
