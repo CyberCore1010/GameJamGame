@@ -132,7 +132,7 @@ public class Grid {
             boolean right = matrix[(int)(testPoint.y/Node.size)][(int)(testPoint.x/Node.size)+1] != 0;
 
             if((up && down && !left && !right) || (left && right && !up && !down)){
-                return true;
+                return false;
             }
             else {
                 return false;
