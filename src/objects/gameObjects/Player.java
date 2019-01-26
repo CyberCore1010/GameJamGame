@@ -121,6 +121,18 @@ public class Player extends GameObject{
             x+=velX;
             setRotation(0);
         }
+
+        if(KeyHandler.isKeyPressed("W") && KeyHandler.isKeyPressed("D")) {
+            setRotation(-0.75);
+        } else if(KeyHandler.isKeyPressed("S") && KeyHandler.isKeyPressed("D")) {
+            setRotation(0.75);
+        } else if(KeyHandler.isKeyPressed("W") && KeyHandler.isKeyPressed("A")) {
+            setRotation(-2.5);
+        } else if(KeyHandler.isKeyPressed("S") && KeyHandler.isKeyPressed("A")) {
+            setRotation(2.5);
+        }
+
+
     }
 
     @Override

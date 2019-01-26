@@ -44,9 +44,12 @@ public class StateHandler {
         //Player
         game.objectHandler.add(new Player(747,447,1,50,50,game));
 
+        //Utility Room
+        game.objectHandler.add(new Wall(297, 395, 200, 10, game));
+
         //Kitchen
-        game.objectHandler.add(new Wall(497, 595, 328, 10, game));
-        game.objectHandler.add(new Wall(497, 300, 10, 300, game));
+        game.objectHandler.add(new Wall(497, 595, 308, 10, game));
+        game.objectHandler.add(new Wall(497, 300, 10, 325, game));
         game.objectHandler.add(new Wall(497, 295, 409, 10, game));
         game.objectHandler.add(new Wall(896, 300, 10, 305, game));
         game.objectHandler.add(new Wall(875, 595, 30, 10, game));
@@ -68,6 +71,7 @@ public class StateHandler {
         game.objectHandler.add(new Wall(1275, 595, 80, 10, game));
 
         //HallwayH1
+        game.objectHandler.add(new Wall(497, 675, 10, 50, game));
         game.objectHandler.add(new Wall(497, 696, 328, 10, game));
         game.objectHandler.add(new Wall(875, 696, 328, 10, game));
 
