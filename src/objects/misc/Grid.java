@@ -1,6 +1,11 @@
 package objects.misc;
 
+import game.Game;
+import objects.gameObjects.Node;
+
+import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.util.FormatFlagsConversionMismatchException;
 
 public class Grid {
 
@@ -18,6 +23,23 @@ public class Grid {
 
     public int[][] getMatrix() {
         return matrix;
+    }
+
+    public ObjectList<Node> getNodes(Game game){
+        ObjectList<Node> nodes = new ObjectList<>();
+        for (int row = 0;row < matrix.length;row++){
+            for (int column = 0; column < matrix[0].length; column ++){
+                Node temp = new Node(row*Node.size,column*Node.size,game);
+                if(matrix[row][column] == 1){
+                    temp.setColor(Color.green);
+                }
+                else if(matrix[row][column] == 0){
+                    temp.setColor(Color.red);
+                }
+                nodes.add(temp);
+            }
+        }
+        return nodes;
     }
 
     private void readGridFromFile(BufferedImage image) {

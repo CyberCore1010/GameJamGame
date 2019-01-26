@@ -9,7 +9,7 @@ import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 
 public class Node extends GameObject {
-    private double width,height;
+    public static double size = 50;
     private Point2D.Double point;
     private Color color;
 
@@ -31,6 +31,10 @@ public class Node extends GameObject {
         return color;
     }
 
+    public void setColor(Color color){
+        this.color = color;
+    }
+
     @Override
     public void update() {
     }
@@ -39,7 +43,7 @@ public class Node extends GameObject {
     public void render(Graphics g) {
         Drawable node = (graphics)->{
             graphics.setColor(color);
-            graphics.fillRect((int)(x-width/2),(int)(y-height/2),(int)width,(int)height);
+            graphics.fillRect((int)(x-size/2),(int)(y-size/2),(int)size,(int)size);
         };
         Graphics2D g2d = (Graphics2D)g;
         renderToCamera(node,g2d,game.cameraMap.get(CameraID.Main));
