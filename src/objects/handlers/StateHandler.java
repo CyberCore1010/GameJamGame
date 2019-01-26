@@ -16,8 +16,8 @@ public class StateHandler {
         game.objectHandler.add(new Floor(310, 0, 300, 500, game));
         game.objectHandler.add(new Player(100,100,1,50,50,game));
         
-        PathList pathList = new PathList(new Point2D.Double(100,100));
-        pathList.add(new Point2D.Double(100,200));
+        PathList pathList = new PathList(new Node(100,100,game),game);
+        pathList.add(new Node(100,200,game));
         game.objectHandler.add(new Hunter(400, 100, game,pathList));
         game.objectHandler.add(new Wall(300, 0, 10, 225, game));
         game.objectHandler.add(new Wall(300, 275, 10, 225, game));

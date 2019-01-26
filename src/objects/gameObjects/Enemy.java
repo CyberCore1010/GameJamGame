@@ -27,8 +27,8 @@ public abstract class Enemy extends GameObject {
 
     //attributes for pathing system
     protected PathList path;
-    protected Point2D.Double nextPoint;
-    protected Point2D.Double currentPos;
+    protected Node nextPoint;
+    protected Node currentPos;
 
     public Enemy(int x, int y, Game game,PathList path) {
         super(x, y, 1, 0, GameObjectID.Enemy, game);
@@ -37,8 +37,8 @@ public abstract class Enemy extends GameObject {
         this.path = path;
         position = new Point2D.Double(x, y);
         playerLastPosition = new Point2D.Double();
-        nextPoint = path.getClosetPoint(position);
-        currentPos = new Point2D.Double();
+        nextPoint = path.getClosetNode(position);
+        currentPos = new Node(x,y,game);
     }
 
 
@@ -97,12 +97,12 @@ public abstract class Enemy extends GameObject {
      * follows
      */
     protected void followPath() {
-        currentPos.setLocation(x, y);
+        currentPos.getPoint().setLocation(x, y);
         if(path.hasReachedNext(currentPos)) {
-            nextPoint = path.getNextPoint();
+            nextPoint = path.getNextNode();
         }
         else {
-            moveToPoint(nextPoint);
+            moveToPoint(nextPoint.getPoint());
         }
 
     }
