@@ -17,9 +17,9 @@ public class Grid {
         BufferedImageLoader loader = new BufferedImageLoader();
         readGridFromFile(loader.loadImage("/map/Floor1.png"));
         for(int[] row : matrix) {
-            //System.out.println();
+            System.out.println();
             for(int number : row) {
-                //System.out.print(number+",");
+                System.out.print(number+",");
             }
         }
     }
@@ -33,7 +33,7 @@ public class Grid {
         for (int row = 0;row < matrix.length;row++){
             ObjectList<Node> rowNodes = new ObjectList<Node>();
             for (int column = 0; column < matrix[0].length; column ++){
-                Node temp = new Node(row*Node.size,column*Node.size,game);
+                Node temp = new Node(column*Node.size,row*Node.size,game);
                 if(matrix[row][column] == 1){
                     temp.setColor(Color.green);
                 }
@@ -72,10 +72,10 @@ public class Grid {
                 int blue = (pixel) & 0xff;
 
                 if(red == 255 && green == 0 && blue == 0) {
-                    matrix[x][y] = 0;
+                    matrix[y][x] = 0;
                 }
                 if(red == 0 && green == 255 && blue == 0) {
-                    matrix[x][y] = 1;
+                    matrix[y][x] = 1;
                 }
             }
         }

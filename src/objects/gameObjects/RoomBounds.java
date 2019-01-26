@@ -31,7 +31,7 @@ public class RoomBounds extends GameObject{
     public void update() {
         for(GameObject object : game.objectHandler.objects) {
             if(object.id == GameObjectID.Player) {
-                if(object.x > x-20 && object.x < x+width+20 && object.y > y-20 && object.y < y+height+20) {
+                if(object.x > x-10 && object.x < x+width+10 && object.y > y-10 && object.y < y+height+10) {
                     line.x1 = middlePoint.x;
                     line.y1 = middlePoint.y;
                     line.x2 = object.x;
