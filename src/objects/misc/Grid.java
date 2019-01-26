@@ -16,6 +16,10 @@ public class Grid {
         }
     }
 
+    public int[][] getMatrix() {
+        return matrix;
+    }
+
     private void readGridFromFile(BufferedImage image) {
         int w = image.getWidth(); //gets the width of the image
         int h = image.getHeight(); //gets the height of the image
@@ -38,5 +42,5 @@ public class Grid {
             }
             System.out.println();
         }
-    }
+    }s
 }
