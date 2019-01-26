@@ -2,6 +2,7 @@ package objects.gameObjects;
 
 import game.CameraID;
 import game.Game;
+import objects.gameObjects.Enemy;
 import objects.interfaces.Drawable;
 import objects.misc.PathList;
 

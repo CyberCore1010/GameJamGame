@@ -2,6 +2,7 @@ package objects.handlers;
 
 import game.Game;
 
+import objects.gameObjects.Hunter;
 import objects.gameObjects.*;
 import objects.misc.BufferedImageLoader;
 import objects.misc.ObjectList;
@@ -33,6 +34,7 @@ public class StateHandler {
         game.objectHandler.add(new Floor(501, 600, 700, 101, loader.loadImage("/floor/wood.png"), game));//HallwayH1
         game.objectHandler.add(new Floor(501, 700, 299, 300, loader.loadImage("/floor/wood.png"), game));//Lounge
         game.objectHandler.add(new Floor(900, 700, 299, 200, loader.loadImage("/floor/carpet.png"), game));//Fireplace room
+        game.objectHandler.add(new Floor(900, 700, 299, 200, loader.loadImage("/floor/blueBrick.png"), game));//Dining room
         game.objectHandler.add(new Floor(1201, 601, 100, 550, loader.loadImage("/floor/wood.png"), game));//HallwayH3
 
         PathGenerator generator = new PathGenerator(game);
