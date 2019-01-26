@@ -35,6 +35,7 @@ public class StateHandler {
         game.objectHandler.add(new Floor(501, 700, 299, 300, loader.loadImage("/floor/wood.png"), game));//Lounge
         game.objectHandler.add(new Floor(900, 700, 299, 200, loader.loadImage("/floor/blueCarpet.png"), game));//Fireplace room
         game.objectHandler.add(new Floor(900, 900, 302, 250, loader.loadImage("/floor/pinkCarpet.png"), game));//Dining room
+        game.objectHandler.add(new Floor(575, 1120, 302, 250, loader.loadImage("/floor/wood.png"), game));//Pantry
         game.objectHandler.add(new Floor(1201, 601, 100, 550, loader.loadImage("/floor/wood.png"), game));//HallwayH3
 
         PathGenerator generator = new PathGenerator(game);
@@ -104,10 +105,13 @@ public class StateHandler {
         game.objectHandler.add(new Wall(895, 1145, 330, 10, game));
 
         //HallwayH2
-        game.objectHandler.add(new Wall(545, 1000, 10, 100, game));
+        game.objectHandler.add(new Wall(545, 1000, 10, 350, game));
 
         //Pantry
         game.objectHandler.add(new Wall(545, 1095, 250, 10, game));
+        game.objectHandler.add(new Wall(545, 1345, 250, 10, game));
+        game.objectHandler.add(new Wall(794, 1095, 10, 130, game));
+        game.objectHandler.add(new Wall(794, 1275, 10, 80, game));
 
         //HallwayH3
         game.objectHandler.add(new Wall(1295, 600, 10, 650, game));
