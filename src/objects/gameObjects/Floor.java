@@ -3,22 +3,22 @@ package objects.gameObjects;
 import game.CameraID;
 import game.Game;
 import objects.interfaces.Drawable;
-import objects.misc.BufferedImageLoader;
 
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
+import java.awt.image.BufferedImage;
 
 public class Floor extends GameObject{
     double width;
     double height;
     private TexturePaint texture;
 
-    public Floor(double x, double y, double width, double height, Game game) {
+    public Floor(double x, double y, double width, double height, BufferedImage image, Game game) {
         super(x, y, 0, 0, GameObjectID.Floor, game);
         this.width = width;
         this.height = height;
-        BufferedImageLoader loader = new BufferedImageLoader();
-        texture = new TexturePaint(loader.loadImage("/floorTexture.png"), new Rectangle(0,0, 32, 32));
+
+        texture = new TexturePaint(image, new Rectangle(-11,-10, 37, 37));
     }
 
     @Override

@@ -2,6 +2,7 @@ package objects.gameObjects;
 
 import game.CameraID;
 import game.Game;
+import objects.handlers.MusicPlayer;
 import objects.interfaces.Drawable;
 import objects.handlers.KeyHandler;
 import objects.misc.BufferedImageLoader;
@@ -17,8 +18,10 @@ public class Player extends GameObject{
     private double velX,velY;
     private boolean movable = true;
     private Camera camera;
-
     private boolean moving;
+
+    private MusicPlayer playerWalking;
+
     private int moveTime = 0;
     private int moveState = 1;
     private Map<Integer, BufferedImage> spriteMap;
@@ -43,6 +46,7 @@ public class Player extends GameObject{
         spriteMap.put(7, loader.loadImage("/player/8.png"));
         spriteMap.put(8, loader.loadImage("/player/9.png"));
         spriteMap.put(9, loader.loadImage("/player/10.png"));
+        playerWalking = new MusicPlayer(game.musicHandler.getAC(),game.musicHandler.getTrack("playerSteps"),1,1,true);
     }
 
     @Override
@@ -52,6 +56,15 @@ public class Player extends GameObject{
         if(movable) {
             collision();
             move();
+            if(moving){
+                if(!playerWalking.isPlaying()){
+                    playerWalking.resume();
+                }
+            }else{
+                if(playerWalking.isPlaying()){
+                    playerWalking.pause();
+                }
+            }
         }
     }
 
@@ -131,12 +144,11 @@ public class Player extends GameObject{
         } else if(KeyHandler.isKeyPressed("S") && KeyHandler.isKeyPressed("A")) {
             setRotation(2.5);
         }
-
-
     }
 
     @Override
     public void render(Graphics g) {
+        System.out.println(x+", "+y);
         Drawable player = (graphics)->{
             graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
             graphics.rotate(getRotation(), x, y);

@@ -32,8 +32,8 @@ public abstract class Enemy extends GameObject {
 
     public Enemy(int x, int y, Game game,PathList path) {
         super(x, y, 1, 0, GameObjectID.Enemy, game);
-        width = 100;
-        height = 100;
+        width = 50;
+        height = 50;
         this.path = path;
         position = new Point2D.Double(x, y);
         playerLastPosition = new Point2D.Double();
