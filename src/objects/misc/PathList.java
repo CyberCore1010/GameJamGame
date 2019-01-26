@@ -1,4 +1,4 @@
-package objects.gameObjects;
+package objects.misc;
 
 import java.awt.geom.Point2D;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -8,8 +8,8 @@ public class PathList extends CopyOnWriteArrayList<Point2D.Double> {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	int listPosition;
-	Point2D.Double nextPoint;
+	private int listPosition;
+	private Point2D.Double nextPoint;
 	
 	public PathList(Point2D.Double nextPoint) {
 		super();

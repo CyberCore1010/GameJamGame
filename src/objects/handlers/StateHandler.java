@@ -3,7 +3,7 @@ package objects.handlers;
 import game.Game;
 
 import objects.gameObjects.*;
-import objects.gameObjects.Enemy;
+import objects.misc.PathList;
 
 import java.awt.geom.Point2D;
 

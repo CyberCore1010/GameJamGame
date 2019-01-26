@@ -1,14 +1,9 @@
 package objects.gameObjects;
 
-import game.CameraID;
 import game.Game;
-import objects.gameObjects.GameObject;
-import objects.gameObjects.GameObjectID;
-import objects.gameObjects.PathList;
-import objects.gameObjects.Player;
-import objects.interfaces.Drawable;
+import objects.misc.PathList;
 import physics.MathsMethods;
-import java.awt.*;
+
 import java.awt.geom.Line2D;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
@@ -42,7 +37,7 @@ public abstract class Enemy extends GameObject {
         this.path = path;
         position = new Point2D.Double(x, y);
         playerLastPosition = new Point2D.Double();
-        nextPoint = path.nextPoint;
+        nextPoint = path.getClosetPoint(position);
         currentPos = new Point2D.Double();
     }
 

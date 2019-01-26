@@ -3,6 +3,7 @@ package objects.gameObjects;
 import game.CameraID;
 import game.Game;
 import objects.interfaces.Drawable;
+import objects.misc.PathList;
 
 import java.awt.*;
 
