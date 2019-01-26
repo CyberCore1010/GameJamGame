@@ -33,7 +33,7 @@ public class Grid {
         for (int row = 0;row < matrix.length;row++){
             ObjectList<Node> rowNodes = new ObjectList<Node>();
             for (int column = 0; column < matrix[0].length; column ++){
-                Node temp = new Node(row*Node.size,column*Node.size,game);
+                Node temp = new Node(column*Node.size,row*Node.size,game);
                 if(matrix[row][column] == 1){
                     temp.setColor(Color.green);
                 }
@@ -48,16 +48,39 @@ public class Grid {
     }
 
     public void setJunctions(ObjectList<ObjectList<Node>> nodeList){
-        //TODO
+        for(ObjectList<Node> row : nodeList){
+            for(Node temp : row){
+                if(temp.getColor().equals(Color.red)){
+                    continue;
+                }
+                else if(!isCorridor(temp)){
+                    temp.junction = true;
+                }
+            }
+        }
     }
 
-    private boolean isCoridoor(Node test){
+    private boolean isCorridor(Node test){
         Point2D.Double testPoint = test.getPoint();
-        boolean up = matrix[(int)testPoint.y-1][(int)testPoint.x] != 0;
-        boolean down = matrix[(int)testPoint.y+1][(int)testPoint.x] != 0;
-        boolean left = matrix[(int)testPoint.y][(int)testPoint.x-1] != 0;
-        boolean right = matrix[(int)testPoint.y][(int)testPoint.x+1] != 0;
-        return false;
+        try{
+            boolean up = matrix[(int)(testPoint.y/Node.size) +1][(int)(testPoint.x/Node.size)] != 0;
+            boolean down = matrix[(int)(testPoint.y/Node.size)-1][(int)(testPoint.x/Node.size)] != 0;
+            boolean left = matrix[(int)(testPoint.y/Node.size)][(int)(testPoint.x/Node.size)-1] != 0;
+            boolean right = matrix[(int)(testPoint.y/Node.size)][(int)(testPoint.x/Node.size)+1] != 0;
+
+            if((up && down && !left && !right) || (left && right && !up && !down)){
+                return true;
+            }
+            else {
+                return false;
+            }
+        }catch (Exception e){
+            System.out.println("error");
+            return false;
+        }
+
+
+
     }
     
     private void readGridFromFile(BufferedImage image) {
@@ -72,12 +95,21 @@ public class Grid {
                 int blue = (pixel) & 0xff;
 
                 if(red == 255 && green == 0 && blue == 0) {
-                    matrix[x][y] = 0;
+                    matrix[y][x] = 0;
                 }
                 if(red == 0 && green == 255 && blue == 0) {
-                    matrix[x][y] = 1;
+                    matrix[y][x] = 1;
                 }
             }
+        }
+    }
+
+    public void printGrid(){
+        for(int[] row: matrix){
+            for(int column : row){
+                System.out.print(column+" ");
+            }
+            System.out.print("\n");
         }
     }
 }

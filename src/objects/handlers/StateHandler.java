@@ -14,6 +14,8 @@ public class StateHandler {
     public StateHandler(Game game) {
         this.game = game;
         ObjectList<ObjectList<Node>> nodeList = game.grid.getNodes();
+        game.grid.printGrid();
+        game.grid.setJunctions(nodeList);
         for(ObjectList<Node> row : nodeList){
             for(Node node : row){
                 game.objectHandler.add(node);
