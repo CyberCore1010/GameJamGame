@@ -3,6 +3,7 @@ package objects.handlers;
 import game.Game;
 
 import objects.gameObjects.*;
+import objects.gameObjects.Enemy;
 
 import java.awt.geom.Point2D;
 
@@ -17,7 +18,7 @@ public class StateHandler {
         
         PathList pathList = new PathList(new Point2D.Double(100,100));
         pathList.add(new Point2D.Double(100,200));
-        game.objectHandler.add(new Enemy(400, 100, game,pathList));
+        game.objectHandler.add(new Hunter(400, 100, game,pathList));
         game.objectHandler.add(new Wall(300, 0, 10, 225, game));
         game.objectHandler.add(new Wall(300, 275, 10, 225, game));
         game.objectHandler.add(new RoomBounds(0, 0, 300, 500, game));

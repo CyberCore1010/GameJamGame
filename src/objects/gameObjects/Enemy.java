@@ -2,6 +2,10 @@ package objects.gameObjects;
 
 import game.CameraID;
 import game.Game;
+import objects.gameObjects.GameObject;
+import objects.gameObjects.GameObjectID;
+import objects.gameObjects.PathList;
+import objects.gameObjects.Player;
 import objects.interfaces.Drawable;
 import physics.MathsMethods;
 import java.awt.*;
@@ -9,8 +13,9 @@ import java.awt.geom.Line2D;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 
-public class Enemy extends GameObject{
+public abstract class Enemy extends GameObject {
     protected double velX,velY;
+    protected double width,height;
 
     //boolean switching cases
     protected boolean canSeePlayer = false;
@@ -32,11 +37,13 @@ public class Enemy extends GameObject{
 
     public Enemy(int x, int y, Game game,PathList path) {
         super(x, y, 1, 0, GameObjectID.Enemy, game);
+        width = 100;
+        height = 100;
         this.path = path;
         position = new Point2D.Double(x, y);
         playerLastPosition = new Point2D.Double();
-        velX = 4;
-        velY = 4;
+        nextPoint = path.nextPoint;
+        currentPos = new Point2D.Double();
     }
 
 
@@ -115,24 +122,8 @@ public class Enemy extends GameObject{
         throw e;
     }
 
-
-    public void update() {
-
-    }
-
-    @Override
-    public void render(Graphics g) {
-        Drawable enemy = (graphics) ->{
-            g.setColor(Color.BLUE);
-            g.fillRect((int)x-(50), (int)y-(50), 100, 100);
-        };
-        Graphics2D g2d = (Graphics2D)g;
-        renderToCamera(enemy,g2d,game.cameraMap.get(CameraID.Main));
-
-    }
-
     @Override
     public Rectangle2D.Double getBounds() {
-        return new Rectangle2D.Double(x, y, 100, 100);
+        return new Rectangle2D.Double(x-width/2, y-height/2, width, height);
     }
 }

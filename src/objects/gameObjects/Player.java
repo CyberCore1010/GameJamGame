@@ -6,11 +6,9 @@ import objects.interfaces.Drawable;
 import objects.handlers.KeyHandler;
 import objects.misc.BufferedImageLoader;
 import objects.misc.Camera;
-
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
-import java.security.Key;
 import java.util.HashMap;
 import java.util.Map;
 
