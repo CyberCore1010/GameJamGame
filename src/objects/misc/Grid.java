@@ -9,8 +9,10 @@ import java.util.FormatFlagsConversionMismatchException;
 
 public class Grid {
 
+    private Game game;
     private int[][] matrix = new int[74][151]; //y, x
-    public Grid(){
+    public Grid(Game game){
+        this.game = game;
         BufferedImageLoader loader = new BufferedImageLoader();
         readGridFromFile(loader.loadImage("/map/Floor1.png"));
         for(int[] row : matrix) {

@@ -32,7 +32,7 @@ public class Game extends JComponent {
     private Thread thread;
 
     Game() {
-        grid = new Grid();
+        grid = new Grid(this);
         objectHandler = new ObjectHandler();
         //creating the window
         window = new Window(this,"Home Sweet Home - Running on Scythe engine");
