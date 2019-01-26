@@ -20,7 +20,12 @@ public class Player extends GameObject{
     private Camera camera;
     private boolean moving;
 
+    //music
     private MusicPlayer playerWalking;
+    private MusicPlayer enemyLeft;
+    private MusicPlayer enemyRight;
+    private final int MAXDETECT=400;
+    private final int TRANSITIONTIME=1;
 
     private int moveTime = 0;
     private int moveState = 1;
@@ -46,7 +51,11 @@ public class Player extends GameObject{
         spriteMap.put(7, loader.loadImage("/player/8.png"));
         spriteMap.put(8, loader.loadImage("/player/9.png"));
         spriteMap.put(9, loader.loadImage("/player/10.png"));
+
+        //music
         playerWalking = new MusicPlayer(game.musicHandler.getAC(),game.musicHandler.getTrack("playerSteps"),1,1,true);
+        enemyLeft = new MusicPlayer(game.musicHandler.getAC(),game.musicHandler.getTrack("whisper1Left"),0,10,true);
+        enemyRight = new MusicPlayer(game.musicHandler.getAC(),game.musicHandler.getTrack("whisper1Right"),0,10,true);
     }
 
     @Override
@@ -66,6 +75,43 @@ public class Player extends GameObject{
                 }
             }
         }
+
+        //audio
+        int closestLeft=Integer.MAX_VALUE;
+        int closestRight=Integer.MAX_VALUE;
+        for(GameObject object : game.objectHandler.objects) {
+            if(object.id == GameObjectID.Enemy){
+                if(object.x > x && (object.x - x)<MAXDETECT){
+                    //further right
+                    closestRight=(int)(object.x - x);
+
+                }else if(object.x < x && (x - object.x)<MAXDETECT){
+                    //further left
+                    closestLeft=(int)(x - object.x);
+                }
+            }
+        }
+
+        if(closestLeft==Integer.MAX_VALUE){
+            if(enemyLeft.isPlaying()){enemyLeft.pause();}
+
+        }else{
+            if(!enemyLeft.isPlaying()){ enemyLeft.resume();}
+            float perc = 100-(closestLeft*100)/MAXDETECT;
+            enemyLeft.fade((4.0f/100f)*perc,TRANSITIONTIME);
+            System.out.println(perc + "Left");
+        }
+
+        if(closestRight==Integer.MAX_VALUE){
+            if(enemyRight.isPlaying()){enemyRight.pause();}
+
+        }else{
+            if(!enemyRight.isPlaying()){ enemyRight.resume();}
+            float perc = 100-(closestRight*100)/MAXDETECT;
+            enemyRight.fade((4.0f/100f)*perc,TRANSITIONTIME);
+            System.out.println(perc + "Right");
+        }
+
     }
 
     void collision() {
@@ -148,7 +194,6 @@ public class Player extends GameObject{
 
     @Override
     public void render(Graphics g) {
-        System.out.println(x+", "+y);
         Drawable player = (graphics)->{
             graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
             graphics.rotate(getRotation(), x, y);
