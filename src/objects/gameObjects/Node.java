@@ -26,6 +26,7 @@ public class Node extends GameObject {
     public Node(double x,double y,Game game){
         super(x,y,0,0,GameObjectID.Node,game);
         this.point = new Point2D.Double(x,y);
+        adjacentJunctions = new ObjectList<>();
     }
 
     public Point2D.Double getPoint(){
@@ -52,6 +53,8 @@ public class Node extends GameObject {
                 graphics.setColor(Color.yellow);
             }
             graphics.fillRect((int)(x-size/2),(int)(y-size/2),(int)size,(int)size);
+            graphics.setColor(Color.black);
+            graphics.fillOval((int)x,(int)y,1,1);
         };
         Graphics2D g2d = (Graphics2D)g;
         renderToCamera(node,g2d,game.cameraMap.get(CameraID.Main));

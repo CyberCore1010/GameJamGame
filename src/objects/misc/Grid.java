@@ -16,12 +16,6 @@ public class Grid {
         this.game = game;
         BufferedImageLoader loader = new BufferedImageLoader();
         readGridFromFile(loader.loadImage("/map/Floor1.png"));
-        for(int[] row : matrix) {
-            System.out.println();
-            for(int number : row) {
-                System.out.print(number+",");
-            }
-        }
     }
 
     public int[][] getMatrix() {
@@ -47,6 +41,7 @@ public class Grid {
         return nodes;
     }
 
+    @SuppressWarnings("Duplicates")
     public void setJunctions(ObjectList<ObjectList<Node>> nodeList){
         for(ObjectList<Node> row : nodeList){
             for(Node temp : row){
@@ -55,6 +50,62 @@ public class Grid {
                 }
                 else if(!isCorridor(temp)){
                     temp.junction = true;
+                }
+            }
+        }
+
+        for(int row = 0;row < nodeList.size();row++){
+            for(int column = 0;column < nodeList.get(0).size();column++){
+                Node temp = nodeList.get(row).get(column);
+                if(temp.junction){
+                    int upCount = 1;
+                    int downCount = 1;
+                    int leftCount = 1;
+                    int rightCount = 1;
+                    while (true){
+                        Node next = nodeList.get(row-upCount).get(column);
+                        if(next.getColor().equals(Color.red)){
+                            break;
+                        }
+                        else if(next.junction){
+                            temp.adjacentJunctions.add(next);
+                            break;
+                        }
+                        upCount++;
+                    }
+                    while (true){
+                        Node next = nodeList.get(row+downCount).get(column);
+                        if(next.getColor().equals(Color.red)){
+                            break;
+                        }
+                        else if(next.junction){
+                            temp.adjacentJunctions.add(next);
+                            break;
+                        }
+                        downCount++;
+                    }
+                    while (true){
+                        Node next = nodeList.get(row).get(column-leftCount);
+                        if(next.getColor().equals(Color.red)){
+                            break;
+                        }
+                        else if(next.junction){
+                            temp.adjacentJunctions.add(next);
+                            break;
+                        }
+                        leftCount++;
+                    }
+                    while (true){
+                        Node next = nodeList.get(row).get(column+rightCount);
+                        if(next.getColor().equals(Color.red)){
+                            break;
+                        }
+                        else if(next.junction){
+                            temp.adjacentJunctions.add(next);
+                            break;
+                        }
+                        rightCount++;
+                    }
                 }
             }
         }
