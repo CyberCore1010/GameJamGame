@@ -107,7 +107,7 @@ public class StateHandler {
         game.objectHandler.add(new Wall(545, 1000, 10, 100, game));
 
         //Pantry
-        game.objectHandler.add(new Wall(545, 1095, 100, 10, game));
+        game.objectHandler.add(new Wall(545, 1095, 250, 10, game));
 
         //HallwayH3
         game.objectHandler.add(new Wall(1295, 600, 10, 650, game));
