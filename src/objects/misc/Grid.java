@@ -13,9 +13,9 @@ public class Grid {
         BufferedImageLoader loader = new BufferedImageLoader();
         readGridFromFile(loader.loadImage("/map/Floor1.png"));
         for(int[] row : matrix) {
-            System.out.println();
+            //System.out.println();
             for(int number : row) {
-                System.out.print(number+",");
+                //System.out.print(number+",");
             }
         }
     }
