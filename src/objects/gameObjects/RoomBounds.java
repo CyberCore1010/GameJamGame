@@ -3,6 +3,7 @@ package objects.gameObjects;
 import game.CameraID;
 import game.Game;
 import objects.interfaces.Drawable;
+import physics.MathsMethods;
 
 import java.awt.*;
 import java.awt.geom.Line2D;
@@ -11,6 +12,7 @@ import java.awt.geom.Rectangle2D;
 
 public class RoomBounds extends GameObject{
     double width, height;
+    int fade = 255;
     Rectangle2D.Double bounds;
 
     private boolean visible = false;
@@ -29,33 +31,50 @@ public class RoomBounds extends GameObject{
     public void update() {
         for(GameObject object : game.objectHandler.objects) {
             if(object.id == GameObjectID.Player) {
-                line.x1 = middlePoint.x;
-                line.y1 = middlePoint.y;
-                line.x2 = object.x;
-                line.y2 = object.y;
-                visible = true;
-                for(GameObject block : game.objectHandler.objects) {
-                    if(block.id == GameObjectID.Wall) {
-                        if(line.intersects(block.getBounds())) {
-                            visible = false;
+                if(object.x > x-20 && object.x < x+width+20) {
+                    line.x1 = middlePoint.x;
+                    line.y1 = middlePoint.y;
+                    line.x2 = object.x;
+                    line.y2 = object.y;
+                    visible = true;
+                    for(GameObject block : game.objectHandler.objects) {
+                        if(block.id == GameObjectID.Wall) {
+                            if(line.intersects(block.getBounds())) {
+                                visible = false;
+                            }
                         }
                     }
+                } else {
+                    visible = false;
                 }
             }
         }
+        fade();
+    }
+
+    private void fade() {
+        int fadeSpeed = 5;
+        if(visible) {
+            if(fade > 0) {
+                fade-=fadeSpeed;
+            }
+        } else {
+            if(fade < 255) {
+                fade+=fadeSpeed;
+            }
+        }
+        fade = (int)MathsMethods.clamp(fade, 0, 255);
     }
 
     @Override
     public void render(Graphics g) {
-        if(!visible) {
-            Drawable drawable = (graphics)->{
-                graphics.setColor(new Color(0, 0, 0, 230));
-                graphics.fillRect((int)x, (int)y, (int)width, (int)height);
-            };
+        Drawable drawable = (graphics)->{
+            graphics.setColor(new Color(0, 0, 0, fade));
+            graphics.fillRect((int)x, (int)y, (int)width, (int)height);
+        };
 
-            Graphics2D g2d = (Graphics2D) g;
-            renderToCamera(drawable, g2d, game.cameraMap.get(CameraID.Main));
-        }
+        Graphics2D g2d = (Graphics2D) g;
+        renderToCamera(drawable, g2d, game.cameraMap.get(CameraID.Main));
     }
 
     @Override

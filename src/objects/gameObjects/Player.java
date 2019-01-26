@@ -61,27 +61,15 @@ public class Player extends GameObject{
         for(GameObject object : game.objectHandler.objects) {
             if(object.id == GameObjectID.Wall) {
                 if(getBounds().intersects(object.getBounds())) {
-                    boolean xBlock = false;
-                    boolean yBlock = false;
-                    if(x <= object.getBounds().x || x >= object.getBounds().x+object.getBounds().width) {
-                        xBlock = true;
+                    if(x <= object.getBounds().x) {
+                        x += velX * -1;
+                    } if(x >= object.getBounds().x+object.getBounds().width) {
+                        x -= velX * -1;
                     }
-                    if(y <= object.getBounds().y || y >= object.getBounds().y+object.getBounds().height) {
-                        yBlock = true;
-                    }
-                    if(xBlock && !yBlock) {
-                        if(x <= object.getBounds().x) {
-                            x += velX * -1;
-                        } if(x >= object.getBounds().x+object.getBounds().width) {
-                            x -= velX * -1;
-                        }
-                    }
-                    if(!xBlock && yBlock) {
-                        if(y <= object.getBounds().y) {
-                            y += velY * -1;
-                        } if(y >= object.getBounds().y+object.getBounds().height) {
-                            y -= velY * -1;
-                        }
+                    if(y <= object.getBounds().y) {
+                        y += velY * -1;
+                    } if(y >= object.getBounds().y+object.getBounds().height) {
+                        y -= velY * -1;
                     }
                 }
             }
@@ -148,6 +136,8 @@ public class Player extends GameObject{
                 graphics.drawImage(spriteMap.get(0), (int)(x-(width/2)), (int)(y-(width/2)), (int)width, (int)height, null);
             }
             graphics.rotate(-getRotation(), x, y);
+            graphics.setColor(Color.RED);
+            graphics.drawRect((int)getBounds().x, (int)getBounds().y, (int)getBounds().width, (int)getBounds().height);
         };
         Graphics2D g2d = (Graphics2D) g;
         renderToCamera(player, g2d, camera);
@@ -155,6 +145,9 @@ public class Player extends GameObject{
 
     @Override
     public Rectangle2D.Double getBounds() {
-        return new Rectangle2D.Double(x-(width/4), y-(height/4), width/2, height/2);
+        if(getRotation() == 0 || getRotation() == -3) {
+            return new Rectangle2D.Double(x-(width/4), (y-(height/4))-5, width/2, (height/2)+10);
+        }
+        return new Rectangle2D.Double((x-(width/4)-5), y-(height/4), (width/2)+10, height/2);
     }
 }
