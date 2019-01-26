@@ -7,9 +7,12 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class Grid {
-
+    
+    private Game game;
     private int[][] matrix = new int[33][33]; //y, x
-    public Grid(){
+
+    public Grid(Game game){
+        this.game = game;
         BufferedImageLoader loader = new BufferedImageLoader();
         readGridFromFile(loader.loadImage("/map/Floor1.png"));
         for(int[] row : matrix) {
