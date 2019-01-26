@@ -29,8 +29,8 @@ public class Player extends GameObject{
         camera = game.cameraMap.get(CameraID.Main);
         this.width = width;
         this.height = height;
-        velX = 2;
-        velY = 2;
+        velX = 2.5;
+        velY = 2.5;
         spriteMap = new HashMap<>();
         BufferedImageLoader loader = new BufferedImageLoader();
         spriteMap.put(0, loader.loadImage("/player/1.png"));

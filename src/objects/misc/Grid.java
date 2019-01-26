@@ -5,11 +5,10 @@ import objects.gameObjects.Node;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.util.FormatFlagsConversionMismatchException;
 
 public class Grid {
 
-    private int[][] matrix = new int[74][151]; //y, x
+    private int[][] matrix = new int[33][33]; //y, x
     public Grid(){
         BufferedImageLoader loader = new BufferedImageLoader();
         readGridFromFile(loader.loadImage("/map/Floor1.png"));
@@ -54,10 +53,10 @@ public class Grid {
                 int blue = (pixel) & 0xff;
 
                 if(red == 255 && green == 0 && blue == 0) {
-                    matrix[y][x] = 0;
+                    matrix[x][y] = 0;
                 }
                 if(red == 0 && green == 255 && blue == 0) {
-                    matrix[y][x] = 1;
+                    matrix[x][y] = 1;
                 }
             }
         }
