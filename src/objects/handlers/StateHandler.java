@@ -3,6 +3,7 @@ package objects.handlers;
 import game.Game;
 
 import objects.gameObjects.*;
+import objects.misc.ObjectList;
 import objects.misc.PathList;
 
 import java.awt.geom.Point2D;
@@ -12,8 +13,11 @@ public class StateHandler {
 
     public StateHandler(Game game) {
         this.game = game;
-        for(Node node : game.grid.getNodes(game)){
-            game.objectHandler.add(node);
+        ObjectList<ObjectList<Node>> nodeList = game.grid.getNodes();
+        for(ObjectList<Node> row : nodeList){
+            for(Node node : row){
+                game.objectHandler.add(node);
+            }
         }
         game.objectHandler.add(new Floor(0, 0, 300, 500, game));
         game.objectHandler.add(new Floor(310, 0, 300, 500, game));

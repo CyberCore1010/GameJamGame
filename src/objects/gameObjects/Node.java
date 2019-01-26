@@ -3,6 +3,7 @@ package objects.gameObjects;
 import game.CameraID;
 import game.Game;
 import objects.interfaces.Drawable;
+import objects.misc.ObjectList;
 
 import java.awt.*;
 import java.awt.geom.Point2D;
@@ -12,9 +13,13 @@ public class Node extends GameObject {
     public static double size = 50;
     private Point2D.Double point;
     private Color color;
+    public boolean junciton = false;
+    public int heuristicValue;
+    public ObjectList<Node> adjacentJunctions;
 
     public Node(Point2D.Double point, Game game){
         super(point.x,point.y,0,0,GameObjectID.Node,game);
+        adjacentJunctions = new ObjectList<>();
         this.point = point;
     }
 

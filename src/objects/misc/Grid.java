@@ -4,6 +4,7 @@ import game.Game;
 import objects.gameObjects.Node;
 
 import java.awt.*;
+import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
 
 public class Grid {
@@ -27,9 +28,10 @@ public class Grid {
         return matrix;
     }
 
-    public ObjectList<Node> getNodes(Game game){
-        ObjectList<Node> nodes = new ObjectList<>();
+    public ObjectList<ObjectList<Node>> getNodes(){
+        ObjectList<ObjectList<Node>> nodes = new ObjectList<>();
         for (int row = 0;row < matrix.length;row++){
+            ObjectList<Node> rowNodes = new ObjectList<Node>();
             for (int column = 0; column < matrix[0].length; column ++){
                 Node temp = new Node(row*Node.size,column*Node.size,game);
                 if(matrix[row][column] == 1){
@@ -38,12 +40,26 @@ public class Grid {
                 else if(matrix[row][column] == 0){
                     temp.setColor(Color.red);
                 }
-                nodes.add(temp);
+                rowNodes.add(temp);
             }
+            nodes.add(rowNodes);
         }
         return nodes;
     }
 
+    public void setJunctions(ObjectList<ObjectList<Node>> nodeList){
+        //TODO
+    }
+
+    private boolean isCoridoor(Node test){
+        Point2D.Double testPoint = test.getPoint();
+        boolean up = matrix[(int)testPoint.y-1][(int)testPoint.x] != 0;
+        boolean down = matrix[(int)testPoint.y+1][(int)testPoint.x] != 0;
+        boolean left = matrix[(int)testPoint.y][(int)testPoint.x-1] != 0;
+        boolean right = matrix[(int)testPoint.y][(int)testPoint.x+1] != 0;
+        return false;
+    }
+    
     private void readGridFromFile(BufferedImage image) {
         int w = image.getWidth(); //gets the width of the image
         int h = image.getHeight(); //gets the height of the image
