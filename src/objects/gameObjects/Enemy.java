@@ -1,0 +1,135 @@
+package objects.gameObjects;
+
+import game.Game;
+import physics.MathsMethods;
+import java.awt.*;
+import java.awt.geom.Line2D;
+import java.awt.geom.Point2D;
+import java.awt.geom.Rectangle2D;
+
+public class Enemy extends GameObject{
+    protected double velX,velY;
+
+    //boolean switching cases
+    protected boolean canSeePlayer = false;
+    protected boolean seenPlayer = false;
+    protected boolean onPath = true;
+    protected boolean searching = false;
+
+    //attributes for working out line of sight
+    protected Point2D.Double playerDirection;
+    protected Point2D.Double playerLastPosition;
+    protected Point2D.Double position;
+    protected Line2D line;
+    protected int fieldOfView = 90;
+
+    //attributes for pathing system
+    protected PathList path;
+    protected Point2D.Double nextPoint;
+    protected Point2D.Double currentPos;
+
+    public Enemy(int x, int y, Game game,PathList path) {
+        super(x, y, 1, 0, GameObjectID.Enemy, game);
+        this.path = path;
+        position = new Point2D.Double(x, y);
+        playerLastPosition = new Point2D.Double();
+        velX = 4;
+        velY = 4;
+    }
+
+
+    protected boolean canSeePlayer() {
+        double angleToPlayer = Math.atan2(playerLastPosition.x-x,playerLastPosition.y-y);
+        double angleDegrees = Math.toDegrees(angleToPlayer);
+        double distance = MathsMethods.length(playerDirection.x, playerDirection.y);
+        if((angleDegrees<fieldOfView/2)&&(distance<500)&& isSightClear()) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    /**
+     * moves to the specified point
+     * @param point
+     */
+    protected void moveToPoint(Point2D.Double point) {
+        double[] unitVector = MathsMethods.getUnitVector(x,y,point.getX(),point.getY());
+        if(MathsMethods.distance(x, y, point.getX(), point.getY())>1) {
+            x+=unitVector[0]*velX;
+            y+=unitVector[1]*velY;
+        }
+
+
+    }
+
+    /**
+     * works out if there are any walls in between the enemy and the player
+     * @return
+     */
+    private boolean isSightClear(){
+        line = new Line2D.Double(position.x, position.y, playerLastPosition.x, playerLastPosition.y);
+        for(GameObject object : game.objectHandler.objects) {
+            if(object.id == GameObjectID.Wall) {
+                if(line.intersects(object.getBounds())) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    /**
+     * sets the last known position of the player
+     * @throws Exception
+     */
+    protected void setLastPlayerPosition() throws Exception {
+        Player player = this.getPlayer();
+        playerLastPosition.setLocation(player.getX(), player.getY());
+    }
+
+    /**
+     * follows
+     */
+    protected void followPath() {
+        currentPos.setLocation(x, y);
+        if(path.hasReachedNext(currentPos)) {
+            nextPoint = path.getNextPoint();
+        }
+        else {
+            moveToPoint(nextPoint);
+        }
+
+    }
+
+    private Player getPlayer() throws Exception{
+        for(GameObject object : game.objectHandler.objects) {
+            if(object.id == GameObjectID.Player) {
+                return (Player)object;
+            }
+        }
+        Exception e = new Exception("player not found");
+        throw e;
+    }
+
+
+    public void update() {
+
+    }
+
+    @Override
+    public void render(Graphics g) {
+        if(canSeePlayer) {
+            g.setColor(Color.BLUE);
+            g.fillRect((int)x-(50), (int)y-(50), 100, 100);
+        }
+        g.setColor(Color.RED);
+        g.drawLine((int)line.getX1(), (int)line.getY1(), (int)line.getX2(), (int)line.getY2());
+    }
+
+    @Override
+    public Rectangle2D.Double getBounds() {
+        return new Rectangle2D.Double(x, y, 100, 100);
+    }
+}
