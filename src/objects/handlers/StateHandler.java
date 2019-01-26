@@ -4,6 +4,7 @@ import game.Game;
 
 import objects.gameObjects.*;
 import objects.misc.ObjectList;
+import objects.misc.PathGenerator;
 import objects.misc.PathList;
 
 import java.awt.geom.Point2D;
@@ -14,7 +15,6 @@ public class StateHandler {
     public StateHandler(Game game) {
         this.game = game;
         ObjectList<ObjectList<Node>> nodeList = game.grid.getNodes();
-        game.grid.setJunctions(nodeList);
         for(ObjectList<Node> row : nodeList){
             for(Node node : row){
                 game.objectHandler.add(node);
@@ -30,10 +30,11 @@ public class StateHandler {
         game.objectHandler.add(new Floor(501, 600, 700, 101, game));//HallwayH1
         game.objectHandler.add(new Floor(1201, 601, 100, 550, game));//HallwayH3
 
-        //PathList pathList = new PathList(new Node(100,100,game),game);
-        //pathList.add(new Node(100,200,game));
-        //game.objectHandler.add(new Hunter(400, 100, game,pathList));
-        //game.objectHandler.add(new RoomBounds(0, 0, 300, 500, game));
+
+        PathGenerator generator = new PathGenerator(game);
+        PathList path = generator.getPathList(new Point2D.Double(1200,1300),new Point2D.Double(850,750));
+        game.objectHandler.add(new Hunter(1200, 1300, game,path));
+        game.objectHandler.add(new RoomBounds(0, 0, 300, 500, game));
 
         //Room Bounds
         game.objectHandler.add(new RoomBounds(501, 299, 400, 301, game));//Kitchen
