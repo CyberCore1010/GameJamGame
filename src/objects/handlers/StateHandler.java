@@ -34,10 +34,9 @@ public class StateHandler {
         game.objectHandler.add(new Floor(501, 600, 700, 101, loader.loadImage("/floor/wood.png"), game));//HallwayH1
         game.objectHandler.add(new Floor(1201, 601, 100, 550, loader.loadImage("/floor/wood.png"), game));//HallwayH3
 
-        //PathList pathList = new PathList(new Node(100,100,game),game);
-        //pathList.add(new Node(100,200,game));
-        //game.objectHandler.add(new Hunter(400, 100, game,pathList));
-        //game.objectHandler.add(new RoomBounds(0, 0, 300, 500, game));
+        PathList pathList = new PathList(new Node(402,649, game),game);
+        pathList.add(new Node(1247,649, game));
+        game.objectHandler.add(new Hunter(402,649, game, pathList));
 
         //Room Bounds
         game.objectHandler.add(new RoomBounds(300, 400, 200, 150, game));//Utility Room
