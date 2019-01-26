@@ -131,8 +131,6 @@ public class Player extends GameObject{
         } else if(KeyHandler.isKeyPressed("S") && KeyHandler.isKeyPressed("A")) {
             setRotation(2.5);
         }
-
-
     }
 
     @Override

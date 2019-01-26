@@ -6,5 +6,6 @@ public enum GameObjectID {
     Enemy,
     RoomBounds,
     Floor,
-    Node
+    Node,
+    Light
 }

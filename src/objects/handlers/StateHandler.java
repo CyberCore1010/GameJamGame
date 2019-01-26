@@ -3,6 +3,7 @@ package objects.handlers;
 import game.Game;
 
 import objects.gameObjects.*;
+import objects.misc.BufferedImageLoader;
 import objects.misc.ObjectList;
 import objects.misc.PathList;
 
@@ -21,14 +22,17 @@ public class StateHandler {
             }
         }
 
+        BufferedImageLoader loader = new BufferedImageLoader();
         //Floor
-        game.objectHandler.add(new Floor(300, 299, 400, 301, game));//Utility Room
-        game.objectHandler.add(new Floor(501, 299, 400, 301, game));//Kitchen
-        game.objectHandler.add(new Floor(900, 400, 100, 201, game));//Stairs
-        game.objectHandler.add(new Floor(1000, 400, 200, 201, game));//Study1
-        game.objectHandler.add(new Floor(1200, 400, 150, 201, game));//Study2
-        game.objectHandler.add(new Floor(501, 600, 700, 101, game));//HallwayH1
-        game.objectHandler.add(new Floor(1201, 601, 100, 550, game));//HallwayH3
+        game.objectHandler.add(new Floor(300, 400, 200, 150, loader.loadImage("/floor/redBrick.png"), game));//Utility Room
+        game.objectHandler.add(new Floor(300, 550, 201, 450, loader.loadImage("/floor/wood.png"), game));//Garage
+        game.objectHandler.add(new Floor(501, 700, 299, 300, loader.loadImage("/floor/wood.png"), game));//Lounge
+        game.objectHandler.add(new Floor(501, 299, 400, 301, loader.loadImage("/floor/kitchen.png"), game));//Kitchen
+        game.objectHandler.add(new Floor(900, 400, 100, 201, loader.loadImage("/floor/wood.png"), game));//Stairs
+        game.objectHandler.add(new Floor(1000, 400, 200, 201, loader.loadImage("/floor/wood.png"), game));//Study1
+        game.objectHandler.add(new Floor(1200, 400, 150, 201, loader.loadImage("/floor/wood.png"), game));//Study2
+        game.objectHandler.add(new Floor(501, 600, 700, 101, loader.loadImage("/floor/wood.png"), game));//HallwayH1
+        game.objectHandler.add(new Floor(1201, 601, 100, 550, loader.loadImage("/floor/wood.png"), game));//HallwayH3
 
         //PathList pathList = new PathList(new Node(100,100,game),game);
         //pathList.add(new Node(100,200,game));
@@ -36,6 +40,9 @@ public class StateHandler {
         //game.objectHandler.add(new RoomBounds(0, 0, 300, 500, game));
 
         //Room Bounds
+        game.objectHandler.add(new RoomBounds(300, 400, 200, 150, game));//Utility Room
+        game.objectHandler.add(new RoomBounds(300, 550, 201, 450, game));//Garage
+        game.objectHandler.add(new RoomBounds(501, 700, 299, 300, game));//Lounge
         game.objectHandler.add(new RoomBounds(501, 299, 400, 301, game));//Kitchen
         game.objectHandler.add(new RoomBounds(1000, 400, 200, 200, game));//Study1
         game.objectHandler.add(new RoomBounds(1200, 400, 150, 201, game));//Study2
@@ -45,18 +52,25 @@ public class StateHandler {
         //Player
         game.objectHandler.add(new Player(747,447,1,50,50,game));
 
-        //Utility Room
+        //Utility Room and Garage
         game.objectHandler.add(new Wall(297, 395, 200, 10, game));
-        game.objectHandler.add(new Wall(295, 395, 10, 160, game));
+        game.objectHandler.add(new Wall(295, 395, 10, 610, game));
+        game.objectHandler.add(new Wall(297, 995, 210, 10, game));
+        game.objectHandler.add(new Wall(497, 775, 10, 225, game));
         game.objectHandler.add(new Wall(295, 545, 80, 10, game));
         game.objectHandler.add(new Wall(425, 545, 80, 10, game));
 
         //Kitchen
-        game.objectHandler.add(new Wall(497, 595, 308, 10, game));
+        game.objectHandler.add(new Wall(497, 595, 325, 10, game));
         game.objectHandler.add(new Wall(497, 300, 10, 325, game));
         game.objectHandler.add(new Wall(497, 295, 409, 10, game));
         game.objectHandler.add(new Wall(896, 300, 10, 305, game));
         game.objectHandler.add(new Wall(875, 595, 30, 10, game));
+
+        //Lounge
+        game.objectHandler.add(new Wall(496, 995, 309, 10, game));
+        game.objectHandler.add(new Wall(795, 700, 10, 25, game));
+        game.objectHandler.add(new Wall(795, 775, 10, 225, game));
 
         //Stairs
         game.objectHandler.add(new Wall(900, 396, 100, 10, game));
@@ -84,6 +98,8 @@ public class StateHandler {
         game.objectHandler.add(new Wall(1195, 675, 10, 300, game));
         game.objectHandler.add(new Wall(1195, 1025, 10, 125, game));
         game.objectHandler.add(new Wall(1275, 1145, 30, 10, game));
+
+        game.objectHandler.add(new LightSource(0, 0, 0, game));
     }
 
     public void update(){
