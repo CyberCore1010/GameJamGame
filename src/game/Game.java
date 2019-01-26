@@ -35,14 +35,14 @@ public class Game extends JComponent {
         grid = new Grid(this);
         objectHandler = new ObjectHandler();
         //creating the window
-        window = new Window(this,"Home Sweet Home - Running on Scythe engine");
+        window = new Window(this,"There's no place like home - Running on Scythe engine");
 
         //setting default game state
         state = GameState.Main;
 
         //creating and adding the initial camera to the camera list
         cameraMap = new ObjectMap<>();
-        Camera main = new Camera(0, 0, 2,window.gameWidth,window.gameHeight);
+        Camera main = new Camera(0, 0, 1,window.gameWidth,window.gameHeight);
         Camera screen = new Camera(0,0,1,window.gameWidth,window.gameHeight);
         cameraMap.put(CameraID.Main,main);
         cameraMap.put(CameraID.Screen,screen);

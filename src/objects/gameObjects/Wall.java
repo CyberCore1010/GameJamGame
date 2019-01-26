@@ -1,6 +1,8 @@
 package objects.gameObjects;
 
+import game.CameraID;
 import game.Game;
+import objects.interfaces.Drawable;
 
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
@@ -14,14 +16,17 @@ public class Wall extends GameObject{
     }
 
     @Override
-    public void update() {
-
-    }
+    public void update() { }
 
     @Override
     public void render(Graphics g) {
-        g.setColor(Color.GREEN);
-        g.fillRect((int)x, (int)y, width, height);
+        Drawable drawable = (graphics)->{
+            g.setColor(Color.GRAY);
+            g.fillRect((int)x, (int)y, width, height);
+        };
+
+        Graphics2D g2d = (Graphics2D) g;
+        renderToCamera(drawable, g2d, game.cameraMap.get(CameraID.Main));
     }
 
     @Override
