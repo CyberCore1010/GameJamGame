@@ -5,6 +5,7 @@ import objects.handlers.EventHandler;
 import objects.handlers.StateHandler;
 import objects.interfaces.Drawable;
 import objects.misc.Camera;
+import objects.misc.Grid;
 import objects.misc.ObjectMap;
 
 import javax.swing.*;
@@ -29,6 +30,7 @@ public class Game extends JComponent {
     private Thread thread;
 
     Game() {
+        new Grid();
         objectHandler = new ObjectHandler();
         //creating the window
         window = new Window(this,"Home Sweet Home - Running on Scythe engine");
@@ -79,7 +81,7 @@ public class Game extends JComponent {
             fps++;
             if(System.currentTimeMillis() - timer > 1000) {
                 timer += 1000;
-                System.out.println(fps);
+                //System.out.println(fps);
                 fps = 0;
             }
         }
