@@ -54,4 +54,21 @@ public class PathGenerator {
         }
         return returnList;
     }
+    private ArrayList<Node> depthFirst(Node current,Node goal){
+        if(current.getPoint().equals(goal.getPoint())){
+            ArrayList<Node> list = new ArrayList<>();
+            list.add(current);
+            return list;
+        }
+        else{
+            for(Node child : current.children){
+                ArrayList childList = depthFirst(child,goal);
+                if(childList != null){
+                    childList.add(0,current);
+                    return childList;
+                }
+            }
+            return null;
+        }
+    }
 }
