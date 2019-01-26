@@ -66,8 +66,8 @@ public class MusicHandler {
     public static void main(String[] args) {
         MusicHandler music = new MusicHandler();
         music.start();
-        MusicPlayer track2 = new MusicPlayer(music.getAC(),music.trackList.get("night"),5,2000);
-        MusicPlayer track1 = new MusicPlayer(music.getAC(),music.trackList.get("whisper1"),1,2000);
+        MusicPlayer track2 = new MusicPlayer(music.getAC(),music.trackList.get("night"),5,2000,true);
+        MusicPlayer track1 = new MusicPlayer(music.getAC(),music.trackList.get("whisper1"),1,2000,true);
         Scanner sc = new Scanner(System.in);
         while(true){
             float i = sc.nextFloat();
@@ -85,12 +85,16 @@ class MusicPlayer{
     private Glide fade;
     private Gain g;
 
-    public MusicPlayer(AudioContext ac, Sample track, float volume, int transitionSpeed){
+    public MusicPlayer(AudioContext ac, Sample track, float volume, int transitionSpeed, boolean loop){
         this.track = track;
         this.ac = ac;
         this.player = new SamplePlayer(ac,track);
         this.fade = new Glide(ac,volume,transitionSpeed);
-        player.setLoopType(SamplePlayer.LoopType.LOOP_FORWARDS); //default loop forwards
+        if(loop){
+            player.setLoopType(SamplePlayer.LoopType.LOOP_FORWARDS); //loop forwards
+        }else{
+            player.setLoopType(SamplePlayer.LoopType.NO_LOOP_FORWARDS); //noloop
+        }
         g = new Gain(ac,5,fade);
         g.addInput(player);
         ac.out.addInput(g);
