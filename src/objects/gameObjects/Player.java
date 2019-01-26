@@ -11,6 +11,8 @@ import java.awt.*;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.security.Key;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Player extends GameObject{
     private double width, height;
@@ -21,16 +23,8 @@ public class Player extends GameObject{
     private boolean moving;
     private int moveTime = 0;
     private int moveState = 1;
-    private BufferedImage one;
-    private BufferedImage two;
-    private BufferedImage three;
-    private BufferedImage four;
-    private BufferedImage five;
-    private BufferedImage six;
-    private BufferedImage seven;
-    private BufferedImage eight;
-    private BufferedImage nine;
-    private BufferedImage ten;
+    private Map<Integer, BufferedImage> spriteMap;
+
 
     public Player(double x, double y, int z, double width, double height, Game game) {
         super(x, y, z,0, GameObjectID.Player,game);
@@ -39,17 +33,18 @@ public class Player extends GameObject{
         this.height = height;
         velX = 2;
         velY = 2;
+        spriteMap = new HashMap<>();
         BufferedImageLoader loader = new BufferedImageLoader();
-        one = loader.loadImage("/player/1.png");
-        two = loader.loadImage("/player/2.png");
-        three = loader.loadImage("/player/3.png");
-        four = loader.loadImage("/player/4.png");
-        five = loader.loadImage("/player/5.png");
-        six = loader.loadImage("/player/6.png");
-        seven = loader.loadImage("/player/7.png");
-        eight = loader.loadImage("/player/8.png");
-        nine = loader.loadImage("/player/9.png");
-        ten = loader.loadImage("/player/10.png");
+        spriteMap.put(0, loader.loadImage("/player/1.png"));
+        spriteMap.put(1, loader.loadImage("/player/2.png"));
+        spriteMap.put(2, loader.loadImage("/player/3.png"));
+        spriteMap.put(3, loader.loadImage("/player/4.png"));
+        spriteMap.put(4, loader.loadImage("/player/5.png"));
+        spriteMap.put(5, loader.loadImage("/player/6.png"));
+        spriteMap.put(6, loader.loadImage("/player/7.png"));
+        spriteMap.put(7, loader.loadImage("/player/8.png"));
+        spriteMap.put(8, loader.loadImage("/player/9.png"));
+        spriteMap.put(9, loader.loadImage("/player/10.png"));
     }
 
     @Override
@@ -99,26 +94,26 @@ public class Player extends GameObject{
             moveTime++;
             if(moveTime <= 50) {
                 if(moveTime == 5) {
-                    moveState = 2;
+                    moveState = 1;
                 } else if(moveTime == 10) {
-                    moveState = 3;
+                    moveState = 2;
                 } else if(moveTime == 15) {
-                    moveState = 4;
+                    moveState = 3;
                 } else if(moveTime == 20) {
-                    moveState = 5;
+                    moveState = 4;
                 } else if(moveTime == 25) {
-                    moveState = 6;
+                    moveState = 5;
                 } else if(moveTime == 30) {
-                    moveState = 7;
+                    moveState = 6;
                 } else if(moveTime == 35) {
-                    moveState = 8;
+                    moveState = 7;
                 } else if(moveTime == 40) {
-                    moveState = 9;
+                    moveState = 8;
                 } else if(moveTime == 45) {
-                    moveState = 10;
+                    moveState = 9;
                 }
             } else {
-                moveState = 1;
+                moveState = 0;
                 moveTime = 0;
             }
         } else {
@@ -148,40 +143,9 @@ public class Player extends GameObject{
             graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
             graphics.rotate(getRotation(), x, y);
             if(moving) {
-                switch(moveState) {
-                    case 1:
-                        graphics.drawImage(one, (int)(x-(width/2)), (int)(y-(width/2)), (int)width, (int)height, null);
-                        break;
-                    case 2:
-                        graphics.drawImage(two, (int)(x-(width/2)), (int)(y-(width/2)), (int)width, (int)height, null);
-                        break;
-                    case 3:
-                        graphics.drawImage(three, (int)(x-(width/2)), (int)(y-(width/2)), (int)width, (int)height, null);
-                        break;
-                    case 4:
-                        graphics.drawImage(four, (int)(x-(width/2)), (int)(y-(width/2)), (int)width, (int)height, null);
-                        break;
-                    case 5:
-                        graphics.drawImage(five, (int)(x-(width/2)), (int)(y-(width/2)), (int)width, (int)height, null);
-                        break;
-                    case 6:
-                        graphics.drawImage(six, (int)(x-(width/2)), (int)(y-(width/2)), (int)width, (int)height, null);
-                        break;
-                    case 7:
-                        graphics.drawImage(seven, (int)(x-(width/2)), (int)(y-(width/2)), (int)width, (int)height, null);
-                        break;
-                    case 8:
-                        graphics.drawImage(eight, (int)(x-(width/2)), (int)(y-(width/2)), (int)width, (int)height, null);
-                        break;
-                    case 9:
-                        graphics.drawImage(nine, (int)(x-(width/2)), (int)(y-(width/2)), (int)width, (int)height, null);
-                        break;
-                    case 10:
-                        graphics.drawImage(ten, (int)(x-(width/2)), (int)(y-(width/2)), (int)width, (int)height, null);
-                        break;
-                }
+                graphics.drawImage(spriteMap.get(moveState), (int)(x-(width/2)), (int)(y-(width/2)), (int)width, (int)height, null);
             } else {
-                graphics.drawImage(one, (int)(x-(width/2)), (int)(y-(width/2)), (int)width, (int)height, null);
+                graphics.drawImage(spriteMap.get(0), (int)(x-(width/2)), (int)(y-(width/2)), (int)width, (int)height, null);
             }
             graphics.rotate(-getRotation(), x, y);
         };

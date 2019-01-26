@@ -4,4 +4,5 @@ public enum GameObjectID {
     Player,
     Wall,
     Enemy,
+    RoomBounds
 }

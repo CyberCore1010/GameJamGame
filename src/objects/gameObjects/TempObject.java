@@ -29,12 +29,12 @@ public class TempObject extends GameObject{
             }
         }
 
-        canSee = false;
+        canSee = true;
         line = new Line2D.Double(myPoint.x, myPoint.y, playerPoint.x, playerPoint.y);
         for(GameObject object : game.objectHandler.objects) {
             if(object.id == GameObjectID.Wall) {
-                if(!line.intersects(object.getBounds())) {
-                    canSee = true;
+                if(line.intersects(object.getBounds())) {
+                    canSee = false;
                 }
             }
         }
