@@ -1,8 +1,6 @@
 package game;
 
-import objects.handlers.ObjectHandler;
-import objects.handlers.EventHandler;
-import objects.handlers.StateHandler;
+import objects.handlers.*;
 import objects.interfaces.Drawable;
 import objects.misc.Camera;
 import objects.misc.Grid;
@@ -22,6 +20,8 @@ public class Game extends JComponent {
 
     public ObjectHandler objectHandler;
     private StateHandler stateHandler;
+    public MusicHandler musicHandler;
+    private MusicPlayer backgroundMusic;
 
     //This is the camera which is an object of type Camera from my Camera class. It's used for updating the camera each tick of the game
     public Map<CameraID,Camera> cameraMap;
@@ -32,6 +32,11 @@ public class Game extends JComponent {
     private Thread thread;
 
     Game() {
+        musicHandler = new MusicHandler();
+        musicHandler.start();
+        backgroundMusic = new MusicPlayer(musicHandler.getAC(),musicHandler.getTrack("night"),1,1,true);
+        backgroundMusic.resume();
+
         grid = new Grid(this);
         objectHandler = new ObjectHandler();
         //creating the window
@@ -51,6 +56,7 @@ public class Game extends JComponent {
 
         stateHandler = new StateHandler(this);
         eventHandler = new EventHandler(this);
+
 
         //creating and starting the thread
         thread = new Thread(this::start);
