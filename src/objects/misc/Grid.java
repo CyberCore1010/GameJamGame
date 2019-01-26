@@ -48,16 +48,39 @@ public class Grid {
     }
 
     public void setJunctions(ObjectList<ObjectList<Node>> nodeList){
-        //TODO
+        for(ObjectList<Node> row : nodeList){
+            for(Node temp : row){
+                if(temp.getColor().equals(Color.red)){
+                    continue;
+                }
+                else if(!isCorridor(temp)){
+                    temp.junction = true;
+                }
+            }
+        }
     }
 
-    private boolean isCoridoor(Node test){
+    private boolean isCorridor(Node test){
         Point2D.Double testPoint = test.getPoint();
-        boolean up = matrix[(int)testPoint.y-1][(int)testPoint.x] != 0;
-        boolean down = matrix[(int)testPoint.y+1][(int)testPoint.x] != 0;
-        boolean left = matrix[(int)testPoint.y][(int)testPoint.x-1] != 0;
-        boolean right = matrix[(int)testPoint.y][(int)testPoint.x+1] != 0;
-        return false;
+        try{
+            boolean up = matrix[(int)(testPoint.y/Node.size) +1][(int)(testPoint.x/Node.size)] != 0;
+            boolean down = matrix[(int)(testPoint.y/Node.size)-1][(int)(testPoint.x/Node.size)] != 0;
+            boolean left = matrix[(int)(testPoint.y/Node.size)][(int)(testPoint.x/Node.size)-1] != 0;
+            boolean right = matrix[(int)(testPoint.y/Node.size)][(int)(testPoint.x/Node.size)+1] != 0;
+
+            if((up && down && !left && !right) || (left && right && !up && !down)){
+                return true;
+            }
+            else {
+                return false;
+            }
+        }catch (Exception e){
+            System.out.println("error");
+            return false;
+        }
+
+
+
     }
     
     private void readGridFromFile(BufferedImage image) {
@@ -78,6 +101,15 @@ public class Grid {
                     matrix[y][x] = 1;
                 }
             }
+        }
+    }
+
+    public void printGrid(){
+        for(int[] row: matrix){
+            for(int column : row){
+                System.out.print(column+" ");
+            }
+            System.out.print("\n");
         }
     }
 }

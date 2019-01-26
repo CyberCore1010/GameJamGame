@@ -13,7 +13,7 @@ public class Node extends GameObject {
     public static double size = 50;
     private Point2D.Double point;
     private Color color;
-    public boolean junciton = false;
+    public boolean junction = false;
     public int heuristicValue;
     public ObjectList<Node> adjacentJunctions;
 
@@ -48,6 +48,9 @@ public class Node extends GameObject {
     public void render(Graphics g) {
         Drawable node = (graphics)->{
             graphics.setColor(color);
+            if(junction){
+                graphics.setColor(Color.yellow);
+            }
             graphics.fillRect((int)(x-size/2),(int)(y-size/2),(int)size,(int)size);
         };
         Graphics2D g2d = (Graphics2D)g;
