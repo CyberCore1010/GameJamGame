@@ -1,6 +1,8 @@
 package objects.gameObjects;
 
+import game.CameraID;
 import game.Game;
+import objects.interfaces.Drawable;
 import physics.MathsMethods;
 import java.awt.*;
 import java.awt.geom.Line2D;
@@ -120,12 +122,13 @@ public class Enemy extends GameObject{
 
     @Override
     public void render(Graphics g) {
-        if(canSeePlayer) {
+        Drawable enemy = (graphics) ->{
             g.setColor(Color.BLUE);
             g.fillRect((int)x-(50), (int)y-(50), 100, 100);
-        }
-        g.setColor(Color.RED);
-        g.drawLine((int)line.getX1(), (int)line.getY1(), (int)line.getX2(), (int)line.getY2());
+        };
+        Graphics2D g2d = (Graphics2D)g;
+        renderToCamera(enemy,g2d,game.cameraMap.get(CameraID.Main));
+
     }
 
     @Override
