@@ -1,6 +1,7 @@
 package objects.gameObjects;
 
 import game.Game;
+import objects.interfaces.Drawable;
 
 import java.awt.*;
 import java.awt.geom.Line2D;
@@ -25,7 +26,6 @@ public class TempObject extends GameObject{
         for(GameObject object : game.objectHandler.objects) {
             if(object.id == GameObjectID.Player) {
                 playerPoint = new Point2D.Double(object.x, object.y);
-                System.out.println(playerPoint);
             }
         }
 
@@ -38,15 +38,18 @@ public class TempObject extends GameObject{
                 }
             }
         }
+
     }
 
     @Override
     public void render(Graphics g) {
+        Drawable drawable = (graphics)->{
+            //graphics.
+        };
         if(canSee) {
             g.setColor(Color.BLUE);
             g.fillRect((int)x, (int)y, 100, 100);
         }
-        g.drawLine((int)line.getX1(), (int)line.getY1(), (int)line.getX2(), (int)line.getY2());
     }
 
     @Override
