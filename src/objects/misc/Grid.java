@@ -33,14 +33,11 @@ public class Grid {
 
                 if(red == 255 && green == 0 && blue == 0) {
                     matrix[x][y] = 0;
-                    System.out.print("0,");
                 }
                 if(red == 0 && green == 255 && blue == 0) {
                     matrix[x][y] = 1;
-                    System.out.print("1,");
                 }
             }
-            System.out.println();
         }
-    }s
+    }
 }
