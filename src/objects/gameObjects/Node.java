@@ -14,19 +14,22 @@ public class Node extends GameObject {
     private Point2D.Double point;
     private Color color;
     public boolean junction = false;
-    public int heuristicValue;
-    public ObjectList<Node> adjacentJunctions;
+    public Node parent;
+    public ObjectList<Node> children;
+    public int score = Integer.MAX_VALUE;
 
     public Node(Point2D.Double point, Game game){
         super(point.x,point.y,0,0,GameObjectID.Node,game);
-        adjacentJunctions = new ObjectList<>();
+        children = new ObjectList<>();
+        parent = null;
         this.point = point;
     }
 
     public Node(double x,double y,Game game){
         super(x,y,0,0,GameObjectID.Node,game);
         this.point = new Point2D.Double(x,y);
-        adjacentJunctions = new ObjectList<>();
+        parent = null;
+        children = new ObjectList<>();
     }
 
     public Point2D.Double getPoint(){

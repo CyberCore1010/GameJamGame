@@ -10,12 +10,15 @@ import java.awt.image.BufferedImage;
 public class Grid {
     
     private Game game;
+    private ObjectList<ObjectList<Node>> nodeList;
     private int[][] matrix = new int[33][33]; //y, x
 
     public Grid(Game game){
         this.game = game;
+        nodeList = new ObjectList<>();
         BufferedImageLoader loader = new BufferedImageLoader();
         readGridFromFile(loader.loadImage("/map/Floor1.png"));
+        generateNodes();
     }
 
     public int[][] getMatrix() {
@@ -23,6 +26,10 @@ public class Grid {
     }
 
     public ObjectList<ObjectList<Node>> getNodes(){
+        return nodeList;
+    }
+
+    private void generateNodes(){
         ObjectList<ObjectList<Node>> nodes = new ObjectList<>();
         for (int row = 0;row < matrix.length;row++){
             ObjectList<Node> rowNodes = new ObjectList<Node>();
@@ -38,7 +45,8 @@ public class Grid {
             }
             nodes.add(rowNodes);
         }
-        return nodes;
+        setJunctions(nodes);
+        this.nodeList = nodes;
     }
 
     @SuppressWarnings("Duplicates")
@@ -68,7 +76,8 @@ public class Grid {
                             break;
                         }
                         else if(next.junction){
-                            temp.adjacentJunctions.add(next);
+                            next.parent = temp;
+                            temp.children.add(next);
                             break;
                         }
                         upCount++;
@@ -79,7 +88,8 @@ public class Grid {
                             break;
                         }
                         else if(next.junction){
-                            temp.adjacentJunctions.add(next);
+                            next.parent = temp;
+                            temp.children.add(next);
                             break;
                         }
                         downCount++;
@@ -90,7 +100,8 @@ public class Grid {
                             break;
                         }
                         else if(next.junction){
-                            temp.adjacentJunctions.add(next);
+                            next.parent = temp;
+                            temp.children.add(next);
                             break;
                         }
                         leftCount++;
@@ -101,7 +112,8 @@ public class Grid {
                             break;
                         }
                         else if(next.junction){
-                            temp.adjacentJunctions.add(next);
+                            next.parent = temp;
+                            temp.children.add(next);
                             break;
                         }
                         rightCount++;
@@ -162,5 +174,11 @@ public class Grid {
             }
             System.out.print("\n");
         }
+    }
+
+    public Node getNearestNode(Point2D.Double point){
+        int row = (int)Math.round(point.y/Node.size);
+        int column = (int)Math.round(point.x/Node.size);
+        return nodeList.get(row).get(column);
     }
 }
