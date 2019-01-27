@@ -21,6 +21,7 @@ public class MusicHandler {
 //        this.game = g;
         trackList = new HashMap<>();
         trackList.put("alarm",SampleManager.sample("res/audio/alarm.mp3"));
+        trackList.put("music",SampleManager.sample("res/audio/music.mp3"));
         trackList.put("nailing",SampleManager.sample("res/audio/nailing.mp3"));
         trackList.put("night",SampleManager.sample("res/audio/night.mp3"));
         trackList.put("playerSteps",SampleManager.sample("res/audio/playerSteps.mp3"));
