@@ -135,7 +135,7 @@ public abstract class Enemy extends GameObject {
 
     @Override
     public Rectangle2D.Double getBounds() {
-        return new Rectangle2D.Double(x-width/2, y-height/2, width, height);
+        return new Rectangle2D.Double(x-width/4, y-height/4, width/2, height/2);
     }
 
     private Point2D.Double getPoint(){
