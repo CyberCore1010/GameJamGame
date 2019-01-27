@@ -10,7 +10,6 @@ import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 
 public abstract class Enemy extends GameObject {
-    protected double velX,velY;
     protected double width,height;
 
     //boolean switching cases
@@ -63,6 +62,7 @@ public abstract class Enemy extends GameObject {
      */
     protected void moveToPoint(Point2D.Double point) {
         setRotation(findRotation(getPoint(),point));
+        System.out.println("Rotation : "+getRotation());
         double[] unitVector = MathsMethods.getUnitVector(x,y,point.getX(),point.getY());
         if(MathsMethods.distance(x, y, point.getX(), point.getY())>1) {
             x+=unitVector[0]*velX;

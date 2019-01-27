@@ -13,15 +13,18 @@ import java.awt.geom.Rectangle2D;
  */
 public abstract class GameObject {
     protected double x,y;
+    protected double velX,velY;
     private double rotation;
     protected int z;
     protected GameObjectID id;
     protected Game game;
 
-    public GameObject(double x, double y , int z , double rotation, GameObjectID id, Game game) {
+    public GameObject(double x, double y , int z ,double rotation, GameObjectID id, Game game) {
         this.x = x;
         this.y = y;
         this.z = z;
+        this.velX = 0;
+        this.velY = 0;
         this.rotation = rotation;
         this.id = id;
         this.game = game;
@@ -38,6 +41,31 @@ public abstract class GameObject {
     protected void renderToCamera(Drawable item, Graphics2D g2d, Camera camera){
         g2d.setTransform(camera.getTransform());
         item.draw(g2d);
+    }
+
+    protected boolean isColliding(GameObject g){
+        if(g.getBounds() == null){
+            return false;
+        }
+        else if(getBounds().intersects(g.getBounds())){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+    protected void resolveCollision(GameObject g){
+        if(x <= g.getBounds().x) {
+            x += velX * -1;
+        } if(x >= g.getBounds().x+g.getBounds().width) {
+            x -= velX * -1;
+        }
+        if(y <= g.getBounds().y) {
+            y += velY * -1;
+        } if(y >= g.getBounds().y+g.getBounds().height) {
+            y -= velY * -1;
+        }
     }
 
     public double getRotation() {

@@ -16,7 +16,6 @@ import java.util.Map;
 
 public class Player extends GameObject{
     private double width, height;
-    private double velX,velY;
     private boolean movable = true;
     private Camera camera;
     private boolean moving;
@@ -117,20 +116,13 @@ public class Player extends GameObject{
 
     }
 
-    void collision() {
+    private void collision() {
         for(GameObject object : game.objectHandler.objects) {
-            if(object.id == GameObjectID.Wall) {
-                if(getBounds().intersects(object.getBounds())) {
-                    if(x <= object.getBounds().x) {
-                        x += velX * -1;
-                    } if(x >= object.getBounds().x+object.getBounds().width) {
-                        x -= velX * -1;
-                    }
-                    if(y <= object.getBounds().y) {
-                        y += velY * -1;
-                    } if(y >= object.getBounds().y+object.getBounds().height) {
-                        y -= velY * -1;
-                    }
+            if(this.isColliding(object)){
+                switch (object.id){
+                    case Wall:
+                        resolveCollision(object);
+                        break;
                 }
             }
         }

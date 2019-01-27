@@ -40,10 +40,23 @@ public class Hunter extends Enemy {
 
     }
 
+    private void collision(){
+        for(GameObject object : game.objectHandler.objects){
+            if(this.isColliding(object)){
+                switch (object.id){
+                    case Wall:
+                        resolveCollision(object);
+                        break;
+                }
+            }
+        }
+    }
+
     @Override
     public void render(Graphics g) {
         Drawable enemy = (graphics)->{
             graphics.setColor(Color.blue);
+            graphics.rotate(getRotation(),x,y);
             graphics.drawImage(sprite, (int)(x-width/2),(int)(y-height/2),(int)width,(int)height, null);
         };
         Graphics2D g2d = (Graphics2D)g;
