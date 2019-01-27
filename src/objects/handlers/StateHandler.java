@@ -49,13 +49,25 @@ public class StateHandler {
         game.objectHandler.add(new Player(747,447,1,50,50,game));
 
         //adding the enemies
-        PathGenerator generatorA = new PathGenerator(game);
-        PathList pathA = generatorA.getPathList(new Point2D.Double(1200,1300),game.grid.getRandomNode().getPoint());
-        game.objectHandler.add(new Hunter(1200, 1300, game, pathA, generatorA));
-
-        PathGenerator generatorB = new PathGenerator(game);
-        PathList pathB = generatorB.getPathList(new Point2D.Double(1200,1300),game.grid.getRandomNode().getPoint());
-        game.objectHandler.add(new Hunter(1200, 1300, game, pathB, generatorB));
+//        PathGenerator generatorA = new PathGenerator(game);
+//        PathList pathA = generatorA.getPathList(new Point2D.Double(1200,1300),game.grid.getRandomNode().getPoint());
+//        game.objectHandler.add(new Hunter(1200, 1300, game, pathA, generatorA));
+//
+//        PathGenerator generatorB = new PathGenerator(game);
+//        PathList pathB = generatorB.getPathList(new Point2D.Double(1200,1300),game.grid.getRandomNode().getPoint());
+//        game.objectHandler.add(new Hunter(1200, 1300, game, pathB, generatorB));
+//
+//        PathGenerator generatorC = new PathGenerator(game);
+//        PathList pathC = generatorC.getPathList(new Point2D.Double(1200,1300),game.grid.getRandomNode().getPoint());
+//        game.objectHandler.add(new Hunter(1200, 1300, game, pathC, generatorC));
+//
+//        PathGenerator generatorD = new PathGenerator(game);
+//        PathList pathD = generatorD.getPathList(new Point2D.Double(1200,1300),game.grid.getRandomNode().getPoint());
+//        game.objectHandler.add(new Hunter(1200, 1300, game, pathD, generatorD));
+//
+//        PathGenerator generatorG = new PathGenerator(game);
+//        PathList pathG = generatorB.getPathList(new Point2D.Double(1200,1300),game.grid.getRandomNode().getPoint());
+//        game.objectHandler.add(new Hunter(1200, 1300, game, pathG, generatorG));
 
 
         //Utility Room and Garage
@@ -104,12 +116,16 @@ public class StateHandler {
         game.objectHandler.add(new Wall(496, 995, 308, 10, game));
         game.objectHandler.add(new Wall(795, 700, 10, 25, game));
         game.objectHandler.add(new Wall(795, 775, 10, 250, game));
+        game.objectHandler.add(new Door(497, 725, false, game));
+        game.objectHandler.add(new Door(795, 725, false, game));
 
         //Fireplace room/Dining room
         game.objectHandler.add(new Wall(895, 700, 10, 25, game));
         game.objectHandler.add(new Wall(895, 895, 300, 10, game));
         game.objectHandler.add(new Wall(895, 775, 10, 375, game));
         game.objectHandler.add(new Wall(875, 1145, 350, 10, game));
+        game.objectHandler.add(new Door(895, 725, false, game));
+        game.objectHandler.add(new Door(1194, 975, false, game));
 
         //HallwayH2
         game.objectHandler.add(new Wall(545, 1000, 10, 350, game));
@@ -121,11 +137,14 @@ public class StateHandler {
         game.objectHandler.add(new Wall(545, 1345, 250, 10, game));
         game.objectHandler.add(new Wall(794, 1075, 10, 150, game));
         game.objectHandler.add(new Wall(794, 1275, 10, 80, game));
+        game.objectHandler.add(new Door(794, 1025, false, game));
+        game.objectHandler.add(new Door(794, 1225, false, game));
 
         //TV room
         game.objectHandler.add(new Wall(800, 1345, 500, 10, game));
         game.objectHandler.add(new Wall(1095, 1150, 10, 25, game));
         game.objectHandler.add(new Wall(1095, 1225, 10, 130, game));
+
 
         //Bathroom
         game.objectHandler.add(new Wall(1100, 1245, 75, 10, game));
