@@ -39,12 +39,16 @@ public class StateHandler {
         game.objectHandler.add(new Floor(1201, 601, 100, 550, loader.loadImage("/floor/wood.png"), game));//HallwayH3
         game.objectHandler.add(new Floor(1100, 1150, 200, 100, loader.loadImage("/floor/wood.png"), game));//HallwayH3-sub
 
+        //Player
+        //game.objectHandler.add(new Player(747,447,1,50,50,game));
+
+        game.objectHandler.add(new Player(0,0,1,50,50,game));
+
         PathGenerator generator = new PathGenerator(game);
         PathList path = generator.getPathList(new Point2D.Double(1200,1300));
         game.objectHandler.add(new Hunter(1200, 1300, game, path, generator));
 
-        //Player
-        game.objectHandler.add(new Player(747,447,1,50,50,game));
+
 
         //Utility Room and Garage
         game.objectHandler.add(new Wall(297, 395, 200, 10, game));
@@ -138,7 +142,7 @@ public class StateHandler {
         game.objectHandler.add(new RoomBounds(1201, 601, 100, 549, game));//HallwayH3
         game.objectHandler.add(new RoomBounds(1100, 1150, 200, 100, game));//HallwayH3-sub
 
-        game.objectHandler.add(new LightSource(0, 0, 0, game));
+        //game.objectHandler.add(new LightSource(0, 0, 0, game));
     }
 
     public void update(){

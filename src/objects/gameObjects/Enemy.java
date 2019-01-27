@@ -98,13 +98,12 @@ public abstract class Enemy extends GameObject {
      * follows
      */
     protected void followPath() {
-        System.out.println(generator.getGoalNode().x+generator.getGoalNode().y);
-        if(x == generator.getGoalNode().x && y == generator.getGoalNode().y) {
-            path = generator.getPathList(new Point2D.Double(x, y));
-            generator.setGoalNode(new Node(new Point2D.Double(0, 0), game));
-        }
         currentPos.getPoint().setLocation(x, y);
         if(path.hasReachedNext(currentPos)) {
+            if(currentPos.getPoint().equals(generator.getGoalNode().getPoint())){
+                //System.out.println("Goal : "+generator.getGoalNode().getPoint());
+                path = generator.getPathList(currentPos.getPoint());
+            }
             nextPoint = path.getNextNode();
         }
         else {

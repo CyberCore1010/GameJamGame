@@ -56,6 +56,8 @@ public class Player extends GameObject{
         playerWalking = new MusicPlayer(game.musicHandler.getAC(),game.musicHandler.getTrack("playerSteps"),1,1,true);
         enemyLeft = new MusicPlayer(game.musicHandler.getAC(),game.musicHandler.getTrack("whisper1Left"),0,10,true);
         enemyRight = new MusicPlayer(game.musicHandler.getAC(),game.musicHandler.getTrack("whisper1Right"),0,10,true);
+
+
     }
 
     @SuppressWarnings("Duplicates")
@@ -66,14 +68,14 @@ public class Player extends GameObject{
         if(movable) {
             collision();
             move();
-            if(moving){
-                if(!playerWalking.isPlaying()){
-                    playerWalking.resume();
-                }
-            }else{
-                if(playerWalking.isPlaying()){
-                    playerWalking.pause();
-                }
+        }
+        if(moving){
+            if(!playerWalking.isPlaying()){
+                playerWalking.resume();
+            }
+        }else{
+            if(playerWalking.isPlaying()){
+                playerWalking.pause();
             }
         }
 
