@@ -8,5 +8,6 @@ public enum GameObjectID {
     Floor,
     Node,
     Light,
+    Door,
     Popup
 }

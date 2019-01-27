@@ -193,7 +193,7 @@ public class Player extends GameObject{
 
     @Override
     public void render(Graphics g) {
-        //System.out.println(x+", "+y);
+        System.out.println(x+", "+y);
         Drawable player = (graphics)->{
             graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
             graphics.rotate(getRotation(), x, y);

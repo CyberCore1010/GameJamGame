@@ -6,6 +6,9 @@ import net.beadsproject.beads.data.Sample;
 import net.beadsproject.beads.data.SampleManager;
 import net.beadsproject.beads.ugens.*;
 
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import java.io.File;
 import java.util.HashMap;
 import java.util.Scanner;
 
@@ -21,6 +24,8 @@ public class MusicHandler {
 //        this.game = g;
         trackList = new HashMap<>();
         trackList.put("alarm",SampleManager.sample("res/audio/alarm.mp3"));
+        trackList.put("doorOpen",SampleManager.sample("res/audio/doorOpen.wav"));
+        trackList.put("doorClose",SampleManager.sample("res/audio/doorClose.wav"));
         trackList.put("music",SampleManager.sample("res/audio/music.mp3"));
         trackList.put("nailing",SampleManager.sample("res/audio/nailing.mp3"));
         trackList.put("night",SampleManager.sample("res/audio/night.mp3"));
@@ -55,7 +60,6 @@ public class MusicHandler {
     public void stop(){
         ac.stop();
     }
-
 
 //    TEST function to check if audio playing and libs work
     public static void main(String[] args) {
