@@ -9,5 +9,6 @@ public enum GameObjectID {
     Node,
     Light,
     Door,
-    Popup
+    Popup,
+    Score
 }
