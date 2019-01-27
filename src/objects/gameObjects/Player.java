@@ -41,16 +41,16 @@ public class Player extends GameObject{
         velY = 2.5;
         spriteMap = new HashMap<>();
         BufferedImageLoader loader = new BufferedImageLoader();
-        spriteMap.put(0, loader.loadImage("/player/1.png"));
-        spriteMap.put(1, loader.loadImage("/player/2.png"));
-        spriteMap.put(2, loader.loadImage("/player/3.png"));
-        spriteMap.put(3, loader.loadImage("/player/4.png"));
-        spriteMap.put(4, loader.loadImage("/player/5.png"));
-        spriteMap.put(5, loader.loadImage("/player/6.png"));
-        spriteMap.put(6, loader.loadImage("/player/7.png"));
-        spriteMap.put(7, loader.loadImage("/player/8.png"));
-        spriteMap.put(8, loader.loadImage("/player/9.png"));
-        spriteMap.put(9, loader.loadImage("/player/10.png"));
+        spriteMap.put(0, loader.loadImage("/sprites/player/1.png"));
+        spriteMap.put(1, loader.loadImage("/sprites/player/2.png"));
+        spriteMap.put(2, loader.loadImage("/sprites/player/3.png"));
+        spriteMap.put(3, loader.loadImage("/sprites/player/4.png"));
+        spriteMap.put(4, loader.loadImage("/sprites/player/5.png"));
+        spriteMap.put(5, loader.loadImage("/sprites/player/6.png"));
+        spriteMap.put(6, loader.loadImage("/sprites/player/7.png"));
+        spriteMap.put(7, loader.loadImage("/sprites/player/8.png"));
+        spriteMap.put(8, loader.loadImage("/sprites/player/9.png"));
+        spriteMap.put(9, loader.loadImage("/sprites/player/10.png"));
 
         //music
         playerWalking = new MusicPlayer(game.musicHandler.getAC(),game.musicHandler.getTrack("playerSteps"),1.5f,1,true);
@@ -102,7 +102,7 @@ public class Player extends GameObject{
         }else{
             if(!enemyLeft.isPlaying()){ enemyLeft.resume();}
             float perc = 100-(closestLeft*100)/MAXDETECT;
-            enemyLeft.fade((6.0f/100f)*perc+1,TRANSITIONTIME);
+            enemyLeft.fade((6.0f/100f)*perc+3,TRANSITIONTIME);
         }
 
         if(closestRight==Integer.MAX_VALUE){
@@ -111,7 +111,7 @@ public class Player extends GameObject{
         }else{
             if(!enemyRight.isPlaying()){ enemyRight.resume();}
             float perc = 100-(closestRight*100)/MAXDETECT;
-            enemyRight.fade((6.0f/100f)*perc+1,TRANSITIONTIME);
+            enemyRight.fade((6.0f/100f)*perc+3,TRANSITIONTIME);
         }
 
     }
