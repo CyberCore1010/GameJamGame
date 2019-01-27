@@ -2,7 +2,6 @@ package objects.gameObjects;
 
 import game.CameraID;
 import game.Game;
-import objects.gameObjects.Enemy;
 import objects.interfaces.Drawable;
 import objects.misc.PathGenerator;
 import objects.misc.PathList;
@@ -19,7 +18,17 @@ public class Hunter extends Enemy {
 
     @Override
     public void update() {
-        followPath();
+        if(canSeePlayer()){
+
+            seeingPlayer = true;
+            seenPlayer = true;
+            setLastPlayerPosition();
+            moveToPoint(playerLastPosition);
+        }
+        else {
+            followPath();
+        }
+
     }
 
     @Override

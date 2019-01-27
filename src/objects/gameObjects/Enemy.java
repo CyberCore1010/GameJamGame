@@ -14,15 +14,13 @@ public abstract class Enemy extends GameObject {
     protected double width,height;
 
     //boolean switching cases
-    protected boolean canSeePlayer = false;
+    protected boolean seeingPlayer = false;
     protected boolean seenPlayer = false;
     protected boolean onPath = true;
     protected boolean searching = false;
 
     //attributes for working out line of sight
-    protected Point2D.Double playerDirection;
     protected Point2D.Double playerLastPosition;
-    protected Point2D.Double position;
     protected Line2D line;
     protected int fieldOfView = 90;
 
@@ -38,23 +36,25 @@ public abstract class Enemy extends GameObject {
         height = 50;
         this.generator = generator;
         this.path = path;
-        position = new Point2D.Double(x, y);
+
         playerLastPosition = new Point2D.Double();
-        nextPoint = path.getClosetNode(position);
+        nextPoint = path.getClosetNode(getPoint());
         currentPos = new Node(x,y,game);
     }
 
 
     protected boolean canSeePlayer() {
-        double angleToPlayer = Math.atan2(playerLastPosition.x-x,playerLastPosition.y-y);
-        double angleDegrees = Math.toDegrees(angleToPlayer);
-        double distance = MathsMethods.length(playerDirection.x, playerDirection.y);
-        if((angleDegrees<fieldOfView/2)&&(distance<500)&& isSightClear()) {
+        Point2D.Double playerPosition = getPlayer().getPoint();
+        double playerRotation = findRotation(getPoint(),playerPosition);
+        double angleDistance = getRotation()- playerRotation;
+        double playerDistance = getPoint().distance(playerPosition);
+        if(isSightClear() && playerDistance < 500 && angleDistance < Math.PI/2) {
             return true;
         }
         else {
             return false;
         }
+
     }
 
     /**
@@ -62,6 +62,7 @@ public abstract class Enemy extends GameObject {
      * @param point
      */
     protected void moveToPoint(Point2D.Double point) {
+        setRotation(findRotation(getPoint(),point));
         double[] unitVector = MathsMethods.getUnitVector(x,y,point.getX(),point.getY());
         if(MathsMethods.distance(x, y, point.getX(), point.getY())>1) {
             x+=unitVector[0]*velX;
@@ -74,23 +75,35 @@ public abstract class Enemy extends GameObject {
      * @return
      */
     private boolean isSightClear(){
-        line = new Line2D.Double(position.x, position.y, playerLastPosition.x, playerLastPosition.y);
-        for(GameObject object : game.objectHandler.objects) {
-            if(object.id == GameObjectID.Wall) {
-                if(line.intersects(object.getBounds())) {
-                    return false;
+        try{
+            Player player = getPlayer();
+            line = new Line2D.Double(x,y,player.x,player.y);
+            for(GameObject object : game.objectHandler.objects) {
+                if(object.id == GameObjectID.Wall) {
+                    if(line.intersects(object.getBounds())) {
+                        return false;
+                    }
                 }
             }
+            return true;
+        }catch (Exception e){
+            return false;
         }
-        return true;
+
+    }
+
+    private double findRotation(Point2D.Double start , Point2D.Double point){
+        double xDiff = point.x-start.x;
+        double yDiff = point.y-start.y;
+        double angle = Math.atan2(yDiff,xDiff);
+        return angle;
     }
 
     /**
      * sets the last known position of the player
-     * @throws Exception
      */
-    protected void setLastPlayerPosition() throws Exception {
-        Player player = this.getPlayer();
+    protected void setLastPlayerPosition(){
+        Player player = getPlayer();
         playerLastPosition.setLocation(player.getX(), player.getY());
     }
 
@@ -111,18 +124,21 @@ public abstract class Enemy extends GameObject {
 
     }
 
-    private Player getPlayer() throws Exception{
+    private Player getPlayer(){
         for(GameObject object : game.objectHandler.objects) {
             if(object.id == GameObjectID.Player) {
                 return (Player)object;
             }
         }
-        Exception e = new Exception("player not found");
-        throw e;
+        return null;
     }
 
     @Override
     public Rectangle2D.Double getBounds() {
         return new Rectangle2D.Double(x-width/2, y-height/2, width, height);
+    }
+
+    private Point2D.Double getPoint(){
+        return new Point2D.Double(x,y);
     }
 }
