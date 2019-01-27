@@ -66,6 +66,7 @@ public class StateHandler {
         game.objectHandler.add(new Wall(497, 295, 409, 10, game));
         game.objectHandler.add(new Wall(896, 300, 10, 305, game));
         game.objectHandler.add(new Wall(875, 595, 30, 10, game));
+        game.objectHandler.add(new Door(822, 555, 0, game));
 
         //Stairs
         game.objectHandler.add(new Wall(900, 396, 100, 10, game));
@@ -145,6 +146,8 @@ public class StateHandler {
         game.objectHandler.add(new RoomBounds(1100, 1150, 200, 100, game));//HallwayH3-sub
 
         game.objectHandler.add(new LightSource(0, 0, 0, game));
+
+        game.objectHandler.add(new Score(-200,-450,game));
     }
 
     public void update(){

@@ -13,10 +13,11 @@ import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class Player extends GameObject{
     private double width, height;
-    private double velX,velY;
     private boolean movable = true;
     private Camera camera;
     private boolean moving;
@@ -57,7 +58,6 @@ public class Player extends GameObject{
         playerWalking = new MusicPlayer(game.musicHandler.getAC(),game.musicHandler.getTrack("playerSteps"),1.5f,1,true);
         enemyLeft = new MusicPlayer(game.musicHandler.getAC(),game.musicHandler.getTrack("whisper1Left"),0,10,true);
         enemyRight = new MusicPlayer(game.musicHandler.getAC(),game.musicHandler.getTrack("whisper1Right"),0,10,true);
-
 
     }
 
@@ -117,20 +117,13 @@ public class Player extends GameObject{
 
     }
 
-    void collision() {
+    private void collision() {
         for(GameObject object : game.objectHandler.objects) {
-            if(object.id == GameObjectID.Wall) {
-                if(getBounds().intersects(object.getBounds())) {
-                    if(x <= object.getBounds().x) {
-                        x += velX * -1;
-                    } if(x >= object.getBounds().x+object.getBounds().width) {
-                        x -= velX * -1;
-                    }
-                    if(y <= object.getBounds().y) {
-                        y += velY * -1;
-                    } if(y >= object.getBounds().y+object.getBounds().height) {
-                        y -= velY * -1;
-                    }
+            if(this.isColliding(object)){
+                switch (object.id){
+                    case Wall:
+                        resolveCollision(object);
+                        break;
                 }
             }
         }
@@ -195,9 +188,13 @@ public class Player extends GameObject{
         }
     }
 
+    public void kill(){
+
+    }
+
     @Override
     public void render(Graphics g) {
-        //System.out.println(x+", "+y);
+        System.out.println(x+", "+y);
         Drawable player = (graphics)->{
             graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
             graphics.rotate(getRotation(), x, y);

@@ -10,7 +10,6 @@ import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 
 public abstract class Enemy extends GameObject {
-    protected double velX,velY;
     protected double width,height;
 
     //boolean switching cases
@@ -48,7 +47,7 @@ public abstract class Enemy extends GameObject {
         double playerRotation = findRotation(getPoint(),playerPosition);
         double angleDistance = getRotation()- playerRotation;
         double playerDistance = getPoint().distance(playerPosition);
-        if(isSightClear() && playerDistance < 500 && angleDistance < Math.PI/2) {
+        if(isSightClear() && playerDistance < 500000 && angleDistance < Math.PI/2) {
             return true;
         }
         else {
@@ -63,6 +62,7 @@ public abstract class Enemy extends GameObject {
      */
     protected void moveToPoint(Point2D.Double point) {
         setRotation(findRotation(getPoint(),point));
+        System.out.println("Rotation : "+getRotation());
         double[] unitVector = MathsMethods.getUnitVector(x,y,point.getX(),point.getY());
         if(MathsMethods.distance(x, y, point.getX(), point.getY())>1) {
             x+=unitVector[0]*velX;
@@ -135,7 +135,7 @@ public abstract class Enemy extends GameObject {
 
     @Override
     public Rectangle2D.Double getBounds() {
-        return new Rectangle2D.Double(x-width/2, y-height/2, width, height);
+        return new Rectangle2D.Double(x-width/4, y-height/4, width/2, height/2);
     }
 
     private Point2D.Double getPoint(){

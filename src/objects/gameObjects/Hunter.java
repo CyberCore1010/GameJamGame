@@ -22,13 +22,13 @@ public class Hunter extends Enemy {
         velX = 2;
         velY = 2;
         BufferedImageLoader loader = new BufferedImageLoader();
-        sprite = loader.loadImage("/sprites/player/1.png");
+        sprite = loader.loadImage("/sprites/enemy/enemy.png");
     }
 
     @Override
     public void update() {
+        collision();
         if(canSeePlayer()){
-
             seeingPlayer = true;
             seenPlayer = true;
             setLastPlayerPosition();
@@ -40,10 +40,27 @@ public class Hunter extends Enemy {
 
     }
 
+    private void collision() {
+        for(GameObject object : game.objectHandler.objects){
+            if(this.isColliding(object)){
+                switch (object.id){
+                    case Wall:
+                        resolveCollision(object);
+                        break;
+                    case Player:
+                        Player player = (Player)object;
+                        player.kill();
+                        break;
+                }
+            }
+        }
+    }
+
     @Override
     public void render(Graphics g) {
         Drawable enemy = (graphics)->{
             graphics.setColor(Color.blue);
+            graphics.rotate(getRotation(),x,y);
             graphics.drawImage(sprite, (int)(x-width/2),(int)(y-height/2),(int)width,(int)height, null);
         };
         Graphics2D g2d = (Graphics2D)g;
