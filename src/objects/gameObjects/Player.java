@@ -102,7 +102,7 @@ public class Player extends GameObject{
         }else{
             if(!enemyLeft.isPlaying()){ enemyLeft.resume();}
             float perc = 100-(closestLeft*100)/MAXDETECT;
-            enemyLeft.fade((4.0f/100f)*perc,TRANSITIONTIME);
+            enemyLeft.fade((6.0f/100f)*perc+1,TRANSITIONTIME);
         }
 
         if(closestRight==Integer.MAX_VALUE){
@@ -111,7 +111,7 @@ public class Player extends GameObject{
         }else{
             if(!enemyRight.isPlaying()){ enemyRight.resume();}
             float perc = 100-(closestRight*100)/MAXDETECT;
-            enemyRight.fade((4.0f/100f)*perc,TRANSITIONTIME);
+            enemyRight.fade((6.0f/100f)*perc+1,TRANSITIONTIME);
         }
 
     }
