@@ -42,7 +42,7 @@ public class Popup extends GameObject{
     public void render(Graphics g) {
         if(active) {
             Drawable popup = (graphics) -> {
-                graphics.setColor(new Color(0,0,255));
+                graphics.setColor(new Color(255,0,255));
                 graphics.fillRect(300, 300, 500, 500);
                 System.out.println("Drawing");
             };
