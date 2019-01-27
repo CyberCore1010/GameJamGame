@@ -187,6 +187,10 @@ public class Player extends GameObject{
         }
     }
 
+    public void kill(){
+
+    }
+
     @Override
     public void render(Graphics g) {
         //System.out.println(x+", "+y);

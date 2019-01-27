@@ -47,7 +47,7 @@ public abstract class Enemy extends GameObject {
         double playerRotation = findRotation(getPoint(),playerPosition);
         double angleDistance = getRotation()- playerRotation;
         double playerDistance = getPoint().distance(playerPosition);
-        if(isSightClear() && playerDistance < 500 && angleDistance < Math.PI/2) {
+        if(isSightClear() && playerDistance < 500000 && angleDistance < Math.PI/2) {
             return true;
         }
         else {

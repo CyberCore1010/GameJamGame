@@ -28,7 +28,6 @@ public class Hunter extends Enemy {
     @Override
     public void update() {
         if(canSeePlayer()){
-
             seeingPlayer = true;
             seenPlayer = true;
             setLastPlayerPosition();
@@ -46,6 +45,10 @@ public class Hunter extends Enemy {
                 switch (object.id){
                     case Wall:
                         resolveCollision(object);
+                        break;
+                    case Player:
+                        Player player = (Player)object;
+                        player.kill();
                         break;
                 }
             }
