@@ -24,8 +24,8 @@ public abstract class Enemy extends GameObject {
     protected int fieldOfView = 90;
 
     //attributes for pathing system
-    private PathGenerator generator;
-    private PathList path;
+    protected PathGenerator generator;
+    protected PathList path;
     protected Node nextPoint;
     protected Node currentPos;
 
@@ -137,7 +137,7 @@ public abstract class Enemy extends GameObject {
         return new Rectangle2D.Double(x-width/4, y-height/4, width/2, height/2);
     }
 
-    private Point2D.Double getPoint(){
+    protected Point2D.Double getPoint(){
         return new Point2D.Double(x,y);
     }
 }
