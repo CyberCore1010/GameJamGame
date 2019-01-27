@@ -4,14 +4,15 @@ import game.CameraID;
 import game.Game;
 import objects.gameObjects.Enemy;
 import objects.interfaces.Drawable;
+import objects.misc.PathGenerator;
 import objects.misc.PathList;
 
 import java.awt.*;
 
 public class Hunter extends Enemy {
 
-    public Hunter(int x, int y, Game game, PathList path) {
-        super(x, y, game, path);
+    public Hunter(int x, int y, Game game, PathList path, PathGenerator generator) {
+        super(x, y, game, path, generator);
         velX = 2;
         velY = 2;
     }

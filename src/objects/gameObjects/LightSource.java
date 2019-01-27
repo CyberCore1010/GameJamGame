@@ -28,7 +28,7 @@ public class LightSource extends GameObject{
     public LightSource(int x, int y, int Z, Game game) {
         super(x, y, Z, 0, GameObjectID.Light, game);
         this.color = new Color(0.0f, 0.0f, 0.0f, 1.0f);
-        center = new Point2D.Float(game.window.gameWidth/2, game.window.gameHeight/2);
+        center = new Point2D.Float((float)game.window.gameWidth/2, (float)game.window.gameHeight/2);
     }
 
     @Override
@@ -41,7 +41,7 @@ public class LightSource extends GameObject{
             Color[] colors = {color, Color.BLACK};
             RadialGradientPaint p = new RadialGradientPaint(center, radius, distance, colors);
             graphics.setPaint(p);
-            graphics.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.50f));
+            graphics.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.75f));
             graphics.fillRect(-game.window.gameWidth/2, -game.window.gameHeight/2, game.window.gameWidth+200, game.window.gameHeight);
         };
 

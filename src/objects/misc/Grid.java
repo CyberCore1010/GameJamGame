@@ -37,9 +37,10 @@ public class Grid {
                 Node temp = new Node(column*Node.size,row*Node.size,game);
                 if(matrix[row][column] == 1){
                     temp.setColor(Color.green);
-                }
-                else if(matrix[row][column] == 0){
+                } else if(matrix[row][column] == 0){
                     temp.setColor(Color.red);
+                } else if(matrix[row][column] == 2){
+                    temp.setColor(Color.blue);
                 }
                 rowNodes.add(temp);
             }
@@ -53,7 +54,7 @@ public class Grid {
     public void setJunctions(ObjectList<ObjectList<Node>> nodeList){
         for(ObjectList<Node> row : nodeList){
             for(Node temp : row){
-                if(temp.getColor().equals(Color.red)){
+                if(temp.getColor().equals(Color.red) || temp.getColor().equals(Color.blue)){
                     continue;
                 }
                 else if(!isCorridor(temp)){
@@ -157,11 +158,16 @@ public class Grid {
                 int green = (pixel >> 8) & 0xff;
                 int blue = (pixel) & 0xff;
 
+                System.out.println(blue);
+
                 if(red == 255 && green == 0 && blue == 0) {
                     matrix[y][x] = 0;
                 }
                 if(red == 0 && green == 255 && blue == 0) {
                     matrix[y][x] = 1;
+                }
+                if(red == 0 && green == 0 && blue == 255) {
+                    matrix[y][x] = 2;
                 }
             }
         }
@@ -180,5 +186,16 @@ public class Grid {
         int row = (int)Math.round(point.y/Node.size);
         int column = (int)Math.round(point.x/Node.size);
         return nodeList.get(row).get(column);
+    }
+
+    public Node getRandomNode() {
+        while(true) {
+            int randomRow = (int)(Math.random() * nodeList.size() + 0);
+            int randomColumn = (int)(Math.random() * nodeList.get(0).size() + 0);
+
+            if(nodeList.get(randomRow).get(randomColumn).junction) {
+                return nodeList.get(randomRow).get(randomColumn);
+            }
+        }
     }
 }

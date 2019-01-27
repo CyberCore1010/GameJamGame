@@ -5,7 +5,6 @@ import objects.misc.ObjectList;
 
 import java.awt.*;
 import java.util.List;
-import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
  * a class to handle all the objects in the game

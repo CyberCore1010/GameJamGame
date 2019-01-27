@@ -44,7 +44,6 @@ public class MusicHandler {
     }
 
     public Sample getTrack(String s){
-        System.out.println(s);
         return(trackList.get(s));
     }
 

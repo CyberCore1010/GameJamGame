@@ -6,6 +6,8 @@ public class Main {
      *
      * @param args - Not used
      */
+    public static boolean debug = true;
+
     public static void main(String[] args) {
         System.setProperty("sun.java2d.opengl", "true");
         new Game();

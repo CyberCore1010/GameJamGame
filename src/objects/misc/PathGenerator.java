@@ -12,6 +12,8 @@ public class PathGenerator {
     private Point2D.Double target;
     private Game game;
 
+    private Node goalNode;
+
     public PathGenerator(Game game){
         this.game = game;
     }
@@ -24,12 +26,20 @@ public class PathGenerator {
         this.unitPos = unitPos;
     }
 
-    public PathList getPathList(Point2D.Double start,Point2D.Double goal){
+    public void setGoalNode(Node node) {
+        goalNode = node;
+    }
+
+    public Node getGoalNode() {
+        return goalNode;
+    }
+
+    public PathList getPathList(Point2D.Double start){
         boolean goalFound = false;
 
         ArrayList<Node> closedList = new ArrayList<>();
         Node startNode = game.grid.getNearestNode(start);
-        Node goalNode = game.grid.getNearestNode(goal);
+        goalNode = game.grid.getRandomNode();
         PathList returnList = new PathList(startNode,game);
         Node currentNode = startNode;
 

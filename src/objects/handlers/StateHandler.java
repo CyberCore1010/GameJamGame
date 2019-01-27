@@ -12,18 +12,14 @@ import objects.misc.PathList;
 import java.awt.geom.Point2D;
 
 public class StateHandler {
-    private Game game;
-
     public StateHandler(Game game) {
-        this.game = game;
+        BufferedImageLoader loader = new BufferedImageLoader();
         ObjectList<ObjectList<Node>> nodeList = game.grid.getNodes();
         for(ObjectList<Node> row : nodeList){
             for(Node node : row){
                 game.objectHandler.add(node);
             }
         }
-
-        BufferedImageLoader loader = new BufferedImageLoader();
         //Floor
         game.objectHandler.add(new Floor(300, 400, 200, 150, loader.loadImage("/floor/redBrick.png"), game));//Utility Room
         game.objectHandler.add(new Floor(300, 550, 201, 450, loader.loadImage("/floor/garage.png"), game));//Garage
@@ -32,27 +28,20 @@ public class StateHandler {
         game.objectHandler.add(new Floor(1000, 400, 200, 201, loader.loadImage("/floor/blueCarpet.png"), game));//Study1
         game.objectHandler.add(new Floor(1200, 400, 150, 201, loader.loadImage("/floor/blueCarpet.png"), game));//Study2
         game.objectHandler.add(new Floor(501, 600, 700, 101, loader.loadImage("/floor/wood.png"), game));//HallwayH1
-        game.objectHandler.add(new Floor(501, 700, 299, 300, loader.loadImage("/floor/wood.png"), game));//Lounge
+        game.objectHandler.add(new Floor(501, 700, 299, 300, loader.loadImage("/floor/temp.png"), game));//Lounge
         game.objectHandler.add(new Floor(900, 700, 299, 200, loader.loadImage("/floor/blueCarpet.png"), game));//Fireplace room
         game.objectHandler.add(new Floor(900, 900, 302, 250, loader.loadImage("/floor/pinkCarpet.png"), game));//Dining room
-        game.objectHandler.add(new Floor(575, 1120, 302, 250, loader.loadImage("/floor/wood.png"), game));//Pantry
+        game.objectHandler.add(new Floor(800, 700, 100, 450, loader.loadImage("/floor/wood.png"), game));//HallwayH2
+        game.objectHandler.add(new Floor(550, 1000, 250, 100, loader.loadImage("/floor/wood.png"), game));//HallwayH2-sub
+        game.objectHandler.add(new Floor(550, 1100, 250, 250, loader.loadImage("/floor/wood.png"), game));//Pantry
+        game.objectHandler.add(new Floor(800, 1150, 300, 200, loader.loadImage("/floor/temp.png"), game));//todo anotherRoom floor
+        game.objectHandler.add(new Floor(1100, 1250, 200, 100, loader.loadImage("/floor/temp.png"), game));//todo anotherRoom2 floor
         game.objectHandler.add(new Floor(1201, 601, 100, 550, loader.loadImage("/floor/wood.png"), game));//HallwayH3
+        game.objectHandler.add(new Floor(1100, 1150, 200, 100, loader.loadImage("/floor/wood.png"), game));//HallwayH3-sub
 
         PathGenerator generator = new PathGenerator(game);
-        PathList path = generator.getPathList(new Point2D.Double(1200,1300),new Point2D.Double(850,750));
-        game.objectHandler.add(new Hunter(1200, 1300, game,path));
-
-        //Room Bounds
-        game.objectHandler.add(new RoomBounds(300, 400, 200, 150, game));//Utility Room
-        game.objectHandler.add(new RoomBounds(300, 550, 201, 450, game));//Garage
-        game.objectHandler.add(new RoomBounds(501, 299, 400, 301, game));//Kitchen
-        game.objectHandler.add(new RoomBounds(1000, 400, 200, 200, game));//Study1
-        game.objectHandler.add(new RoomBounds(1200, 400, 150, 201, game));//Study2
-        game.objectHandler.add(new RoomBounds(501, 600, 700, 101, game));//HallwayH1
-        game.objectHandler.add(new RoomBounds(501, 700, 299, 300, game));//Lounge
-        game.objectHandler.add(new RoomBounds(900, 700, 299, 200, game));//Fireplace room
-        game.objectHandler.add(new RoomBounds(900, 900, 302, 250, game));//Dining room
-        game.objectHandler.add(new RoomBounds(1201, 601, 100, 550, game));//HallwayH3
+        PathList path = generator.getPathList(new Point2D.Double(1200,1300));
+        game.objectHandler.add(new Hunter(1200, 1300, game, path, generator));
 
         //Player
         game.objectHandler.add(new Player(747,447,1,50,50,game));
@@ -96,28 +85,58 @@ public class StateHandler {
         //Lounge
         game.objectHandler.add(new Wall(496, 995, 308, 10, game));
         game.objectHandler.add(new Wall(795, 700, 10, 25, game));
-        game.objectHandler.add(new Wall(795, 775, 10, 230, game));
+        game.objectHandler.add(new Wall(795, 775, 10, 250, game));
 
         //Fireplace room/Dining room
         game.objectHandler.add(new Wall(895, 700, 10, 25, game));
         game.objectHandler.add(new Wall(895, 895, 300, 10, game));
         game.objectHandler.add(new Wall(895, 775, 10, 375, game));
-        game.objectHandler.add(new Wall(895, 1145, 330, 10, game));
+        game.objectHandler.add(new Wall(875, 1145, 350, 10, game));
 
         //HallwayH2
         game.objectHandler.add(new Wall(545, 1000, 10, 350, game));
+        game.objectHandler.add(new Wall(800, 1145, 25, 10, game));
 
         //Pantry
         game.objectHandler.add(new Wall(545, 1095, 250, 10, game));
         game.objectHandler.add(new Wall(545, 1345, 250, 10, game));
-        game.objectHandler.add(new Wall(794, 1095, 10, 130, game));
+        game.objectHandler.add(new Wall(794, 1075, 10, 150, game));
         game.objectHandler.add(new Wall(794, 1275, 10, 80, game));
 
+        //todo name anotherRoom
+        game.objectHandler.add(new Wall(800, 1345, 500, 10, game));
+        game.objectHandler.add(new Wall(1095, 1150, 10, 25, game));
+        game.objectHandler.add(new Wall(1095, 1225, 10, 130, game));
+
+        //todo name anotherRoom2
+        game.objectHandler.add(new Wall(1100, 1245, 75, 10, game));
+        game.objectHandler.add(new Wall(1225, 1245, 75, 10, game));
+
         //HallwayH3
-        game.objectHandler.add(new Wall(1295, 600, 10, 650, game));
+        game.objectHandler.add(new Wall(1295, 600, 10, 755, game));
         game.objectHandler.add(new Wall(1195, 675, 10, 300, game));
         game.objectHandler.add(new Wall(1195, 1025, 10, 125, game));
         game.objectHandler.add(new Wall(1275, 1145, 30, 10, game));
+
+        //Room Bounds
+
+        game.objectHandler.add(new RoomBounds(300, 400, 201, 150, game));//Utility Room
+        game.objectHandler.add(new RoomBounds(300, 550, 201, 450, game));//Garage
+        game.objectHandler.add(new RoomBounds(501, 299, 400, 301, game));//Kitchen
+        game.objectHandler.add(new RoomBounds(900, 400, 100, 200, game));//Stairs
+        game.objectHandler.add(new RoomBounds(1000, 400, 200, 200, game));//Study1
+        game.objectHandler.add(new RoomBounds(1200, 400, 150, 201, game));//Study2
+        game.objectHandler.add(new RoomBounds(501, 600, 700, 101, game));//HallwayH1
+        game.objectHandler.add(new RoomBounds(501, 700, 299, 300, game));//Lounge
+        game.objectHandler.add(new RoomBounds(900, 700, 301, 200, game));//Fireplace room
+        game.objectHandler.add(new RoomBounds(900, 900, 301, 250, game));//Dining room
+        game.objectHandler.add(new RoomBounds(800, 700, 100, 450, game));//HallwayH2
+        game.objectHandler.add(new RoomBounds(550, 1000, 250, 100, game));//HallwayH2-sub
+        game.objectHandler.add(new RoomBounds(550, 1100, 250, 250, game));//Pantry
+        game.objectHandler.add(new RoomBounds(800, 1150, 300, 200, game));//todo anotherRoom bound
+        game.objectHandler.add(new RoomBounds(1100, 1250, 200, 100, game));//todo anotherRoom2 bound
+        game.objectHandler.add(new RoomBounds(1201, 601, 100, 549, game));//HallwayH3
+        game.objectHandler.add(new RoomBounds(1100, 1150, 200, 100, game));//HallwayH3-sub
 
         game.objectHandler.add(new LightSource(0, 0, 0, game));
     }

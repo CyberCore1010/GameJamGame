@@ -1,6 +1,7 @@
 package objects.gameObjects;
 
 import game.Game;
+import objects.misc.PathGenerator;
 import objects.misc.PathList;
 import physics.MathsMethods;
 
@@ -26,14 +27,16 @@ public abstract class Enemy extends GameObject {
     protected int fieldOfView = 90;
 
     //attributes for pathing system
-    protected PathList path;
+    private PathGenerator generator;
+    private PathList path;
     protected Node nextPoint;
     protected Node currentPos;
 
-    public Enemy(int x, int y, Game game,PathList path) {
+    public Enemy(int x, int y, Game game,PathList path, PathGenerator generator) {
         super(x, y, 1, 0, GameObjectID.Enemy, game);
         width = 50;
         height = 50;
+        this.generator = generator;
         this.path = path;
         position = new Point2D.Double(x, y);
         playerLastPosition = new Point2D.Double();
@@ -64,8 +67,6 @@ public abstract class Enemy extends GameObject {
             x+=unitVector[0]*velX;
             y+=unitVector[1]*velY;
         }
-
-
     }
 
     /**
@@ -97,6 +98,11 @@ public abstract class Enemy extends GameObject {
      * follows
      */
     protected void followPath() {
+        System.out.println(generator.getGoalNode().x+generator.getGoalNode().y);
+        if(x == generator.getGoalNode().x && y == generator.getGoalNode().y) {
+            path = generator.getPathList(new Point2D.Double(x, y));
+            generator.setGoalNode(new Node(new Point2D.Double(0, 0), game));
+        }
         currentPos.getPoint().setLocation(x, y);
         if(path.hasReachedNext(currentPos)) {
             nextPoint = path.getNextNode();
