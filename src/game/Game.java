@@ -1,9 +1,8 @@
 package game;
 
 import objects.gameObjects.GameObjectID;
-import objects.gameObjects.Popup;
+import objects.gameObjects.PopupStart;
 import objects.handlers.*;
-import objects.interfaces.Drawable;
 import objects.misc.Camera;
 import objects.misc.Grid;
 import objects.misc.ObjectMap;
@@ -20,7 +19,7 @@ public class Game extends JComponent {
 
     public Grid grid;
     public boolean paused;
-    public objects.gameObjects.Popup popup;
+    public PopupStart popup;
 
     public ObjectHandler objectHandler;
     private StateHandler stateHandler;
@@ -37,7 +36,6 @@ public class Game extends JComponent {
     private Thread thread;
 
     Game() {
-        popup = new Popup(0,0,0,0, GameObjectID.Popup,this);
         musicHandler = new MusicHandler();
         musicHandler.start();
         backgroundMusic = new MusicPlayer(musicHandler.getAC(),musicHandler.getTrack("night"),1.5f,1,true);
@@ -64,6 +62,10 @@ public class Game extends JComponent {
 
         stateHandler = new StateHandler(this);
         eventHandler = new EventHandler(this);
+
+        popup = new PopupStart(0,0,0,0, GameObjectID.Popup,this);
+        objectHandler.add(popup);
+        repaint();
 
 
         //creating and starting the thread
@@ -126,7 +128,7 @@ public class Game extends JComponent {
 
         ////////DRAWING AREA////////
         if(paused){
-
+            popup.render(g);
         }
         else {
             objectHandler.render(g); //displays objects passed from handler
