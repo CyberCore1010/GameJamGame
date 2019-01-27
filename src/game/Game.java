@@ -22,6 +22,7 @@ public class Game extends JComponent {
     private StateHandler stateHandler;
     public MusicHandler musicHandler;
     private MusicPlayer backgroundMusic;
+    private MusicPlayer backgroundSong;
 
     //This is the camera which is an object of type Camera from my Camera class. It's used for updating the camera each tick of the game
     public Map<CameraID,Camera> cameraMap;
@@ -36,8 +37,8 @@ public class Game extends JComponent {
         musicHandler.start();
         backgroundMusic = new MusicPlayer(musicHandler.getAC(),musicHandler.getTrack("night"),1.5f,1,true);
         backgroundMusic.resume();
-//        backgroundMusic = new MusicPlayer(musicHandler.getAC(),musicHandler.getTrack("whisper1Right"),2,1,true);
-//        backgroundMusic.resume();
+        backgroundSong = new MusicPlayer(musicHandler.getAC(),musicHandler.getTrack("music"),0.8f,1,true);
+        backgroundSong.resume();
 
         grid = new Grid(this);
         objectHandler = new ObjectHandler();
