@@ -206,8 +206,6 @@ public class Player extends GameObject{
                 graphics.drawImage(spriteMap.get(0), (int)(x-(width/2)), (int)(y-(width/2)), (int)width, (int)height, null);
             }
             graphics.rotate(-getRotation(), x, y);
-            graphics.setColor(Color.RED);
-            graphics.drawRect((int)getBounds().x, (int)getBounds().y, (int)getBounds().width, (int)getBounds().height);
         };
         Graphics2D g2d = (Graphics2D) g;
         renderToCamera(player, g2d, camera);
