@@ -44,12 +44,14 @@ public class StateHandler {
         //Player
         game.objectHandler.add(new Player(747,447,1,50,50,game));
 
-        PathGenerator generator = new PathGenerator(game);
+        //adding the enemies
+        PathGenerator generatorA = new PathGenerator(game);
+        PathList pathA = generatorA.getPathList(new Point2D.Double(1200,1300),game.grid.getRandomNode().getPoint());
+        game.objectHandler.add(new Hunter(1200, 1300, game, pathA, generatorA));
 
-        PathList path = generator.getPathList(new Point2D.Double(1200,1300),game.grid.getRandomNode().getPoint());
-        game.repaint();
-        game.objectHandler.add(new Hunter(1200, 1300, game, path, generator));
-
+        PathGenerator generatorB = new PathGenerator(game);
+        PathList pathB = generatorB.getPathList(new Point2D.Double(1200,1300),game.grid.getRandomNode().getPoint());
+        game.objectHandler.add(new Hunter(1200, 1300, game, pathB, generatorB));
 
 
         //Utility Room and Garage
