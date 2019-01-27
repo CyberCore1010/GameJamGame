@@ -7,5 +7,6 @@ public enum GameObjectID {
     RoomBounds,
     Floor,
     Node,
-    Light
+    Light,
+    Popup
 }

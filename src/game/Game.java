@@ -1,5 +1,7 @@
 package game;
 
+import objects.gameObjects.GameObjectID;
+import objects.gameObjects.Popup;
 import objects.handlers.*;
 import objects.interfaces.Drawable;
 import objects.misc.Camera;
@@ -17,6 +19,8 @@ public class Game extends JComponent {
     public GameState state;
 
     public Grid grid;
+    public boolean paused;
+    public objects.gameObjects.Popup popup;
 
     public ObjectHandler objectHandler;
     private StateHandler stateHandler;
@@ -80,6 +84,10 @@ public class Game extends JComponent {
         double delta = 0;
         int fps = 0;
         long timer = System.currentTimeMillis();
+
+        popup = new Popup(0,0,0,0, GameObjectID.Popup,this);
+        popup.drawStart();
+
         while(isRunning) {
             long now = System.nanoTime();
             delta += (now - lastTime) / ns;
@@ -104,8 +112,11 @@ public class Game extends JComponent {
      * players current position. Afterwords it runs the update method in the object handler
      */
     private void update() {
-        stateHandler.update();
-        objectHandler.update();
+        popup.update();
+        if(!paused) {
+            stateHandler.update();
+            objectHandler.update();
+        }
     }
 
     @Override
