@@ -1,5 +1,7 @@
 package game;
 
+import objects.gameObjects.GameObjectID;
+import objects.gameObjects.Popup;
 import objects.handlers.*;
 import objects.interfaces.Drawable;
 import objects.misc.Camera;
@@ -17,6 +19,8 @@ public class Game extends JComponent {
     public GameState state;
 
     public Grid grid;
+    public boolean paused;
+    public objects.gameObjects.Popup popup;
 
     public ObjectHandler objectHandler;
     private StateHandler stateHandler;
@@ -33,6 +37,7 @@ public class Game extends JComponent {
     private Thread thread;
 
     Game() {
+        popup = new Popup(0,0,0,0, GameObjectID.Popup,this);
         musicHandler = new MusicHandler();
         musicHandler.start();
         backgroundMusic = new MusicPlayer(musicHandler.getAC(),musicHandler.getTrack("night"),1.5f,1,true);
@@ -80,6 +85,7 @@ public class Game extends JComponent {
         double delta = 0;
         int fps = 0;
         long timer = System.currentTimeMillis();
+
         while(isRunning) {
             long now = System.nanoTime();
             delta += (now - lastTime) / ns;
@@ -104,8 +110,12 @@ public class Game extends JComponent {
      * players current position. Afterwords it runs the update method in the object handler
      */
     private void update() {
-        stateHandler.update();
-        objectHandler.update();
+        if(paused) {
+            popup.update();
+        }else {
+            stateHandler.update();
+            objectHandler.update();
+        }
     }
 
     @Override
@@ -115,8 +125,13 @@ public class Game extends JComponent {
         Graphics2D g2d = (Graphics2D) g;
 
         ////////DRAWING AREA////////
+        if(paused){
 
-        objectHandler.render(g); //displays objects passed from handler
+        }
+        else {
+            objectHandler.render(g); //displays objects passed from handler
+        }
+
 
         ////////MENU DRAWING////////
         g2d.dispose();

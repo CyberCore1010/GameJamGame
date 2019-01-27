@@ -8,6 +8,7 @@ import objects.handlers.KeyHandler;
 import objects.misc.BufferedImageLoader;
 import objects.misc.Camera;
 import java.awt.*;
+import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.util.HashMap;
@@ -217,5 +218,9 @@ public class Player extends GameObject{
             return new Rectangle2D.Double(x-(width/4), (y-(height/4))-5, width/2, (height/2)+10);
         }
         return new Rectangle2D.Double((x-(width/4)-5), y-(height/4), (width/2)+10, height/2);
+    }
+
+    public Point2D.Double getPoint(){
+        return new Point2D.Double(x,y);
     }
 }

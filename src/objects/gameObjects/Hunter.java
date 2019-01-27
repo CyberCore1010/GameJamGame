@@ -27,7 +27,17 @@ public class Hunter extends Enemy {
 
     @Override
     public void update() {
-        followPath();
+        if(canSeePlayer()){
+
+            seeingPlayer = true;
+            seenPlayer = true;
+            setLastPlayerPosition();
+            moveToPoint(playerLastPosition);
+        }
+        else {
+            followPath();
+        }
+
     }
 
     @Override
