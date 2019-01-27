@@ -35,7 +35,7 @@ public class Door extends GameObject {
                     closeOnce = true;
                     if(openOnce) {
                         openOnce = false;
-                        MusicPlayer player = new MusicPlayer(game.musicHandler.getAC(), game.musicHandler.getTrack("doorOpen"), 5, 0, false);
+                        MusicPlayer player = new MusicPlayer(game.musicHandler.getAC(), game.musicHandler.getTrack("doorOpen"), 2, 0, false);
                         player.resume();
                     }
                 }
@@ -44,7 +44,7 @@ public class Door extends GameObject {
         if(!found && closeOnce) {
             closeOnce = false;
             openOnce = true;
-            MusicPlayer player = new MusicPlayer(game.musicHandler.getAC(), game.musicHandler.getTrack("doorClose"), 5, 0, false);
+            MusicPlayer player = new MusicPlayer(game.musicHandler.getAC(), game.musicHandler.getTrack("doorClose"), 2, 0, false);
             player.resume();
         }
     }
@@ -58,7 +58,6 @@ public class Door extends GameObject {
                 graphics.drawImage(spriteClose, (int)x, (int)y, 54, 50, null);
             }
         };
-
         Graphics2D g2d = (Graphics2D) g;
         renderToCamera(drawable, g2d, game.cameraMap.get(CameraID.Main));
     }

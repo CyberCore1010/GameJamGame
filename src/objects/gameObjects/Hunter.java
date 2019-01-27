@@ -22,11 +22,12 @@ public class Hunter extends Enemy {
         velX = 2;
         velY = 2;
         BufferedImageLoader loader = new BufferedImageLoader();
-        sprite = loader.loadImage("/sprites/player/1.png");
+        sprite = loader.loadImage("/sprites/enemy/enemy.png");
     }
 
     @Override
     public void update() {
+        collision();
         if(canSeePlayer()){
             seeingPlayer = true;
             seenPlayer = true;
@@ -39,7 +40,7 @@ public class Hunter extends Enemy {
 
     }
 
-    private void collision(){
+    private void collision() {
         for(GameObject object : game.objectHandler.objects){
             if(this.isColliding(object)){
                 switch (object.id){
