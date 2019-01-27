@@ -37,6 +37,7 @@ public class Game extends JComponent {
     private Thread thread;
 
     Game() {
+        popup = new Popup(0,0,0,0, GameObjectID.Popup,this);
         musicHandler = new MusicHandler();
         musicHandler.start();
         backgroundMusic = new MusicPlayer(musicHandler.getAC(),musicHandler.getTrack("night"),1.5f,1,true);
@@ -85,9 +86,6 @@ public class Game extends JComponent {
         int fps = 0;
         long timer = System.currentTimeMillis();
 
-        popup = new Popup(0,0,0,0, GameObjectID.Popup,this);
-        popup.drawStart();
-
         while(isRunning) {
             long now = System.nanoTime();
             delta += (now - lastTime) / ns;
@@ -112,8 +110,9 @@ public class Game extends JComponent {
      * players current position. Afterwords it runs the update method in the object handler
      */
     private void update() {
-        popup.update();
-        if(!paused) {
+        if(paused) {
+            popup.update();
+        }else {
             stateHandler.update();
             objectHandler.update();
         }
@@ -126,8 +125,13 @@ public class Game extends JComponent {
         Graphics2D g2d = (Graphics2D) g;
 
         ////////DRAWING AREA////////
+        if(paused){
 
-        objectHandler.render(g); //displays objects passed from handler
+        }
+        else {
+            objectHandler.render(g); //displays objects passed from handler
+        }
+
 
         ////////MENU DRAWING////////
         g2d.dispose();

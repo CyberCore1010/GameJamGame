@@ -15,6 +15,7 @@ public class Popup extends GameObject{
 
     public Popup(double x, double y, int z, double rotation, GameObjectID id, Game game) {
         super(x, y, z, rotation, id, game);
+        drawStart();
     }
 
     public void drawStart(){
@@ -41,7 +42,9 @@ public class Popup extends GameObject{
     public void render(Graphics g) {
         if(active) {
             Drawable popup = (graphics) -> {
-                graphics.drawRect(100, 100, 500, 500);
+                graphics.setColor(new Color(0,0,255));
+                graphics.fillRect(300, 300, 500, 500);
+                System.out.println("Drawing");
             };
             Graphics2D g2d = (Graphics2D) g;
             renderToCamera(popup, g2d, game.cameraMap.get(CameraID.Screen));
