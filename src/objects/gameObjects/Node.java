@@ -8,6 +8,7 @@ import objects.misc.ObjectList;
 import java.awt.*;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
+import java.util.Objects;
 
 public class Node extends GameObject {
     public static double size = 50;
@@ -52,9 +53,6 @@ public class Node extends GameObject {
     public void render(Graphics g) {
         Drawable node = (graphics)->{
             graphics.setColor(color);
-            if(junction){
-                graphics.setColor(Color.yellow);
-            }
             graphics.fillRect((int)(x-size/2),(int)(y-size/2),(int)size,(int)size);
             graphics.setColor(Color.black);
             graphics.fillOval((int)x,(int)y,1,1);
@@ -66,5 +64,19 @@ public class Node extends GameObject {
     @Override
     public Rectangle2D.Double getBounds() {
         return null;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Node node = (Node) o;
+        return Objects.equals(point, node.point);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(point);
     }
 }

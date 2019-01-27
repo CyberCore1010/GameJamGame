@@ -40,12 +40,14 @@ public class StateHandler {
         game.objectHandler.add(new Floor(1100, 1150, 200, 100, loader.loadImage("/floor/wood.png"), game));//HallwayH3-sub
 
         //Player
-        //game.objectHandler.add(new Player(747,447,1,50,50,game));
+        game.objectHandler.add(new Player(747,447,1,50,50,game));
 
-        game.objectHandler.add(new Player(0,0,1,50,50,game));
+        //game.objectHandler.add(new Player(0,0,1,50,50,game));
 
         PathGenerator generator = new PathGenerator(game);
-        PathList path = generator.getPathList(new Point2D.Double(1200,1300));
+
+        PathList path = generator.getPathList(new Point2D.Double(1200,1300),game.grid.getRandomNode().getPoint());
+        game.repaint();
         game.objectHandler.add(new Hunter(1200, 1300, game, path, generator));
 
 

@@ -73,7 +73,7 @@ public class Grid {
                     int rightCount = 1;
                     while (true){
                         Node next = nodeList.get(row-upCount).get(column);
-                        if(next.getColor().equals(Color.red)){
+                        if(next.getColor().equals(Color.red) || next.getColor().equals(Color.blue)){
                             break;
                         }
                         else if(next.junction){
@@ -85,7 +85,7 @@ public class Grid {
                     }
                     while (true){
                         Node next = nodeList.get(row+downCount).get(column);
-                        if(next.getColor().equals(Color.red)){
+                        if(next.getColor().equals(Color.red)||next.getColor().equals(Color.blue)){
                             break;
                         }
                         else if(next.junction){
@@ -97,7 +97,7 @@ public class Grid {
                     }
                     while (true){
                         Node next = nodeList.get(row).get(column-leftCount);
-                        if(next.getColor().equals(Color.red)){
+                        if(next.getColor().equals(Color.red)||next.getColor().equals(Color.blue)){
                             break;
                         }
                         else if(next.junction){
@@ -109,7 +109,7 @@ public class Grid {
                     }
                     while (true){
                         Node next = nodeList.get(row).get(column+rightCount);
-                        if(next.getColor().equals(Color.red)){
+                        if(next.getColor().equals(Color.red)||next.getColor().equals(Color.blue)){
                             break;
                         }
                         else if(next.junction){
@@ -158,7 +158,7 @@ public class Grid {
                 int green = (pixel >> 8) & 0xff;
                 int blue = (pixel) & 0xff;
 
-                System.out.println(blue);
+//                System.out.println(blue);
 
                 if(red == 255 && green == 0 && blue == 0) {
                     matrix[y][x] = 0;
@@ -189,13 +189,18 @@ public class Grid {
     }
 
     public Node getRandomNode() {
+
         while(true) {
             int randomRow = (int)Math.floor(Math.random() * nodeList.size());
             int randomColumn = (int)Math.floor(Math.random() * nodeList.get(0).size());
             System.out.println("rand row : "+randomRow+" rand col : "+randomColumn);
             if(nodeList.get(randomRow).get(randomColumn).junction) {
+                nodeList.get(randomRow).get(randomColumn).setColor(Color.pink);
                 return nodeList.get(randomRow).get(randomColumn);
             }
         }
+
+
+        //return nodeList.get(15).get(18);
     }
 }

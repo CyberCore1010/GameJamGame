@@ -100,11 +100,10 @@ public abstract class Enemy extends GameObject {
     protected void followPath() {
         currentPos.getPoint().setLocation(x, y);
         if(path.hasReachedNext(currentPos)) {
-            if(currentPos.getPoint().equals(generator.getGoalNode().getPoint())){
-                //System.out.println("Goal : "+generator.getGoalNode().getPoint());
-                path = generator.getPathList(currentPos.getPoint());
-            }
             nextPoint = path.getNextNode();
+            if(nextPoint.equals(generator.goalNode)) {
+                path = generator.getPathList(nextPoint.getPoint(), game.grid.getRandomNode().getPoint());
+            }
         }
         else {
             moveToPoint(nextPoint.getPoint());
