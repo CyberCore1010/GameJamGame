@@ -49,25 +49,25 @@ public class StateHandler {
         game.objectHandler.add(new Player(747,447,1,50,50,game));
 
         //adding the enemies
-//        PathGenerator generatorA = new PathGenerator(game);
-//        PathList pathA = generatorA.getPathList(new Point2D.Double(1200,1300),game.grid.getRandomNode().getPoint());
-//        game.objectHandler.add(new Hunter(1200, 1300, game, pathA, generatorA));
-//
-//        PathGenerator generatorB = new PathGenerator(game);
-//        PathList pathB = generatorB.getPathList(new Point2D.Double(1200,1300),game.grid.getRandomNode().getPoint());
-//        game.objectHandler.add(new Hunter(1200, 1300, game, pathB, generatorB));
-//
-//        PathGenerator generatorC = new PathGenerator(game);
-//        PathList pathC = generatorC.getPathList(new Point2D.Double(1200,1300),game.grid.getRandomNode().getPoint());
-//        game.objectHandler.add(new Hunter(1200, 1300, game, pathC, generatorC));
-//
-//        PathGenerator generatorD = new PathGenerator(game);
-//        PathList pathD = generatorD.getPathList(new Point2D.Double(1200,1300),game.grid.getRandomNode().getPoint());
-//        game.objectHandler.add(new Hunter(1200, 1300, game, pathD, generatorD));
-//
-//        PathGenerator generatorG = new PathGenerator(game);
-//        PathList pathG = generatorB.getPathList(new Point2D.Double(1200,1300),game.grid.getRandomNode().getPoint());
-//        game.objectHandler.add(new Hunter(1200, 1300, game, pathG, generatorG));
+        PathGenerator generatorA = new PathGenerator(game);
+        PathList pathA = generatorA.getPathList(new Point2D.Double(1200,1300),game.grid.getRandomNode().getPoint());
+        game.objectHandler.add(new Hunter(1200, 1300, game, pathA, generatorA));
+
+        PathGenerator generatorB = new PathGenerator(game);
+        PathList pathB = generatorB.getPathList(new Point2D.Double(1200,1300),game.grid.getRandomNode().getPoint());
+        game.objectHandler.add(new Hunter(1200, 1300, game, pathB, generatorB));
+
+        PathGenerator generatorC = new PathGenerator(game);
+        PathList pathC = generatorC.getPathList(new Point2D.Double(1200,1300),game.grid.getRandomNode().getPoint());
+        game.objectHandler.add(new Hunter(1200, 1300, game, pathC, generatorC));
+
+        PathGenerator generatorD = new PathGenerator(game);
+        PathList pathD = generatorD.getPathList(new Point2D.Double(1200,1300),game.grid.getRandomNode().getPoint());
+        game.objectHandler.add(new Hunter(1200, 1300, game, pathD, generatorD));
+
+        PathGenerator generatorG = new PathGenerator(game);
+        PathList pathG = generatorB.getPathList(new Point2D.Double(1200,1300),game.grid.getRandomNode().getPoint());
+        game.objectHandler.add(new Hunter(1200, 1300, game, pathG, generatorG));
 
 
         //Utility Room and Garage
