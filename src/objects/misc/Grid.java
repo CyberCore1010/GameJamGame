@@ -192,7 +192,6 @@ public class Grid {
         while(true) {
             int randomRow = (int)Math.floor(Math.random() * nodeList.size());
             int randomColumn = (int)Math.floor(Math.random() * nodeList.get(0).size());
-            System.out.println("rand row : "+randomRow+" rand col : "+randomColumn);
             if(nodeList.get(randomRow).get(randomColumn).junction) {
                 nodeList.get(randomRow).get(randomColumn).setColor(Color.pink);
                 return nodeList.get(randomRow).get(randomColumn);
