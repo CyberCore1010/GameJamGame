@@ -12,15 +12,20 @@ import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 
 public class Door extends GameObject {
-    BufferedImage spriteOpen;
-    BufferedImage spriteClose;
-    Boolean open = false, openOnce = true, closeOnce = false;
+    BufferedImage horizontalSpriteOpen;
+    BufferedImage horizontalSpriteClose;
+    BufferedImage verticalSpriteOpen;
+    BufferedImage verticalSpriteClose;
+    Boolean horizontal, open = false, openOnce = true, closeOnce = false;
 
-    public Door(double x, double y, double rotation, Game game) {
-        super(x, y, 0, rotation, GameObjectID.Door, game);
+    public Door(double x, double y, boolean horizontal, Game game) {
+        super(x, y, 0, 0, GameObjectID.Door, game);
         BufferedImageLoader loader = new BufferedImageLoader();
-        spriteOpen = loader.loadImage("/sprites/doorOpen.png");
-        spriteClose = loader.loadImage("/sprites/doorClose.png");
+        this.horizontal = horizontal;
+        horizontalSpriteOpen = loader.loadImage("/sprites/horizontalDoorOpen.png");
+        horizontalSpriteClose = loader.loadImage("/sprites/horizontalDoorClose.png");
+        verticalSpriteOpen = loader.loadImage("/sprites/verticalDoorOpen.png");
+        verticalSpriteClose = loader.loadImage("/sprites/verticalDoorClose.png");
     }
 
     @Override
@@ -29,7 +34,7 @@ public class Door extends GameObject {
         boolean found = false;
         for(GameObject object : game.objectHandler.objects) {
             if(object.getId() == GameObjectID.Player || object.getId() == GameObjectID.Enemy) {
-                if(object.getX() > x-20 && object.getX() < x+50+20 && object.getY() > y+20 && object.getY() < y+50+20) {
+                if(object.getX() > x-23 && object.getX() < x+50+20 && object.getY() > y && object.getY() < y+50+20) {
                     found = true;
                     open = true;
                     closeOnce = true;
@@ -52,10 +57,18 @@ public class Door extends GameObject {
     @Override
     public void render(Graphics g) {
         Drawable drawable = (graphics)->{
-            if(open) {
-                graphics.drawImage(spriteOpen, (int)x, (int)y, 54, 50, null);
+            if(horizontal) {
+                if(open) {
+                    graphics.drawImage(horizontalSpriteOpen, (int)x, (int)y, 54, 50, null);
+                } else {
+                    graphics.drawImage(horizontalSpriteClose, (int)x, (int)y, 54, 50, null);
+                }
             } else {
-                graphics.drawImage(spriteClose, (int)x, (int)y, 54, 50, null);
+                if(open) {
+                    graphics.drawImage(verticalSpriteOpen, (int)x, (int)y, 54, 50, null);
+                } else {
+                    graphics.drawImage(verticalSpriteClose, (int)x, (int)y, 54, 50, null);
+                }
             }
         };
         Graphics2D g2d = (Graphics2D) g;
