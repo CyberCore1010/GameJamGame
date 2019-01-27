@@ -20,11 +20,9 @@ public class StateHandler {
                 game.objectHandler.add(node);
             }
         }
-
-        //Grass
-        game.objectHandler.add(new Floor(-200, -200, 2500, 2500, loader.loadImage("/sprites/floor/grass.png"), game));//Utility Room
-
         //Floor
+        game.objectHandler.add(new Floor(-200, -200, 2500, 2500, loader.loadImage("/sprites/floor/grass.png"), game));//Grass
+
         game.objectHandler.add(new Floor(300, 400, 200, 150, loader.loadImage("/sprites/floor/redBrick.png"), game));//Utility Room
         game.objectHandler.add(new Floor(300, 550, 201, 450, loader.loadImage("/sprites/floor/garage.png"), game));//Garage
         game.objectHandler.add(new Floor(501, 299, 400, 301, loader.loadImage("/sprites/floor/kitchen.png"), game));//Kitchen
