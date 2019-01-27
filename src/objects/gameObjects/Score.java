@@ -9,7 +9,6 @@ import java.awt.geom.Rectangle2D;
 
 public class Score extends GameObject{
     private double time = 0;
-
     public Score(double x, double y,Game game) {
         super(x, y, 0,0, GameObjectID.Score, game);
     }
