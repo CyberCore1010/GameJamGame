@@ -37,7 +37,7 @@ public class Game extends JComponent {
         musicHandler.start();
         backgroundMusic = new MusicPlayer(musicHandler.getAC(),musicHandler.getTrack("night"),1.5f,1,true);
         backgroundMusic.resume();
-        backgroundSong = new MusicPlayer(musicHandler.getAC(),musicHandler.getTrack("music"),0.8f,1,true);
+        backgroundSong = new MusicPlayer(musicHandler.getAC(),musicHandler.getTrack("music"),0.2f,1,true);
         backgroundSong.resume();
 
         grid = new Grid(this);

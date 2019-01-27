@@ -189,7 +189,6 @@ public class Grid {
     }
 
     public Node getRandomNode() {
-
         while(true) {
             int randomRow = (int)Math.floor(Math.random() * nodeList.size());
             int randomColumn = (int)Math.floor(Math.random() * nodeList.get(0).size());
@@ -199,8 +198,5 @@ public class Grid {
                 return nodeList.get(randomRow).get(randomColumn);
             }
         }
-
-
-        //return nodeList.get(15).get(18);
     }
 }
