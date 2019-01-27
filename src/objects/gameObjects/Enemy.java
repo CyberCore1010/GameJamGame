@@ -62,7 +62,6 @@ public abstract class Enemy extends GameObject {
      */
     protected void moveToPoint(Point2D.Double point) {
         setRotation(findRotation(getPoint(),point));
-        System.out.println("Rotation : "+getRotation());
         double[] unitVector = MathsMethods.getUnitVector(x,y,point.getX(),point.getY());
         if(MathsMethods.distance(x, y, point.getX(), point.getY())>1) {
             x+=unitVector[0]*velX;

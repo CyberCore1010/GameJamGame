@@ -13,20 +13,19 @@ import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class Player extends GameObject{
     private double width, height;
     private boolean movable = true;
     private Camera camera;
     private boolean moving;
+    private boolean ded;
 
     //music
     private MusicPlayer playerWalking;
     private MusicPlayer enemyLeft;
     private MusicPlayer enemyRight;
-    private final int MAXDETECT=200;
+    private final int MAXDETECT=300;
     private final int TRANSITIONTIME=1;
 
     private int moveTime = 0;
@@ -66,7 +65,7 @@ public class Player extends GameObject{
     public void update() {
         camera.setX(x);
         camera.setY(y);
-        if(movable) {
+        if(movable&&!ded) {
             collision();
             move();
         }
@@ -189,12 +188,17 @@ public class Player extends GameObject{
     }
 
     public void kill(){
-
+        if(!ded) {
+            PopupLose lose = new PopupLose(0, 0, 0, 0, GameObjectID.Popup, game);
+//        game.objectHandler.clear();
+            game.objectHandler.add(lose);
+            game.repaint();
+            ded=true;
+        }
     }
 
     @Override
     public void render(Graphics g) {
-        System.out.println(x+", "+y);
         Drawable player = (graphics)->{
             graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
             graphics.rotate(getRotation(), x, y);
