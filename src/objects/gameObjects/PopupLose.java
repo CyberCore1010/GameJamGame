@@ -49,7 +49,8 @@ public class PopupLose extends GameObject{
     public void render(Graphics g) {
         if(active) {
             Drawable popup = (graphics) -> {
-                System.out.println("Drawing");
+                graphics.setColor(Color.BLACK);
+                graphics.fillRect(-game.window.gameWidth/2, -game.window.gameHeight/2, 4000, 4000);
                 graphics.setColor(new Color(38, 255, 41,200));
                 graphics.fillRect(-250, -200, 500, 400);
                 graphics.setFont(new Font("Big Caslon",Font.BOLD,15));

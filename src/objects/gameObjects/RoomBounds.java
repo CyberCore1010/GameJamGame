@@ -74,7 +74,7 @@ public class RoomBounds extends GameObject{
         };
 
         Graphics2D g2d = (Graphics2D) g;
-        //renderToCamera(drawable, g2d, game.cameraMap.get(CameraID.Main));
+        renderToCamera(drawable, g2d, game.cameraMap.get(CameraID.Main));
     }
 
     @Override
