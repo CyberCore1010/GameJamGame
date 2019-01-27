@@ -13,6 +13,10 @@ import java.awt.geom.Point2D;
 
 public class StateHandler {
     public StateHandler(Game game) {
+        init(game);
+    }
+
+    public void init(Game game){
         BufferedImageLoader loader = new BufferedImageLoader();
         ObjectList<ObjectList<Node>> nodeList = game.grid.getNodes();
         for(ObjectList<Node> row : nodeList){

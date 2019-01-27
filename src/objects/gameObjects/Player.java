@@ -19,6 +19,7 @@ public class Player extends GameObject{
     private boolean movable = true;
     private Camera camera;
     private boolean moving;
+    private boolean ded;
 
     //music
     private MusicPlayer playerWalking;
@@ -64,7 +65,7 @@ public class Player extends GameObject{
     public void update() {
         camera.setX(x);
         camera.setY(y);
-        if(movable) {
+        if(movable&&!ded) {
             collision();
             move();
         }
@@ -187,10 +188,13 @@ public class Player extends GameObject{
     }
 
     public void kill(){
-        PopupLose lose = new PopupLose(0,0,0,0,GameObjectID.Popup,game);
-        game.objectHandler.clear();
-        game.objectHandler.add(lose);
-        game.repaint();
+        if(!ded) {
+            PopupLose lose = new PopupLose(0, 0, 0, 0, GameObjectID.Popup, game);
+//        game.objectHandler.clear();
+            game.objectHandler.add(lose);
+            game.repaint();
+            ded=true;
+        }
     }
 
     @Override

@@ -22,7 +22,7 @@ public class Game extends JComponent {
     public PopupStart popup;
 
     public ObjectHandler objectHandler;
-    private StateHandler stateHandler;
+    public StateHandler stateHandler;
     public MusicHandler musicHandler;
     private MusicPlayer backgroundMusic;
     private MusicPlayer backgroundSong;
@@ -35,7 +35,7 @@ public class Game extends JComponent {
     private static boolean isRunning = true;
     private Thread thread;
 
-    Game() {
+    public Game() {
         musicHandler = new MusicHandler();
         musicHandler.start();
         backgroundMusic = new MusicPlayer(musicHandler.getAC(),musicHandler.getTrack("night"),1.5f,1,true);
